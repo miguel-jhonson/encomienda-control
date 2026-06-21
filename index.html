@@ -48,17 +48,13 @@
 
     <script>
         document.getElementById('encomiendaForm').addEventListener('submit', function(e) {
-            e.preventDefault(); 
+            e.preventDefault(); // EVITA QUE LA PÁGINA SE RECARGUE O CAMBIE DE PANTALLA
             
             const form = e.target;
             const button = form.querySelector('button');
             const statusMessage = document.getElementById('statusMessage');
             
-            // 1. Capturar los datos del formulario de forma limpia
-            const depto = form.querySelector('[name="depto"]').value;
-            const bulto = form.querySelector('[name="bulto"]').value;
-            const fono = form.querySelector('[name="fono"]').value;
-
+            // Bloqueo visual del botón mientras procesa en la nube
             button.disabled = true;
             button.innerText = 'Procesando...';
             statusMessage.style.display = 'none';
@@ -67,41 +63,42 @@
             const formData = new FormData(form);
             const data = new URLSearchParams(formData);
 
-            // 2. BACKEND: Enviar datos de fondo a la planilla de Google
+            // ENVÍO ASÍNCRONO: Los datos viajan en silencio al Google Sheets de la conserjería
             fetch(form.action, {
                 method: 'POST',
                 body: data,
                 mode: 'no-cors'
             })
             .then(() => {
-                // Notificación minimalista exitosa
+                // Configuración de la etiqueta de éxito minimalista
                 statusMessage.style.backgroundColor = '#10b981';
                 statusMessage.style.color = '#fff';
                 statusMessage.style.display = 'block';
-                statusMessage.innerText = '✅ Registrado. Abriendo WhatsApp...';
+                statusMessage.innerText = '✅ Registro Exitoso'; // Tu etiqueta limpia
                 
-                // 3. FRONT-END: Formateo con backticks obligatorios de JS (Template Literals)
-                const textoMensaje = 📢 *Aviso de Conserjería* 📢\n\nEstimado residente del Depto *${depto}*,\nLe informamos que ha llegado un/a *${bulto}* a la conserjería.\nPuede pasar a retirarlo cuando guste. ¡Muchas gracias!;
-                
-                // 4. URL de redirección nativa limpia para smartphones
-                const urlWhatsApp = https://whatsapp.com{fono}&text=${encodeURIComponent(textoMensaje)};
-                
+                // Limpia los campos inmediatamente para el siguiente paquete
                 form.reset();
 
-                // Redirige al chat de WhatsApp en 1.5 segundos exactos
-                setTimeout(() => {
-                    statusMessage.style.opacity = '0';
-                    setTimeout(() => { statusMessage.style.display = 'none'; }, 500);
-                    window.location.href = urlWhatsApp;
-                }, 1500);
+                // TEMPORIZADOR: Desvanece la etiqueta sola a los 5 segundos
+                setTimeout(function() {
+                    statusMessage.style.opacity = '0'; // Efecto visual suave
+                    setTimeout(function() {
+                        statusMessage.style.display = 'none';
+                    }, 500); 
+                }, 5000); // 5000 milisegundos = 5 segundos exactos
             })
             .catch(error => {
                 statusMessage.style.backgroundColor = '#ef4444';
                 statusMessage.style.color = '#fff';
                 statusMessage.style.display = 'block';
                 statusMessage.innerText = '❌ Error de Red: ' + error;
+                
+                setTimeout(function() {
+                    statusMessage.style.display = 'none';
+                }, 5000);
             })
             .finally(() => {
+                // Devuelve el botón a su estado normal para poder registrar otra encomienda
                 button.disabled = false;
                 button.innerText = 'Registrar y Enviar';
             });
