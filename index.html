@@ -1,44 +1,55 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Control Digital Encomiendas</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #1e1e24; color: #fff; padding: 20px; display: flex; justify-content: center; }
-        .card { background: #2a2a35; padding: 25px; border-radius: 12px; width: 100%; max-width: 400px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        h2 { margin-top: 0; color: #a188f5; border-bottom: 2px solid #3e3e50; padding-bottom: 10px; }
-        .group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-weight: bold; font-size: 14px; }
-        input, select { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #4e4e64; background: #1e1e24; color: #fff; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; border: none; border-radius: 6px; background: #6c5ce7; color: white; font-weight: bold; font-size: 16px; cursor: pointer; }
-        button:hover { background: #5b4cc4; }
-    </style>
-</head>
-<body>
-    <div class="card">
-        <h2>Control Encomiendas</h2>
-        <!-- Reemplaza con la URL de tu Web App de Apps Script -->
-        <form id="encomiendaForm" action="https://script.google.com/macros/s/AKfycbweVE252ukrunlxgLPht9Xcgn1JZd5dB0yEwX43zgne6S8A1ifVGOAVJ4-k7uKE4Ua0xg/exec" method="POST">
-            <div class="group">
-                <label>Nombre/Apellido del Residente</label>
-                <input type="text" name="nombre" required placeholder="Ej: Juan Pérez">
-            </div>
-            <div class="group">
-                <label>Número Depto</label>
-                <input type="number" name="depto" required placeholder="Ej: 119">
-            </div>
-            <div class="group">
-                <label>Bulto/Paquete</label>
-                <select name="bulto" required>
-                    <option value="">Elegir...</option>
-                    <option value="Paquete">Paquete</option>
-                    <option value="Sobre">Sobre / Documento</option>
-                    <option value="Caja">Caja / Bulto</option>
-                </select>
-            </div>
-            <div class="group">
-                <label>Fono Residente</label>
-                <input type="tel" name="fono" required placeholder="Ej: 56912345678" pattern="[0-9]{11}">
-            </div>
-            <button type="submit">Registrar y Enviar</button>
+</form>
+        <!-- Mensaje de confirmación oculto por defecto -->
+        <div id="statusMessage" style="display:none; margin-top:20px; padding:12px; border-radius:6px; font-weight:bold; text-align:center;"></div>
+    </div>
+
+    <script>
+        document.getElementById('encomiendaForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // EVITA QUE ABRA OTRA PESTAÑA O SE RECARGUE LA PÁGINA
+            
+            const form = e.target;
+            const button = form.querySelector('button');
+            const statusMessage = document.getElementById('statusMessage');
+            
+            // Efecto visual: Bloquear botón mientras el servidor procesa en la nube
+            button.disabled = true;
+            button.innerText = 'Procesando en Servidor...';
+            statusMessage.style.display = 'none';
+
+            // Crear el paquete de datos para enviar por POST
+            const formData = new FormData(form);
+            const data = new URLSearchParams(formData);
+
+            // Disparo asíncrono (AJAX) hacia tu Web App de Google
+            fetch(form.action, {
+                method: 'POST',
+                body: data,
+                mode: 'no-cors' // Evita bloqueos de seguridad del navegador (CORS)
+            })
+            .then(() => {
+                // Éxito: Mostrar cartel verde elegante sin salir de la app
+                statusMessage.style.backgroundColor = '#10b981';
+                statusMessage.style.color = '#fff';
+                statusMessage.style.display = 'block';
+                statusMessage.innerText = '✅ Registro Exitoso y Mensaje Enviado';
+                
+                // Limpiar los campos para el siguiente paquete que llegue
+                form.reset();
+            })
+            .catch(error => {
+                // Manejo de excepciones en la red
+                statusMessage.style.backgroundColor = '#ef4444';
+                statusMessage.style.color = '#fff';
+                statusMessage.style.display = 'block';
+                statusMessage.innerText = '❌ Error de Conexión: ' + error;
+            })
+            .finally(() => {
+                // Devolver el botón a su estado normal
+                button.disabled = false;
+                button.innerText = 'Registrar y Enviar';
+            });
+        });
+    </script>
+</body>
+</html>
