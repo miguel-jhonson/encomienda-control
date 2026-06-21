@@ -57,46 +57,49 @@
             const button = form.querySelector('button');
             const statusMessage = document.getElementById('statusMessage');
             
+            // 1. Capturar los datos del formulario del celular
+            const nombre = form.querySelector('[name="nombre"]').value;
+            const depto = form.querySelector('[name="depto"]').value;
+            const bulto = form.querySelector('[name="bulto"]').value;
+            const fono = form.querySelector('[name="fono"]').value;
+
             button.disabled = true;
-            button.innerText = 'Procesando...';
-            statusMessage.style.display = 'none';
-            statusMessage.style.opacity = '1'; // Resetear opacidad
+            button.innerText = 'Procesando en Servidor...';
 
             const formData = new FormData(form);
             const data = new URLSearchParams(formData);
 
+            // 2. BACKEND: Enviar los datos silenciosamente al Google Sheets
             fetch(form.action, {
                 method: 'POST',
                 body: data,
                 mode: 'no-cors'
             })
             .then(() => {
-                // Configuración de la barra delgada de éxito
                 statusMessage.style.backgroundColor = '#10b981';
                 statusMessage.style.color = '#fff';
                 statusMessage.style.display = 'block';
-                statusMessage.innerText = '✅ Registro Exitoso y Mensaje Enviado';
+                statusMessage.innerText = '✅ Registrado. Abriendo WhatsApp...';
+                
+                // 3. FRONT-END: Diseñar el mensaje dinámico para el residente
+                const textoMensaje = 📢 *Aviso de Conserjería* 📢\n\nEstimado residente del Depto *${depto}*,\nLe informamos que ha llegado un/a *${bulto}* a la conserjería.\nPuede pasar a retirarlo cuando guste. ¡Muchas gracias!;
+                
+                // 4. DISPARO INMEDIATO: Abrir la aplicación de WhatsApp del celular con el texto listo
+                const urlWhatsApp = https://whatsapp.com{fono}&text=${encodeURIComponent(textoMensaje)};
                 
                 form.reset();
 
-                // BUCLE DE TIEMPO: Desvanecer y ocultar automáticamente a los 5 segundos
-                setTimeout(function() {
-                    statusMessage.style.opacity = '0'; // Efecto de desvanecido suave
-                    setTimeout(function() {
-                        statusMessage.style.display = 'none';
-                    }, 500); // Espera que termine el efecto visual para ocultar el bloque
-                }, 5000); // 5000 milisegundos = 5 segundos
+                // Redirige al chat de WhatsApp en 1.5 segundos para que alcancen a ver el cartel verde
+                setTimeout(() => {
+                    statusMessage.style.display = 'none';
+                    window.location.href = urlWhatsApp;
+                }, 1500);
             })
             .catch(error => {
                 statusMessage.style.backgroundColor = '#ef4444';
                 statusMessage.style.color = '#fff';
                 statusMessage.style.display = 'block';
                 statusMessage.innerText = '❌ Error: ' + error;
-                
-                // En caso de error también se limpia solo en 5 segundos
-                setTimeout(function() {
-                    statusMessage.style.display = 'none';
-                }, 5000);
             })
             .finally(() => {
                 button.disabled = false;
