@@ -46,51 +46,59 @@
     </div>
     </form>
         <!-- Mensaje de confirmación oculto por defecto -->
-        <div id="statusMessage" style="display:none; margin-top:20px; padding:12px; border-radius:6px; font-weight:bold; text-align:center;"></div>
+         <div id="statusMessage" style="display:none; margin-top:15px; padding:8px; border-radius:4px; font-weight:bold; text-align:center; font-size:14px; transition: opacity 0.5s ease;"></div>
     </div>
 
     <script>
         document.getElementById('encomiendaForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // EVITA QUE ABRA OTRA PESTAÑA O SE RECARGUE LA PÁGINA
+            e.preventDefault(); 
             
             const form = e.target;
             const button = form.querySelector('button');
             const statusMessage = document.getElementById('statusMessage');
             
-            // Efecto visual: Bloquear botón mientras el servidor procesa en la nube
             button.disabled = true;
-            button.innerText = 'Procesando en Servidor...';
+            button.innerText = 'Procesando...';
             statusMessage.style.display = 'none';
+            statusMessage.style.opacity = '1'; // Resetear opacidad
 
-            // Crear el paquete de datos para enviar por POST
             const formData = new FormData(form);
             const data = new URLSearchParams(formData);
 
-            // Disparo asíncrono (AJAX) hacia tu Web App de Google
             fetch(form.action, {
                 method: 'POST',
                 body: data,
-                mode: 'no-cors' // Evita bloqueos de seguridad del navegador (CORS)
+                mode: 'no-cors'
             })
             .then(() => {
-                // Éxito: Mostrar cartel verde elegante sin salir de la app
+                // Configuración de la barra delgada de éxito
                 statusMessage.style.backgroundColor = '#10b981';
                 statusMessage.style.color = '#fff';
                 statusMessage.style.display = 'block';
                 statusMessage.innerText = '✅ Registro Exitoso y Mensaje Enviado';
                 
-                // Limpiar los campos para el siguiente paquete que llegue
                 form.reset();
+
+                // BUCLE DE TIEMPO: Desvanecer y ocultar automáticamente a los 5 segundos
+                setTimeout(function() {
+                    statusMessage.style.opacity = '0'; // Efecto de desvanecido suave
+                    setTimeout(function() {
+                        statusMessage.style.display = 'none';
+                    }, 500); // Espera que termine el efecto visual para ocultar el bloque
+                }, 5000); // 5000 milisegundos = 5 segundos
             })
             .catch(error => {
-                // Manejo de excepciones en la red
                 statusMessage.style.backgroundColor = '#ef4444';
                 statusMessage.style.color = '#fff';
                 statusMessage.style.display = 'block';
-                statusMessage.innerText = '❌ Error de Conexión: ' + error;
+                statusMessage.innerText = '❌ Error: ' + error;
+                
+                // En caso de error también se limpia solo en 5 segundos
+                setTimeout(function() {
+                    statusMessage.style.display = 'none';
+                }, 5000);
             })
             .finally(() => {
-                // Devolver el botón a su estado normal
                 button.disabled = false;
                 button.innerText = 'Registrar y Enviar';
             });
