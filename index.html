@@ -18,7 +18,7 @@
 <body>
     <div class="card">
         <h2>Control Encomiendas</h2>
-        <form id="encomiendaForm" action="https://script.google.com/macros/s/AKfycbweVE252ukrunlxgLPht9Xcgn1JZd5dB0yEwX43zgne6S8A1ifVGOAVJ4-k7uKE4Ua0xg/exec" method="POST">
+        <form id="encomiendaForm" action="https://google.com" method="POST">
             <div class="group">
                 <label>Nombre/Apellido del Residente</label>
                 <input type="text" name="nombre" required placeholder="Ej: Juan Pérez">
@@ -42,19 +42,24 @@
             </div>
             <button type="submit">Registrar y Enviar</button>
         </form>
-        <!-- Mensaje de confirmación minimalista -->
+        
+        <!-- Tu etiqueta de confirmación minimalista de 5 segundos -->
         <div id="statusMessage" style="display:none; margin-top:15px; padding:8px; border-radius:4px; font-weight:bold; text-align:center; font-size:14px; transition: opacity 0.5s ease;"></div>
     </div>
 
     <script>
         document.getElementById('encomiendaForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // EVITA QUE LA PÁGINA SE RECARGUE O CAMBIE DE PANTALLA
+            e.preventDefault(); // DETIENE EL ENVÍO NATIVO PARA QUE NO TE ABRA LA PÁGINA BLANCA DE GOOGLE
             
             const form = e.target;
             const button = form.querySelector('button');
             const statusMessage = document.getElementById('statusMessage');
             
-            // Bloqueo visual del botón mientras procesa en la nube
+            // Capturar las variables para el mensaje de WhatsApp
+            const depto = form.querySelector('[name="depto"]').value;
+            const bulto = form.querySelector('[name="bulto"]').value;
+            const fono = form.querySelector('[name="fono"]').value;
+
             button.disabled = true;
             button.innerText = 'Procesando...';
             statusMessage.style.display = 'none';
@@ -63,29 +68,38 @@
             const formData = new FormData(form);
             const data = new URLSearchParams(formData);
 
-            // ENVÍO ASÍNCRONO: Los datos viajan en silencio al Google Sheets de la conserjería
+            // 1. REGISTRO EN SEGUNDO PLANO: Envía los datos silenciosamente al Google Sheets
             fetch(form.action, {
                 method: 'POST',
                 body: data,
                 mode: 'no-cors'
             })
             .then(() => {
-                // Configuración de la etiqueta de éxito minimalista
+                // 2. INTERFAZ: Muestra la etiqueta verde chica en la pantalla actual
                 statusMessage.style.backgroundColor = '#10b981';
                 statusMessage.style.color = '#fff';
                 statusMessage.style.display = 'block';
-                statusMessage.innerText = '✅ Registro Exitoso'; // Tu etiqueta limpia
+                statusMessage.innerText = '✅ Registro Exitoso';
                 
-                // Limpia los campos inmediatamente para el siguiente paquete
+                // 3. MENSAJERÍA DISPARO: Diseña el texto dinámico con comillas invertidas correctas
+                const textoMensaje = 📢 *Aviso de Conserjería* 📢\n\nEstimado residente del Depto *${depto}*,\nLe informamos que ha llegado un/a *${bulto}* a la conserjería.\nPuede pasar a retirarlo cuando guste. ¡Muchas gracias!;
+                
+                // URL de la API pública de WhatsApp Web / App para cualquier número
+                const urlWhatsApp = https://whatsapp.com{fono}&text=${encodeURIComponent(textoMensaje)};
+                
+                // 4. ACCIÓN UNIFICADA: Abre el chat de WhatsApp en una pestaña nueva sin sacar al conserje de la app
+                window.open(urlWhatsApp, '_blank');
+                
+                // Limpia el formulario inmediatamente para el próximo paquete
                 form.reset();
 
-                // TEMPORIZADOR: Desvanece la etiqueta sola a los 5 segundos
+                // Temporizador de 5 segundos para desaparecer la etiqueta sola
                 setTimeout(function() {
-                    statusMessage.style.opacity = '0'; // Efecto visual suave
+                    statusMessage.style.opacity = '0';
                     setTimeout(function() {
                         statusMessage.style.display = 'none';
-                    }, 500); 
-                }, 5000); // 5000 milisegundos = 5 segundos exactos
+                    }, 500);
+                }, 5000);
             })
             .catch(error => {
                 statusMessage.style.backgroundColor = '#ef4444';
@@ -93,12 +107,9 @@
                 statusMessage.style.display = 'block';
                 statusMessage.innerText = '❌ Error de Red: ' + error;
                 
-                setTimeout(function() {
-                    statusMessage.style.display = 'none';
-                }, 5000);
+                setTimeout(function() { statusMessage.style.display = 'none'; }, 5000);
             })
             .finally(() => {
-                // Devuelve el botón a su estado normal para poder registrar otra encomienda
                 button.disabled = false;
                 button.innerText = 'Registrar y Enviar';
             });
