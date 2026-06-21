@@ -18,7 +18,6 @@
 <body>
     <div class="card">
         <h2>Control Encomiendas</h2>
-        <!-- Reemplaza con la URL de tu Web App de Apps Script -->
         <form id="encomiendaForm" action="https://script.google.com/macros/s/AKfycbweVE252ukrunlxgLPht9Xcgn1JZd5dB0yEwX43zgne6S8A1ifVGOAVJ4-k7uKE4Ua0xg/exec" method="POST">
             <div class="group">
                 <label>Nombre/Apellido del Residente</label>
@@ -43,10 +42,8 @@
             </div>
             <button type="submit">Registrar y Enviar</button>
         </form>
-    </div>
-    </form>
-        <!-- Mensaje de confirmación oculto por defecto -->
-         <div id="statusMessage" style="display:none; margin-top:15px; padding:8px; border-radius:4px; font-weight:bold; text-align:center; font-size:14px; transition: opacity 0.5s ease;"></div>
+        <!-- Mensaje de confirmación minimalista -->
+        <div id="statusMessage" style="display:none; margin-top:15px; padding:8px; border-radius:4px; font-weight:bold; text-align:center; font-size:14px; transition: opacity 0.5s ease;"></div>
     </div>
 
     <script>
@@ -57,41 +54,44 @@
             const button = form.querySelector('button');
             const statusMessage = document.getElementById('statusMessage');
             
-            // 1. Capturar los datos del formulario del celular
-            const nombre = form.querySelector('[name="nombre"]').value;
+            // 1. Capturar los datos del formulario de forma limpia
             const depto = form.querySelector('[name="depto"]').value;
             const bulto = form.querySelector('[name="bulto"]').value;
             const fono = form.querySelector('[name="fono"]').value;
 
             button.disabled = true;
-            button.innerText = 'Procesando en Servidor...';
+            button.innerText = 'Procesando...';
+            statusMessage.style.display = 'none';
+            statusMessage.style.opacity = '1';
 
             const formData = new FormData(form);
             const data = new URLSearchParams(formData);
 
-            // 2. BACKEND: Enviar los datos silenciosamente al Google Sheets
+            // 2. BACKEND: Enviar datos de fondo a la planilla de Google
             fetch(form.action, {
                 method: 'POST',
                 body: data,
                 mode: 'no-cors'
             })
             .then(() => {
+                // Notificación minimalista exitosa
                 statusMessage.style.backgroundColor = '#10b981';
                 statusMessage.style.color = '#fff';
                 statusMessage.style.display = 'block';
                 statusMessage.innerText = '✅ Registrado. Abriendo WhatsApp...';
                 
-                // 3. FRONT-END: Diseñar el mensaje dinámico para el residente
+                // 3. FRONT-END: Formateo con backticks obligatorios de JS (Template Literals)
                 const textoMensaje = 📢 *Aviso de Conserjería* 📢\n\nEstimado residente del Depto *${depto}*,\nLe informamos que ha llegado un/a *${bulto}* a la conserjería.\nPuede pasar a retirarlo cuando guste. ¡Muchas gracias!;
                 
-                // 4. DISPARO INMEDIATO: Abrir la aplicación de WhatsApp del celular con el texto listo
+                // 4. URL de redirección nativa limpia para smartphones
                 const urlWhatsApp = https://whatsapp.com{fono}&text=${encodeURIComponent(textoMensaje)};
                 
                 form.reset();
 
-                // Redirige al chat de WhatsApp en 1.5 segundos para que alcancen a ver el cartel verde
+                // Redirige al chat de WhatsApp en 1.5 segundos exactos
                 setTimeout(() => {
-                    statusMessage.style.display = 'none';
+                    statusMessage.style.opacity = '0';
+                    setTimeout(() => { statusMessage.style.display = 'none'; }, 500);
                     window.location.href = urlWhatsApp;
                 }, 1500);
             })
@@ -99,7 +99,7 @@
                 statusMessage.style.backgroundColor = '#ef4444';
                 statusMessage.style.color = '#fff';
                 statusMessage.style.display = 'block';
-                statusMessage.innerText = '❌ Error: ' + error;
+                statusMessage.innerText = '❌ Error de Red: ' + error;
             })
             .finally(() => {
                 button.disabled = false;
@@ -107,6 +107,5 @@
             });
         });
     </script>
-</body>
 </body>
 </html>
