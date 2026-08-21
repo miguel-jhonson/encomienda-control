@@ -79,10 +79,10 @@ document.getElementById('encomiendaForm').addEventListener('submit', function(e)
         statusMessage.innerText = '✅ Registro Exitoso';
 
         // 3. MENSAJERÍA DISPARO: Diseña el texto dinámico con comillas invertidas correctas
-        const textoMensaje = `📢 *Aviso de Conserjería* 📢\n\nEstimado residente del Depto *${depto}*,\nLe informamos que ha llegado un/a *${bulto}* a la conserjería.\nPuede pasar a retirarlo cuando guste. ¡Muchas gracias!`; 
+        //const textoMensaje = `📢 *Aviso de Conserjería* 📢\n\nEstimado residente del Depto *${depto}*,\nLe informamos que ha llegado un/a *${bulto}* a la conserjería.\nPuede pasar a retirarlo cuando guste. ¡Muchas gracias!`; 
 
         // URL de la API pública de WhatsApp Web / App para cualquier número
-        const urlWhatsApp = `https://api.whatsapp.com/send?phone=${fono}&text=${encodeURIComponent(textoMensaje)}`; 
+        //const urlWhatsApp = `https://api.whatsapp.com/send?phone=${fono}&text=${encodeURIComponent(textoMensaje)}`; 
 
         // 4. ACCIÓN UNIFICADA: Abre el chat de WhatsApp en una pestaña nueva sin sacar al conserje de la app
         //window.open(urlWhatsApp, '_blank');
