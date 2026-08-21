@@ -85,7 +85,7 @@ document.getElementById('encomiendaForm').addEventListener('submit', function(e)
         const urlWhatsApp = `https://api.whatsapp.com/send?phone=${fono}&text=${encodeURIComponent(textoMensaje)}`; 
 
         // 4. ACCIÓN UNIFICADA: Abre el chat de WhatsApp en una pestaña nueva sin sacar al conserje de la app
-        window.open(urlWhatsApp, '_blank');
+        //window.open(urlWhatsApp, '_blank');
 
         // Limpia el formulario inmediatamente para el próximo paquete
         form.reset();
