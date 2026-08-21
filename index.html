@@ -70,7 +70,7 @@
             const data = new URLSearchParams(formData);
 
             // 1. REGISTRO EN SEGUNDO PLANO: Envía los datos silenciosamente al Google Sheets
-            fetch(form.action, {method: 'POST', body: data, mode: 'no-cors'})
+            fetch(form.action, {method: 'POST', body: data, mode: 'no-cors' })
             .then(() => {
                 // 2. INTERFAZ: Muestra la etiqueta verde chica en la pantalla actual
                 statusMessage.style.backgroundColor = '#10b981';
