@@ -4,114 +4,553 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Control Digital Encomiendas</title>
+
     <style>
-        body { font-family: Arial, sans-serif; background-color: #1e1e24; color: #fff; padding: 20px; display: flex; justify-content: center; }
-        .card { background: #2a2a35; padding: 25px; border-radius: 12px; width: 100%; max-width: 400px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        h2 { margin-top: 0; color: #a188f5; border-bottom: 2px solid #3e3e50; padding-bottom: 10px; }
-        .group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-weight: bold; font-size: 14px; }
-        input, select { width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #4e4e64; background: #1e1e24; color: #fff; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; border: none; border-radius: 6px; background: #6c5ce7; color: white; font-weight: bold; font-size: 16px; cursor: pointer; }
-        button:hover { background: #5b4cc4; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e24;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .card {
+            background: #2a2a35;
+            padding: 25px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #a188f5;
+            border-bottom: 2px solid #3e3e50;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #a188f5;
+            margin-top: 10px;
+        }
+
+        .group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #4e4e64;
+            background: #1e1e24;
+            color: #fff;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            background: #6c5ce7;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #5b4cc4;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .separator {
+            margin: 25px 0;
+            border-top: 2px solid #3e3e50;
+        }
+
+        #statusMessage,
+        #searchMessage {
+            display: none;
+            margin-top: 15px;
+            padding: 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        #resultadoConsulta {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #1e1e24;
+            border-radius: 8px;
+            border: 1px solid #4e4e64;
+        }
+
+        .dato {
+            margin-bottom: 10px;
+        }
+
+        .dato strong {
+            color: #a188f5;
+        }
+
+        .estado {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: #6c5ce7;
+            font-weight: bold;
+            font-size: 13px;
+        }
     </style>
 </head>
+
 <body>
-    <div class="card">
-        <h2>Control Encomiendas</h2>
-        <form id="encomiendaForm" action="https://script.google.com/macros/s/AKfycbweVE252ukrunlxgLPht9Xcgn1JZd5dB0yEwX43zgne6S8A1ifVGOAVJ4-k7uKE4Ua0xg/exec" method="POST">
-            <div class="group">
-                <label>Nombre/Apellido del Residente</label>
-                <input type="text" name="nombre" required placeholder="Ej: Juan Pérez">
-            </div>
-            <div class="group">
-                <label>Número Depto</label>
-                <input type="number" name="depto" required placeholder="Ej: 119">
-            </div>
-            <div class="group">
-                <label>Bulto/Paquete</label>
-                <select name="bulto" required>
-                    <option value="">Elegir...</option>
-                    <option value="Paquete">Paquete</option>
-                    <option value="Sobre">Sobre / Documento</option>
-                    <option value="Caja">Caja / Bulto</option>
-                </select>
-            </div>
-            <div class="group">
-                <label>Fono Residente</label>
-                <input type="tel" name="fono" required placeholder="Ej: 56912345678" pattern="[0-9]{11}">
-            </div>
-            <button type="submit">Registrar y Enviar</button>
-        </form>
-        
-        <!-- Tu etiqueta de confirmación minimalista de 5 segundos -->
-        <div id="statusMessage" style="display:none; margin-top:15px; padding:8px; border-radius:4px; font-weight:bold; text-align:center; font-size:14px; transition: opacity 0.5s ease;"></div>
+
+<div class="card">
+
+    <h2>Control Encomiendas</h2>
+
+    <!-- ========================= -->
+    <!-- REGISTRO DE ENCOMIENDA -->
+    <!-- ========================= -->
+
+    <form
+        id="encomiendaForm"
+        action="https://script.google.com/macros/s/AKfycbweVE252ukrunlxgLPht9Xcgn1JZd5dB0yEwX43zgne6S8A1ifVGOAVJ4-k7uKE4Ua0xg/exec"
+        method="POST"
+    >
+
+        <div class="group">
+            <label>Nombre/Apellido del Residente</label>
+            <input
+                type="text"
+                name="nombre"
+                required
+                placeholder="Ej: Juan Pérez"
+            >
+        </div>
+
+        <div class="group">
+            <label>Número Depto</label>
+            <input
+                type="number"
+                name="depto"
+                required
+                placeholder="Ej: 119"
+            >
+        </div>
+
+        <div class="group">
+            <label>Bulto/Paquete</label>
+
+            <select name="bulto" required>
+                <option value="">Elegir...</option>
+                <option value="Paquete">Paquete</option>
+                <option value="Sobre">Sobre / Documento</option>
+                <option value="Caja">Caja / Bulto</option>
+            </select>
+        </div>
+
+        <div class="group">
+            <label>Fono Residente</label>
+
+            <input
+                type="tel"
+                name="fono"
+                required
+                placeholder="Ej: 56912345678"
+                pattern="[0-9]{11}"
+            >
+        </div>
+
+        <button type="submit">
+            Registrar y Enviar
+        </button>
+
+    </form>
+
+    <div id="statusMessage"></div>
+
+    <!-- ========================= -->
+    <!-- SEPARADOR -->
+    <!-- ========================= -->
+
+    <div class="separator"></div>
+
+    <!-- ========================= -->
+    <!-- CONSULTA -->
+    <!-- ========================= -->
+
+    <h3>🔎 Consultar Encomienda</h3>
+
+    <div class="group">
+        <label>ID de encomienda</label>
+
+        <input
+            type="text"
+            id="idConsulta"
+            placeholder="Ej: ENC-00005"
+            autocomplete="off"
+        >
     </div>
 
-    <script>
-document.getElementById('encomiendaForm').addEventListener('submit', function(e) {
-    e.preventDefault(); // DETIENE EL ENVÍO NATIVO PARA QUE NO TE ABRA LA PÁGINA BLANCA DE GOOGLE
-    
-    const form = e.target;
-    const button = form.querySelector('button');
-    const statusMessage = document.getElementById('statusMessage');
+    <button type="button" id="btnConsultar">
+        Consultar
+    </button>
 
-    // Capturar las variables para el mensaje de WhatsApp
-    const depto = form.querySelector('[name="depto"]').value;
-    const bulto = form.querySelector('[name="bulto"]').value;
-    const fono = form.querySelector('[name="fono"]').value;
+    <div id="searchMessage"></div>
 
-    button.disabled = true;
-    button.innerText = 'Procesando...';
-    
-    statusMessage.style.display = 'none';
-    statusMessage.style.opacity = '1';
+    <!-- ========================= -->
+    <!-- RESULTADO -->
+    <!-- ========================= -->
 
-    const formData = new FormData(form);
-    const data = new URLSearchParams(formData);
+    <div id="resultadoConsulta">
 
-    // 1. REGISTRO EN SEGUNDO PLANO: Envía los datos silenciosamente al Google Sheets
-    fetch(form.action, {method: 'POST', body: data, mode: 'no-cors' })
-    .then(() => {
-        // 2. INTERFAZ: Muestra la etiqueta verde chica en la pantalla actual
-        statusMessage.style.backgroundColor = '#10b981';
-        statusMessage.style.color = '#fff';
-        statusMessage.style.display = 'block';
-        statusMessage.innerText = '✅ Registro Exitoso';
+        <div class="dato">
+            <strong>ID:</strong>
+            <span id="resultadoId"></span>
+        </div>
 
-        // 3. MENSAJERÍA DISPARO: Diseña el texto dinámico con comillas invertidas correctas
-        //const textoMensaje = `📢 *Aviso de Conserjería* 📢\n\nEstimado residente del Depto *${depto}*,\nLe informamos que ha llegado un/a *${bulto}* a la conserjería.\nPuede pasar a retirarlo cuando guste. ¡Muchas gracias!`; 
+        <div class="dato">
+            <strong>Residente:</strong>
+            <span id="resultadoNombre"></span>
+        </div>
 
-        // URL de la API pública de WhatsApp Web / App para cualquier número
-        //const urlWhatsApp = `https://api.whatsapp.com/send?phone=${fono}&text=${encodeURIComponent(textoMensaje)}`; 
+        <div class="dato">
+            <strong>Departamento:</strong>
+            <span id="resultadoDepto"></span>
+        </div>
 
-        // 4. ACCIÓN UNIFICADA: Abre el chat de WhatsApp en una pestaña nueva sin sacar al conserje de la app
-        //window.open(urlWhatsApp, '_blank');
+        <div class="dato">
+            <strong>Tipo:</strong>
+            <span id="resultadoBulto"></span>
+        </div>
 
-        // Limpia el formulario inmediatamente para el próximo paquete
-        form.reset();
+        <div class="dato">
+            <strong>Ingreso:</strong>
+            <span id="resultadoIngreso"></span>
+        </div>
 
-        // Temporizador de 5 segundos para desaparecer la etiqueta sola
-        setTimeout(function() {
-            statusMessage.style.opacity = '0';
-            setTimeout(function() {
-                statusMessage.style.display = 'none';
-            }, 500);
-        }, 5000);
-    })
-    .catch(error => {
-        statusMessage.style.backgroundColor = '#ef4444';
-        statusMessage.style.color = '#fff';
-        statusMessage.style.display = 'block';
-        statusMessage.innerText = '❌ Error de Red: ' + error;
-        setTimeout(function() {
+        <div class="dato">
+            <strong>Estado:</strong>
+            <span
+                class="estado"
+                id="resultadoEstado"
+            ></span>
+        </div>
+
+        <div
+            class="dato"
+            id="bloqueRetiro"
+            style="display:none;"
+        >
+            <strong>Retiro:</strong>
+            <span id="resultadoRetiro"></span>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    // ==========================================
+    // CONFIGURACIÓN
+    // ==========================================
+
+    const SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbweVE252ukrunlxgLPht9Xcgn1JZd5dB0yEwX43zgne6S8A1ifVGOAVJ4-k7uKE4Ua0xg/exec";
+
+
+    // ==========================================
+    // REGISTRO DE ENCOMIENDA
+    // ==========================================
+
+    document
+        .getElementById('encomiendaForm')
+        .addEventListener('submit', function(e) {
+
+            e.preventDefault();
+
+            const form = e.target;
+            const button = form.querySelector('button');
+            const statusMessage =
+                document.getElementById('statusMessage');
+
+            button.disabled = true;
+            button.innerText = 'Procesando...';
+
             statusMessage.style.display = 'none';
-        }, 5000);
-    })
-    .finally(() => {
-        button.disabled = false;
-        button.innerText = 'Registrar y Enviar';
+            statusMessage.style.opacity = '1';
+
+            const formData = new FormData(form);
+            const data = new URLSearchParams(formData);
+
+            fetch(form.action, {
+                method: 'POST',
+                body: data,
+                mode: 'no-cors'
+            })
+            .then(() => {
+
+                statusMessage.style.backgroundColor = '#10b981';
+                statusMessage.style.color = '#fff';
+                statusMessage.style.display = 'block';
+                statusMessage.innerText = '✅ Registro Exitoso';
+
+                form.reset();
+
+                setTimeout(function() {
+
+                    statusMessage.style.opacity = '0';
+
+                    setTimeout(function() {
+                        statusMessage.style.display = 'none';
+                    }, 500);
+
+                }, 5000);
+
+            })
+            .catch(error => {
+
+                statusMessage.style.backgroundColor = '#ef4444';
+                statusMessage.style.color = '#fff';
+                statusMessage.style.display = 'block';
+                statusMessage.innerText =
+                    '❌ Error de Red: ' + error;
+
+                setTimeout(function() {
+                    statusMessage.style.display = 'none';
+                }, 5000);
+
+            })
+            .finally(() => {
+
+                button.disabled = false;
+                button.innerText = 'Registrar y Enviar';
+
+            });
+
+        });
+
+
+    // ==========================================
+    // CONSULTA DE ENCOMIENDA
+    // ==========================================
+
+    const btnConsultar =
+        document.getElementById('btnConsultar');
+
+    const idConsulta =
+        document.getElementById('idConsulta');
+
+    const resultadoConsulta =
+        document.getElementById('resultadoConsulta');
+
+    const searchMessage =
+        document.getElementById('searchMessage');
+
+
+    btnConsultar.addEventListener('click', function() {
+
+        const id = idConsulta.value.trim().toUpperCase();
+
+        resultadoConsulta.style.display = 'none';
+        searchMessage.style.display = 'none';
+
+        if (!id) {
+
+            mostrarMensajeBusqueda(
+                '⚠️ Ingresa un ID de encomienda.',
+                '#f59e0b'
+            );
+
+            return;
+        }
+
+        btnConsultar.disabled = true;
+        btnConsultar.innerText = 'Consultando...';
+
+
+        const callbackName =
+            'consultaEncomienda_' +
+            Date.now();
+
+
+        window[callbackName] = function(data) {
+
+            if (data.encontrado) {
+
+                mostrarResultado(data);
+
+            } else {
+
+                mostrarMensajeBusqueda(
+                    '❌ ' + data.mensaje,
+                    '#ef4444'
+                );
+
+            }
+
+            btnConsultar.disabled = false;
+            btnConsultar.innerText = 'Consultar';
+
+            // Limpiar callback temporal
+            delete window[callbackName];
+
+            if (scriptConsulta.parentNode) {
+                scriptConsulta.parentNode.removeChild(scriptConsulta);
+            }
+
+        };
+
+
+        const scriptConsulta =
+            document.createElement('script');
+
+        scriptConsulta.src =
+            SCRIPT_URL +
+            '?id=' +
+            encodeURIComponent(id) +
+            '&callback=' +
+            encodeURIComponent(callbackName);
+
+        scriptConsulta.onerror = function() {
+
+            mostrarMensajeBusqueda(
+                '❌ No fue posible consultar el servidor.',
+                '#ef4444'
+            );
+
+            btnConsultar.disabled = false;
+            btnConsultar.innerText = 'Consultar';
+
+            delete window[callbackName];
+
+            if (scriptConsulta.parentNode) {
+                scriptConsulta.parentNode.removeChild(scriptConsulta);
+            }
+        };
+
+
+        document.body.appendChild(scriptConsulta);
+
     });
-});
+
+
+    // ==========================================
+    // MOSTRAR RESULTADO
+    // ==========================================
+
+    function mostrarResultado(data) {
+
+        document.getElementById('resultadoId').textContent =
+            data.id || '';
+
+        document.getElementById('resultadoNombre').textContent =
+            data.nombre || '';
+
+        document.getElementById('resultadoDepto').textContent =
+            data.depto || '';
+
+        document.getElementById('resultadoBulto').textContent =
+            data.bulto || '';
+
+        document.getElementById('resultadoIngreso').textContent =
+            formatearFecha(data.fechaIngreso);
+
+        document.getElementById('resultadoEstado').textContent =
+            data.estado || '';
+
+        const bloqueRetiro =
+            document.getElementById('bloqueRetiro');
+
+        const resultadoRetiro =
+            document.getElementById('resultadoRetiro');
+
+
+        if (data.fechaRetiro || data.horaRetiro) {
+
+            bloqueRetiro.style.display = 'block';
+
+            resultadoRetiro.textContent =
+                (data.fechaRetiro || '') +
+                ' ' +
+                (data.horaRetiro || '');
+
+        } else {
+
+            bloqueRetiro.style.display = 'none';
+
+            resultadoRetiro.textContent = '';
+
+        }
+
+        resultadoConsulta.style.display = 'block';
+    }
+
+
+    // ==========================================
+    // FORMATO DE FECHA
+    // ==========================================
+
+    function formatearFecha(valor) {
+
+        if (!valor) {
+            return '';
+        }
+
+        const fecha = new Date(valor);
+
+        if (isNaN(fecha.getTime())) {
+            return valor;
+        }
+
+        return fecha.toLocaleString('es-CL', {
+            dateStyle: 'short',
+            timeStyle: 'medium'
+        });
+
+    }
+
+
+    // ==========================================
+    // MENSAJE DE CONSULTA
+    // ==========================================
+
+    function mostrarMensajeBusqueda(
+        mensaje,
+        color
+    ) {
+
+        searchMessage.style.backgroundColor = color;
+        searchMessage.style.color = '#fff';
+        searchMessage.style.display = 'block';
+        searchMessage.style.opacity = '1';
+        searchMessage.innerText = mensaje;
+
+    }
+
 </script>
+
 </body>
 </html>
