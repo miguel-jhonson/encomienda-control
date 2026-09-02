@@ -133,7 +133,7 @@
     <h2>Control Encomiendas</h2>
 
     <!-- ========================= -->
-    <!-- REGISTRO DE ENCOMIENDA -->
+    <!--  REGISTRO DE ENCOMIENDA   -->
     <!-- ========================= -->
 
     <form
@@ -194,13 +194,13 @@
     <div id="statusMessage"></div>
 
     <!-- ========================= -->
-    <!-- SEPARADOR -->
+    <!--        SEPARADOR          -->
     <!-- ========================= -->
 
     <div class="separator"></div>
 
     <!-- ========================= -->
-    <!-- CONSULTA -->
+    <!--         CONSULTA          -->
     <!-- ========================= -->
 
     <h3>🔎 Consultar Encomienda</h3>
@@ -223,7 +223,7 @@
     <div id="searchMessage"></div>
 
     <!-- ========================= -->
-    <!-- RESULTADO -->
+    <!--        RESULTADO          -->
     <!-- ========================= -->
 
     <div id="resultadoConsulta">
@@ -288,17 +288,17 @@
 
 <script>
 
-    // ==========================================
-    // CONFIGURACIÓN
-    // ==========================================
+    // ========================================== //
+    //               CONFIGURACIÓN                //
+    // ========================================== //
 
     const SCRIPT_URL =
         "https://script.google.com/macros/s/AKfycbweVE252ukrunlxgLPht9Xcgn1JZd5dB0yEwX43zgne6S8A1ifVGOAVJ4-k7uKE4Ua0xg/exec";
 
 
-    // ==========================================
-    // REGISTRO DE ENCOMIENDA
-    // ==========================================
+    // ========================================== //
+    //          REGISTRO DE ENCOMIENDA            //
+    // ========================================== //
 
     document
         .getElementById('encomiendaForm')
@@ -368,9 +368,9 @@
         });
 
 
-    // ==========================================
-    // CONSULTA DE ENCOMIENDA
-    // ==========================================
+    // ========================================== //
+    //          CONSULTA DE ENCOMIENDA            //
+    // ========================================== //
 
     const btnConsultar =
         document.getElementById('btnConsultar');
@@ -385,403 +385,123 @@
         document.getElementById('searchMessage');
 
 
+    // ========================================== //
+    //            CONSULTAR ENCOMIENDA            //
+    // ========================================== //
+
     btnConsultar.addEventListener('click', function() {
-
-        const id = idConsulta.value.trim().toUpperCase();
-
+        const id =
+            idConsulta.value
+                .trim()
+                .toUpperCase();
         resultadoConsulta.style.display = 'none';
         searchMessage.style.display = 'none';
 
-        if (!id) {
+        
+    // --------------------------- //
+    //          VALIDAR ID         //
+    // --------------------------- //
 
+        if (!id) {
             mostrarMensajeBusqueda(
                 '⚠️ Ingresa un ID de encomienda.',
                 '#f59e0b'
             );
-
             return;
         }
-
         btnConsultar.disabled = true;
         btnConsultar.innerText = 'Consultando...';
 
 
+    // --------------------------- //
+    //    CREAR CALLBACK JSONP     //
+    // --------------------------- // 
+
         const callbackName =
             'consultaEncomienda_' +
-            Date.now();
+            date.now();
 
+    // --------------------------- //
+    //         CREAR SCRIPT        //
+    // --------------------------- //
 
-        window[callbackName] = function(data) {
-
-            if (data.encontrado) {
-
-                mostrarResultado(data);
-
-            } else {
-
-                mostrarMensajeBusqueda(
-                    '❌ ' + data.mensaje,
-                    '#ef4444'
-                );
-
-            }
-
-            btnConsultar.disabled = false;
-            btnConsultar.innerText = 'Consultar';
-
-            // Limpiar callback temporal
-            delete window[callbackName];
-
-            if (scriptConsulta.parentNode) {
-                scriptConsulta.parentNode.removeChild(scriptConsulta);
-            }
-
-        };
-
-
-        const scriptConsulta =
+        const scriptConsulta = 
             document.createElement('script');
 
-        scriptConsulta.src =
-            SCRIPT_URL +
-            '?id=' +
-            encodeURIComponent(id) +
-            '&callback=' +
-            encodeURIComponent(callbackName);
+    // --------------------------- //
+    //      FUNCIÓN CALLBACK       //
+    // --------------------------- // 
 
-        scriptConsulta.onerror = function() {
+        window[callbackName] =
+            function(data) {
+                try{
+                    if (data && data.encontrado) {
+                        mostrarResultado(data);
+                        
+                    }else{
+                        
+                        mostrarMensajeBusqueda(
+                            '❌ ' +
+                            (
+                                data &&
+                                data.mensaje
+                                ? data.mensaje
+                                : 'No se encontró la encomienda.'
+                        ),
+                        '#ef4444'
+                    );
+                }
+                    
+            } catch (error) {
 
-            mostrarMensajeBusqueda(
-                '❌ No fue posible consultar el servidor.',
-                '#ef4444'
-            );
+                console.error(
+                    'Error procesando consulta:',
+                    error
+                );
+                mostrarMensajeBusqueda(
+                    '❌ Error al procesar la respuesta.',
+                    '#ef4444'
+                );
+            }
+
+            // --------------------------- //
+            //       RESTAURAR BOTÓN       //
+            // --------------------------- //
 
             btnConsultar.disabled = false;
             btnConsultar.innerText = 'Consultar';
-
-            delete window[callbackName];
-
-            if (scriptConsulta.parentNode) {
-                scriptConsulta.parentNode.removeChild(scriptConsulta);
-            }
-        };
-
-
-        document.body.appendChild(scriptConsulta);
-
-    });
-
-
-    // ==========================================
-    // MOSTRAR RESULTADO
-    // ==========================================
-
-    function mostrarResultado(data) {
-
-    document.getElementById('resultadoId').textContent =
-        data.id || '';
-
-    document.getElementById('resultadoNombre').textContent =
-        data.nombre || '';
-
-    document.getElementById('resultadoDepto').textContent =
-        data.depto || '';
-
-    document.getElementById('resultadoBulto').textContent =
-        data.bulto || '';
-
-    document.getElementById('resultadoIngreso').textContent =
-        formatearFecha(data.fechaIngreso);
-
-    const estadoElemento =
-        document.getElementById('resultadoEstado');
-
-    const estado =
-        String(data.estado || '').toUpperCase();
-
-    estadoElemento.textContent =
-        data.estado || 'SIN ESTADO';
-
-
-    // Color del estado
-    if (estado === 'RECIBIDA') {
-
-        estadoElemento.style.backgroundColor =
-            '#6c5ce7';
-
-    } else if (estado === 'RETIRADA') {
-
-        estadoElemento.style.backgroundColor =
-            '#10b981';
-
-    } else if (estado === 'INCIDENCIA') {
-
-        estadoElemento.style.backgroundColor =
-            '#ef4444';
-
-    } else {
-
-        estadoElemento.style.backgroundColor =
-            '#64748b';
-    }
-
-
-    const bloqueRetiro =
-        document.getElementById('bloqueRetiro');
-
-    const resultadoRetiro =
-        document.getElementById('resultadoRetiro');
-
-    const accionRetiro =
-        document.getElementById('accionRetiro');
-
-
-    // Si ya fue retirada
-    if (data.fechaRetiro || data.horaRetiro) {
-
-        bloqueRetiro.style.display =
-            'block';
-
-        resultadoRetiro.textContent =
-            (data.fechaRetiro || '') +
-            ' ' +
-            (data.horaRetiro || '');
-
-    } else {
-
-        bloqueRetiro.style.display =
-            'none';
-
-        resultadoRetiro.textContent = '';
-    }
-
-
-    // Mostrar botón solamente si está RECIBIDA
-    if (estado === 'RECIBIDA') {
-
-        accionRetiro.style.display =
-            'block';
-
-        document.getElementById(
-            'btnRegistrarRetiro'
-        ).disabled = false;
-
-    } else {
-
-        accionRetiro.style.display =
-            'none';
-    }
-
-
-    // Guardamos el ID actualmente consultado
-    document.getElementById(
-        'btnRegistrarRetiro'
-    ).dataset.id = data.id || '';
-
-
-    resultadoConsulta.style.display = 'block';
-}
-
-    document
-    .getElementById('btnRegistrarRetiro')
-    .addEventListener('click', function() {
-
-        const boton = this;
-        const id = boton.dataset.id;
-
-        if (!id) {
-
-            mostrarMensajeBusqueda(
-                '❌ No se encontró el ID de la encomienda.',
-                '#ef4444'
-            );
-
-            return;
-        }
-
-        const confirmar = confirm(
-            '¿Confirmas que la encomienda ' +
-            id +
-            ' fue retirada por el residente?'
-        );
-
-        if (!confirmar) {
-            return;
-        }
-
-        boton.disabled = true;
-        boton.innerText = 'Registrando retiro...';
-
-
-        const datosRetiro =
-            new URLSearchParams();
-
-        datosRetiro.append(
-            'accion',
-            'retirar'
-        );
-
-        datosRetiro.append(
-            'id',
-            id
-        );
-
-
-        fetch(SCRIPT_URL, {
-
-            method: 'POST',
-            body: datosRetiro,
-            mode: 'no-cors'
-
-        })
-        .then(function() {
-
-            /*
-             * Como la petición se realiza con no-cors,
-             * no podemos leer directamente la respuesta.
-             *
-             * Por eso esperamos un momento y luego
-             * volvemos a consultar el ID para confirmar.
-             */
-
-            setTimeout(function() {
-
-                consultarID(id);
-
-            }, 1000);
-
-        })
-        .catch(function(error) {
-
-            mostrarMensajeBusqueda(
-                '❌ Error al registrar el retiro.',
-                '#ef4444'
-            );
-
-            boton.disabled = false;
-            boton.innerText =
-                '✅ Registrar retiro';
-
-        });
-
-    });
-
-    function consultarID(id) {
-
-    const boton =
-        document.getElementById(
-            'btnRegistrarRetiro'
-        );
-
-    const callbackName =
-        'confirmarRetiro_' +
-        Date.now();
-
-
-    window[callbackName] =
-        function(data) {
-
-            if (data.encontrado) {
-
-                mostrarResultado(data);
-
-                const estado =
-                    String(
-                        data.estado || ''
-                    ).toUpperCase();
-
-                if (estado === 'RETIRADA') {
-
-                    mostrarMensajeBusqueda(
-                        '✅ Retiro registrado correctamente.',
-                        '#10b981'
-                    );
-
-                } else {
-
-                    mostrarMensajeBusqueda(
-                        '⚠️ No se pudo confirmar el retiro.',
-                        '#f59e0b'
-                    );
-                }
-
-            } else {
-
-                mostrarMensajeBusqueda(
-                    '❌ No se pudo consultar la encomienda.',
-                    '#ef4444'
-                );
-
-            }
-
-            if (boton) {
-
-                boton.disabled = false;
-                boton.innerText =
-                    '✅ Registrar retiro';
-
-            }
-
-            delete window[callbackName];
-
-            if (scriptConsulta &&
-                scriptConsulta.parentNode) {
-
+                
+                
+            // -------------------------------------------- //
+            //          LIMPIAR CALLBACK Y SCRIPT           //
+            // -------------------------------------------- //
+            
+            delate window[callbackName];
+            if(
+                scriptConsulta &&
                 scriptConsulta.parentNode
-                    .removeChild(scriptConsulta);
+            ){
+                scriptConsulta.parentNode
+                    .removechild(scriptConsulta);
             }
         };
 
 
-    const scriptConsulta =
-        document.createElement('script');
-
+    // --------------------------- //
+    //     CONSTRUIR URL JSONP     //
+    // --------------------------- //
 
     scriptConsulta.src =
         SCRIPT_URL +
         '?id=' +
         encodeURIComponent(id) +
-        '&callback=' +
-        encodeURIComponent(
-            callbackName
-        );
-
-
-    scriptConsulta.onerror =
-        function() {
-
-            mostrarMensajeBusqueda(
-                '❌ No fue posible verificar el retiro.',
-                '#ef4444'
-            );
-
-            if (boton) {
-
-                boton.disabled = false;
-                boton.innerText =
-                    '✅ Registrar retiro';
-
-            }
-
-            delete window[callbackName];
-
-            if (scriptConsulta.parentNode) {
-
-                scriptConsulta.parentNode
-                    .removeChild(scriptConsulta);
-
-            }
-        };
-
-
-    document.body.appendChild(
-        scriptConsulta
-    );
-}
-
-    // ==========================================
-    // FORMATO DE FECHA
-    // ==========================================
+        'callback='
+        encodeURIComponent(callbackName);
+        
+//==============================================================================================================================================//
+    // ========================================== //
+    //             FORMATO DE FECHA               //
+    // ========================================== //
 
     function formatearFecha(valor) {
 
@@ -803,9 +523,9 @@
     }
 
 
-    // ==========================================
-    // MENSAJE DE CONSULTA
-    // ==========================================
+    // ========================================== //
+    //             MENSAJE DE CONSULTA            //
+    // ========================================== //
 
     function mostrarMensajeBusqueda(
         mensaje,
