@@ -420,6 +420,7 @@
         const callbackName =
             'consultaEncomienda_' +
             date.now();
+        
 
     // --------------------------- //
     //         CREAR SCRIPT        //
@@ -427,6 +428,7 @@
 
         const scriptConsulta = 
             document.createElement('script');
+        
 
     // --------------------------- //
     //      FUNCIÓN CALLBACK       //
@@ -497,7 +499,74 @@
         encodeURIComponent(id) +
         'callback='
         encodeURIComponent(callbackName);
+
+
+    // --------------------------- //
+    //     ERROR DE CONEXIÓN       //
+    // --------------------------- //
+
+    scriptConsulta.onerror =
+        function() {
+
+            console.error(
+                'No se pudo cargar:',
+                scriptConsulta.src
+            );
+
+            mostrarMensajeBusqueda(
+                '❌ No fue posible consultar el servidor.',
+                '#ef4444'
+            );
+
+            btnConsultar.disabled = false;
+            btnConsultar.innerText = 'Consultar';
+
+            delete window[callbackName];
+
+            if (
+                scriptConsulta &&
+                scriptConsulta.parentNode
+            ) {
+
+                scriptConsulta.parentNode
+                    .removeChild(scriptConsulta);
+            }
+        };
         
+
+    // --------------------------- //
+    //    TIMEOUT DE SEGURIDAD     //
+    // --------------------------- //
+
+    const timeoutConsulta =
+        setTimeout(function() {
+            if (
+                window[callbackName]
+            ) {
+                delete window[callbackName];
+
+                if (
+                    scriptConsulta &&
+                    scriptConsulta.parentNode
+                ) {
+                    scriptConsulta.parentNode
+                        .removeChild(scriptConsulta);
+                }
+
+                btnConsultar.disabled = false;
+                btnConsultar.innerText =
+                    'Consultar';
+
+                mostrarMensajeBusqueda(
+                    '❌ La consulta tardó demasiado en responder.',
+                    '#ef4444'
+                );
+            }
+        }, 15000);
+
+    // Guardar timeout para cancelarlo
+    scriptConsulta.dataset.timeout =
+        timeoutConsulta;
 //==============================================================================================================================================//
     // ========================================== //
     //             FORMATO DE FECHA               //
