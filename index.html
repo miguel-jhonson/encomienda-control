@@ -577,6 +577,141 @@
         scriptConsulta
     );
 });
+
+
+// ==========================================
+// MOSTRAR RESULTADO
+// ==========================================
+
+function mostrarResultado(data) {
+
+    document.getElementById(
+        'resultadoId'
+    ).textContent =
+        data.id || '';
+
+    document.getElementById(
+        'resultadoNombre'
+    ).textContent =
+        data.nombre || '';
+
+    document.getElementById(
+        'resultadoDepto'
+    ).textContent =
+        data.depto || '';
+
+    document.getElementById(
+        'resultadoBulto'
+    ).textContent =
+        data.bulto || '';
+
+    document.getElementById(
+        'resultadoIngreso'
+    ).textContent =
+        formatearFecha(
+            data.fechaIngreso
+        );
+
+
+    // ==========================================
+    // ESTADO
+    // ==========================================
+
+    const estadoElemento =
+        document.getElementById(
+            'resultadoEstado'
+        );
+
+    const estado =
+        String(
+            data.estado || ''
+        ).trim().toUpperCase();
+
+    estadoElemento.textContent =
+        data.estado || 'SIN ESTADO';
+
+
+    // ==========================================
+    // COLOR ESTADO
+    // ==========================================
+
+    if (estado === 'RECIBIDA') {
+
+        estadoElemento.style.backgroundColor = '#6c5ce7';
+
+    } else if (estado === 'RETIRADA') {
+
+        estadoElemento.style.backgroundColor = '#10b981';
+
+    } else if (estado === 'INCIDENCIA') {
+
+        estadoElemento.style.backgroundColor = '#ef4444';
+
+    } else {
+
+        estadoElemento.style.backgroundColor = '#64748b';
+    }
+
+
+    // ==========================================
+    // INFORMACIÓN DEL RETIRO
+    // ==========================================
+
+    const bloqueRetiro =
+        document.getElementById(
+            'bloqueRetiro'
+        );
+
+    const resultadoRetiro =
+        document.getElementById(
+            'resultadoRetiro'
+        );
+
+    if (
+        data.fechaRetiro ||
+        data.horaRetiro
+    ) {
+
+        bloqueRetiro.style.display = 'block';
+        resultadoRetiro.textContent =
+            (
+                data.fechaRetiro || ''
+            ) +
+            ' ' +
+            (
+                data.horaRetiro || ''
+            );
+
+    } else {
+
+        bloqueRetiro.style.display = 'none';
+        resultadoRetiro.textContent = '';
+    }
+
+    // ==========================================
+    // BOTÓN REGISTRAR RETIRO
+    // ==========================================
+
+    const accionRetiro =
+        document.getElementById(
+            'accionRetiro'
+        );
+
+    const btnRegistrarRetiro =
+        document.getElementById(
+            'btnRegistrarRetiro'
+        );
+
+    if (estado === 'RECIBIDA') {
+
+        accionRetiro.style.display = 'block';
+        btnRegistrarRetiro.disabled = false;
+
+    } else {
+
+        accionRetiro.style.display ='none';
+        btnRegistrarRetiro.disabled = true;
+    }
 //==============================================================================================================================================//
     // ========================================== //
     //             FORMATO DE FECHA               //
