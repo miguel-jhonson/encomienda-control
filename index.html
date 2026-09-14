@@ -390,177 +390,117 @@
     // ========================================== //
 
     btnConsultar.addEventListener('click', function() {
-        const id =
-            idConsulta.value.trim().toUpperCase();
-        resultadoConsulta.style.display = 'none';
-        searchMessage.style.display = 'none';
 
-        
-    // --------------------------- //
-    //          VALIDAR ID         //
-    // --------------------------- //
+    const id = idConsulta.value.trim().toUpperCase();
 
-        if (!id) {
-            mostrarMensajeBusqueda(
-                '⚠️ Ingresa un ID de encomienda.', '#f59e0b'
-            );
-            return;
-        }
-        btnConsultar.disabled = true;
-        btnConsultar.innerText = 'Consultando...';
+    resultadoConsulta.style.display = 'none';
+    searchMessage.style.display = 'none';
 
+    if (!id) {
+        mostrarMensajeBusqueda(
+            '⚠️ Ingresa un ID de encomienda.',
+            '#f59e0b'
+        );
+        return;
+    }
 
-    // --------------------------- //
-    //    CREAR CALLBACK JSONP     //
-    // --------------------------- // 
+    btnConsultar.disabled = true;
+    btnConsultar.innerText = 'Consultando...';
 
-        const callbackName =
-            'consultaEncomienda_' + Date.now();
-        
+    const callbackName =
+        'consultaEncomienda_' + Date.now();
 
-    // --------------------------- //
-    //         CREAR SCRIPT        //
-    // --------------------------- //
+    const scriptConsulta =
+        document.createElement('script');
 
-        const scriptConsulta = 
-            document.createElement('script');
-        
+    window[callbackName] = function(data) {
 
-    // --------------------------- //
-    //      FUNCIÓN CALLBACK       //
-    // --------------------------- // 
+        try {
 
-        window[callbackName] =
-            function(data) {
-                try{
-                    if (data && data.encontrado) {
-                        mostrarResultado(data);
-                        
-                    }else{
-                        
-                        mostrarMensajeBusqueda(
-                            '❌ ' +
-                            (
-                                data &&
-                                data.mensaje
-                                ? data.mensaje
-                                : 'No se encontró la encomienda.'
-                        ),
-                        '#ef4444'
-                    );
-                }
-                    
-            } catch (error) {
+            if (data && data.encontrado) {
 
-                console.error(
-                    'Error procesando consulta:', error
-                );
+                mostrarResultado(data);
+
+            } else {
+
                 mostrarMensajeBusqueda(
-                    '❌ Error al procesar la respuesta.', '#ef4444'
+                    '❌ ' +
+                    (
+                        data && data.mensaje
+                            ? data.mensaje
+                            : 'No se encontró la encomienda.'
+                    ),
+                    '#ef4444'
                 );
             }
 
-            // --------------------------- //
-            //       RESTAURAR BOTÓN       //
-            // --------------------------- //
-
-            btnConsultar.disabled = false;
-            btnConsultar.innerText = 'Consultar';
-                
-                
-            // -------------------------------------------- //
-            //          LIMPIAR CALLBACK Y SCRIPT           //
-            // -------------------------------------------- //
-            
-            delete window[callbackName];
-            if(
-                scriptConsulta && scriptConsulta.parentNode
-            ){
-                scriptConsulta.parentNode.removeChild(scriptConsulta);
-            }
-        };
-
-
-    // --------------------------- //
-    //     CONSTRUIR URL JSONP     //
-    // --------------------------- //
-
-    scriptConsulta.src =
-        SCRIPT_URL + '?id=' +
-        encodeURIComponent(id) + '&callback='
-        encodeURIComponent(callbackName);
-
-
-    // --------------------------- //
-    //     ERROR DE CONEXIÓN       //
-    // --------------------------- //
-
-    scriptConsulta.onerror =
-        function() {
+        } catch (error) {
 
             console.error(
-                'No se pudo cargar:', scriptConsulta.src
+                'Error procesando consulta:',
+                error
             );
 
             mostrarMensajeBusqueda(
-                '❌ No fue posible consultar el servidor.', '#ef4444'
+                '❌ Error al procesar la respuesta.',
+                '#ef4444'
             );
+        }
 
-            btnConsultar.disabled = false;
-            btnConsultar.innerText = 'Consultar';
+        btnConsultar.disabled = false;
+        btnConsultar.innerText = 'Consultar';
 
-            delete window[callbackName];
+        delete window[callbackName];
 
-            if (
-                scriptConsulta && scriptConsulta.parentNode
-            ) {
-                scriptConsulta.parentNode.removeChild(scriptConsulta);
-            }
-        };
-        
+        if (
+            scriptConsulta &&
+            scriptConsulta.parentNode
+        ) {
+            scriptConsulta.parentNode.removeChild(
+                scriptConsulta
+            );
+        }
+    };
 
-    // --------------------------- //
-    //    TIMEOUT DE SEGURIDAD     //
-    // --------------------------- //
+    scriptConsulta.src =
+        SCRIPT_URL +
+        '?id=' +
+        encodeURIComponent(id) +
+        '&callback=' +
+        encodeURIComponent(callbackName);
 
-    const timeoutConsulta =
-        setTimeout(function() {
-            if (
-                window[callbackName]
-            ) {
-                delete window[callbackName];
+    scriptConsulta.onerror = function() {
 
-                if (
-                    scriptConsulta &&
-                    scriptConsulta.parentNode
-                ) {
-                    scriptConsulta.parentNode
-                        .removeChild(scriptConsulta);
-                }
+        console.error(
+            'No se pudo cargar:',
+            scriptConsulta.src
+        );
 
-                btnConsultar.disabled = false;
-                btnConsultar.innerText = 'Consultar';
+        mostrarMensajeBusqueda(
+            '❌ No fue posible consultar el servidor.',
+            '#ef4444'
+        );
 
-                mostrarMensajeBusqueda(
-                    '❌ La consulta tardó demasiado en responder.', '#ef4444'
-                );
-            }
-        }, 15000);
+        btnConsultar.disabled = false;
+        btnConsultar.innerText = 'Consultar';
 
-    // Guardar timeout para cancelarlo
-    scriptConsulta.dataset.timeout =
-        timeoutConsulta;
+        delete window[callbackName];
 
-
-    // --------------------------- //
-    //      EJECUTAR CONSULTA      //
-    // --------------------------- //
+        if (
+            scriptConsulta &&
+            scriptConsulta.parentNode
+        ) {
+            scriptConsulta.parentNode.removeChild(
+                scriptConsulta
+            );
+        }
+    };
 
     document.body.appendChild(
         scriptConsulta
     );
-});
 
+});
 
     // --------------------------- //
     //      MOSTRAR RESULTADO      //
