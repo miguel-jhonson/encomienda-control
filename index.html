@@ -415,7 +415,7 @@
     // --------------------------- // 
 
         const callbackName =
-            'consultaEncomienda_' + date.now();
+            'consultaEncomienda_' + Date.now();
         
 
     // --------------------------- //
@@ -472,11 +472,11 @@
             //          LIMPIAR CALLBACK Y SCRIPT           //
             // -------------------------------------------- //
             
-            delate window[callbackName];
+            delete window[callbackName];
             if(
                 scriptConsulta && scriptConsulta.parentNode
             ){
-                scriptConsulta.parentNode.removechild(scriptConsulta);
+                scriptConsulta.parentNode.removeChild(scriptConsulta);
             }
         };
 
@@ -487,7 +487,7 @@
 
     scriptConsulta.src =
         SCRIPT_URL + '?id=' +
-        encodeURIComponent(id) + 'callback='
+        encodeURIComponent(id) + '&callback='
         encodeURIComponent(callbackName);
 
 
