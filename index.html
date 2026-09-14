@@ -391,9 +391,7 @@
 
     btnConsultar.addEventListener('click', function() {
         const id =
-            idConsulta.value
-                .trim()
-                .toUpperCase();
+            idConsulta.value.trim().toUpperCase();
         resultadoConsulta.style.display = 'none';
         searchMessage.style.display = 'none';
 
@@ -404,8 +402,7 @@
 
         if (!id) {
             mostrarMensajeBusqueda(
-                '⚠️ Ingresa un ID de encomienda.',
-                '#f59e0b'
+                '⚠️ Ingresa un ID de encomienda.', '#f59e0b'
             );
             return;
         }
@@ -418,8 +415,7 @@
     // --------------------------- // 
 
         const callbackName =
-            'consultaEncomienda_' +
-            date.now();
+            'consultaEncomienda_' + date.now();
         
 
     // --------------------------- //
@@ -457,12 +453,10 @@
             } catch (error) {
 
                 console.error(
-                    'Error procesando consulta:',
-                    error
+                    'Error procesando consulta:', error
                 );
                 mostrarMensajeBusqueda(
-                    '❌ Error al procesar la respuesta.',
-                    '#ef4444'
+                    '❌ Error al procesar la respuesta.', '#ef4444'
                 );
             }
 
@@ -480,11 +474,9 @@
             
             delate window[callbackName];
             if(
-                scriptConsulta &&
-                scriptConsulta.parentNode
+                scriptConsulta && scriptConsulta.parentNode
             ){
-                scriptConsulta.parentNode
-                    .removechild(scriptConsulta);
+                scriptConsulta.parentNode.removechild(scriptConsulta);
             }
         };
 
@@ -494,10 +486,8 @@
     // --------------------------- //
 
     scriptConsulta.src =
-        SCRIPT_URL +
-        '?id=' +
-        encodeURIComponent(id) +
-        'callback='
+        SCRIPT_URL + '?id=' +
+        encodeURIComponent(id) + 'callback='
         encodeURIComponent(callbackName);
 
 
@@ -509,13 +499,11 @@
         function() {
 
             console.error(
-                'No se pudo cargar:',
-                scriptConsulta.src
+                'No se pudo cargar:', scriptConsulta.src
             );
 
             mostrarMensajeBusqueda(
-                '❌ No fue posible consultar el servidor.',
-                '#ef4444'
+                '❌ No fue posible consultar el servidor.', '#ef4444'
             );
 
             btnConsultar.disabled = false;
@@ -524,12 +512,9 @@
             delete window[callbackName];
 
             if (
-                scriptConsulta &&
-                scriptConsulta.parentNode
+                scriptConsulta && scriptConsulta.parentNode
             ) {
-
-                scriptConsulta.parentNode
-                    .removeChild(scriptConsulta);
+                scriptConsulta.parentNode.removeChild(scriptConsulta);
             }
         };
         
@@ -554,12 +539,10 @@
                 }
 
                 btnConsultar.disabled = false;
-                btnConsultar.innerText =
-                    'Consultar';
+                btnConsultar.innerText = 'Consultar';
 
                 mostrarMensajeBusqueda(
-                    '❌ La consulta tardó demasiado en responder.',
-                    '#ef4444'
+                    '❌ La consulta tardó demasiado en responder.', '#ef4444'
                 );
             }
         }, 15000);
@@ -579,9 +562,9 @@
 });
 
 
-// ==========================================
-// MOSTRAR RESULTADO
-// ==========================================
+    // --------------------------- //
+    //      MOSTRAR RESULTADO      //
+    // --------------------------- //
 
 function mostrarResultado(data) {
 
@@ -613,9 +596,9 @@ function mostrarResultado(data) {
         );
 
 
-    // ==========================================
-    // ESTADO
-    // ==========================================
+    // ---------------- //
+    //      ESTADO      //
+    // ---------------- //
 
     const estadoElemento =
         document.getElementById(
@@ -631,9 +614,9 @@ function mostrarResultado(data) {
         data.estado || 'SIN ESTADO';
 
 
-    // ==========================================
-    // COLOR ESTADO
-    // ==========================================
+    // ---------------------- //
+    //      COLOR ESTADO      //
+    // ---------------------- //
 
     if (estado === 'RECIBIDA') {
 
@@ -653,9 +636,9 @@ function mostrarResultado(data) {
     }
 
 
-    // ==========================================
-    // INFORMACIÓN DEL RETIRO
-    // ==========================================
+    // -------------------------------- //
+    //      INFORMACIÓN DEL RETIRO      //
+    // -------------------------------- //
 
     const bloqueRetiro =
         document.getElementById(
@@ -668,8 +651,7 @@ function mostrarResultado(data) {
         );
 
     if (
-        data.fechaRetiro ||
-        data.horaRetiro
+        data.fechaRetiro || data.horaRetiro
     ) {
 
         bloqueRetiro.style.display = 'block';
@@ -688,9 +670,9 @@ function mostrarResultado(data) {
         resultadoRetiro.textContent = '';
     }
 
-    // ==========================================
-    // BOTÓN REGISTRAR RETIRO
-    // ==========================================
+    // -------------------------------- //
+    //      BOTÓN REGISTRAR RETIRO      //
+    // -------------------------------- //
 
     const accionRetiro =
         document.getElementById(
@@ -709,9 +691,325 @@ function mostrarResultado(data) {
 
     } else {
 
-        accionRetiro.style.display ='none';
+        accionRetiro.style.display = 'none';
         btnRegistrarRetiro.disabled = true;
     }
+
+
+
+    // --------------------------- //
+    //      GUARDAR ID ACTUAL      //
+    // --------------------------- //
+
+    btnRegistrarRetiro.dataset.id = data.id || '';
+
+
+    // --------------------------- //
+    //      MOSTRAR RESULTADO      //
+    // --------------------------- //
+
+    resultadoConsulta.style.display = 'block';
+}
+
+
+// -------------------------- //
+//      REGISTRAR RETIRO      //
+// -------------------------- //
+
+document
+    .getElementById('btnRegistrarRetiro')
+    .addEventListener(
+        'click',
+        function() {
+
+            const boton = this;
+
+            const id =
+                String(
+                    boton.dataset.id || ''
+                )
+                .trim()
+                .toUpperCase();
+
+
+            // -------------------- //
+            //      VALIDAR ID      //
+            // -------------------- //
+
+            if (!id) {
+
+                mostrarMensajeBusqueda(
+                    '❌ No se encontró el ID de la encomienda.', '#ef4444'
+                );
+
+                return;
+            }
+
+
+            // ---------------------- //
+            //      CONFIRMACIÓN      //
+            // ---------------------- //
+
+            const confirmar =
+                confirm(
+                    '¿Confirmas que la encomienda ' + id +
+                    ' fue retirada por el residente?'
+                );
+
+            if (!confirmar) {
+
+                return;
+
+            }
+
+
+            // ------------------------ //
+            //      BLOQUEAR BOTÓN      //
+            // ------------------------ //
+
+            boton.disabled = true;
+
+            boton.innerText = 'Registrando retiro...';
+
+
+            // ------------------------ //
+            //      PREPARAR DATOS      //
+            // ------------------------ //
+
+            const datosRetiro =
+                new URLSearchParams();
+
+
+            datosRetiro.append(
+                'accion',
+                'retirar'
+            );
+
+
+            datosRetiro.append(
+                'id',
+                id
+            );
+
+
+            // ----------------------- //
+            //      ENVIAR RETIRO      //
+            // ----------------------- //
+
+            fetch(
+                SCRIPT_URL,
+                {
+                    method: 'POST',
+                    body: datosRetiro,
+                    mode: 'no-cors'
+                }
+            )
+            .then(function() {
+
+                /*
+                 * Como usamos no-cors,
+                 * el navegador no permite leer
+                 * directamente la respuesta.
+                 *
+                 * Esperamos un momento para que
+                 * Apps Script termine de actualizar
+                 * Google Sheets.
+                 */
+
+                setTimeout(
+                    function() {
+
+                        consultarID(
+                            id
+                        );
+
+                    },
+                    1200
+                );
+
+            })
+            .catch(
+                function(error) {
+
+                    console.error(
+                        'Error registrando retiro:', error
+                    );
+
+                    mostrarMensajeBusqueda(
+                        '❌ Error al registrar el retiro.', '#ef4444'
+                    );
+  
+                    boton.disabled = false;
+
+                    boton.innerText = '✅ Registrar retiro';
+                }
+            );
+
+        }
+    );
+
+
+// ------------------------- //
+//      CONFIRMAR RETIRO     //
+// ------------------------- //
+
+function consultarID(id) {
+
+    const boton =
+        document.getElementById(
+            'btnRegistrarRetiro'
+        );
+
+    const callbackName =
+        'confirmarRetiro_' + Date.now();
+
+    const scriptConsulta =
+        document.createElement('script');
+
+
+    // ------------------ //
+    //      CALLBACK      //
+    // ------------------ //
+
+    window[callbackName] =
+        function(data) {
+
+            try {
+
+                if (
+                    data &&
+                    data.encontrado
+                ) {
+
+                    mostrarResultado(
+                        data
+                    );
+
+                    const estado =
+                        String(
+                            data.estado || ''
+                        )
+                        .trim()
+                        .toUpperCase();
+
+                    if (
+                        estado === 'RETIRADA'
+                    ) {
+
+                        mostrarMensajeBusqueda(
+                            '✅ Retiro registrado correctamente.', '#10b981'
+                        );
+
+                    } else {
+
+                        mostrarMensajeBusqueda(
+                            '⚠️ El retiro fue enviado, pero aún no se pudo confirmar.', '#f59e0b'
+                        );
+                    }
+
+                } else {
+
+                    mostrarMensajeBusqueda(
+                        '❌ No se pudo consultar la encomienda.', '#ef4444'
+                    );
+
+                }
+                
+            } catch (error) {
+
+                console.error(
+                    'Error confirmando retiro:', error
+                );
+
+                mostrarMensajeBusqueda(
+                    '❌ Error al procesar la confirmación.', '#ef4444'
+                );
+            }
+
+
+            // ------------------------ //
+            //      RESTAURAR BOTÓN     //
+            // ------------------------ //
+
+            if (boton) {
+
+                boton.disabled = false;
+                boton.innerText = '✅ Registrar retiro';
+            }
+
+
+            // ----------------- //
+            //      LIMPIAR      //
+            // ----------------- //
+
+            delete window[callbackName];
+
+            if (
+                scriptConsulta && scriptConsulta.parentNode
+            ) {
+
+                scriptConsulta.parentNode
+                    .removeChild(
+                        scriptConsulta
+                    );
+            }
+        };
+
+
+    // ------------------- //
+    //      URL JSONP      //
+    // ------------------- //
+
+    scriptConsulta.src =
+        SCRIPT_URL + '?id=' +
+        encodeURIComponent(id) + '&callback=' +
+        encodeURIComponent(
+            callbackName
+        );
+
+
+    // --------------- //
+    //      ERROR      //
+    // --------------- //
+
+    scriptConsulta.onerror =
+        function() {
+
+            mostrarMensajeBusqueda(
+                '❌ No fue posible verificar el retiro.', '#ef4444'
+            );
+
+
+            if (boton) {
+
+                boton.disabled = false;
+                boton.innerText = '✅ Registrar retiro';
+
+            }
+
+            delete window[callbackName];
+
+            if (
+                scriptConsulta && scriptConsulta.parentNode
+            ) {
+
+                scriptConsulta.parentNode.removeChild(
+                        scriptConsulta
+                    );
+            }
+
+        };
+
+
+    // ------------------ //
+    //      EJECUTAR      //
+    // ------------------ //
+
+    document.body.appendChild(
+        scriptConsulta
+    );
+
+}
 //==============================================================================================================================================//
     // ========================================== //
     //             FORMATO DE FECHA               //
