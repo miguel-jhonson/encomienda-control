@@ -9,293 +9,646 @@
         * {
             box-sizing: border-box;
         }
-        
+
         body {
             margin: 0;
             min-height: 100vh;
-            font-family: Arial, sans-serif;
-            background: #f4f6f9;
-            color: #2d3748;
             padding: 30px 15px;
+
+            font-family:
+            Arial,
+            sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f4f6fb 0%,
+                    #eef1f7 100%
+                );
+
+            color: #26334a;
         }
+
+
+        /* ==========================================
+                       TARJETA PRINCIPAL
+         ========================================== */
 
         .card {
             width: 100%;
             max-width: 520px;
-            margin: 0 auto;
+
+            margin: 40px auto;
+
+            padding: 32px;
+
             background: #ffffff;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 20px 45px
+                rgba(31, 41, 55, 0.10);
         }
+
+
+        /* ==========================================
+                           CABECERA
+         ========================================== */
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 32px;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+
+        .header-icon {
+            width: 46px;
+            height: 46px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background:
+                rgba(108, 92, 231, 0.10);
+
+            font-size: 22px;
+        }
+
 
         h2 {
-            margin: 0 0 8px;
-            color: #2f3b52;
-            font-size: 25px;
+            margin: 0;
+
+            color: #27364f;
+
+            font-size: 23px;
+
             font-weight: 700;
-            border: none;
-            padding: 0;
         }
 
-        h2::after {
-            content: "Gestión digital de conserjería";
-            display: block;
-            margin-top: 6px;
+
+        .header p {
+            margin: 4px 0 0;
+
             color: #718096;
-            font-size: 14px;
-            font-weight: 400;
+
+            font-size: 13px;
         }
 
-        h3 {
-            margin: 0 0 20px;
-            color: #2f3b52;
-            font-size: 19px;
+
+        /* ==========================================
+                         BOTÓN LUPA
+         ========================================== */
+
+        .btn-lupa {
+            width: 44px;
+            height: 44px;
+
+            min-height: 44px;
+
+            padding: 0;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid #e1e6ef;
+
+            border-radius: 12px;
+
+            background: #ffffff;
+
+            color: #53627a;
+
+            font-size: 20px;
+
+            cursor: pointer;
+
+            box-shadow: none;
+
+            transition:
+                all 0.2s ease;
         }
+
+
+        .btn-lupa:hover {
+            color: #6c5ce7;
+
+            border-color: #6c5ce7;
+
+            background:
+                rgba(108, 92, 231, 0.06);
+
+            transform: translateY(-1px);
+        }
+
+
+        /* ==========================================
+                         FORMULARIO
+         ========================================== */
 
         .group {
-            margin-bottom: 18px;
+            margin-bottom: 21px;
         }
+
 
         label {
             display: block;
-            margin-bottom: 7px;
-            color: #4a5568;
+
+            margin-bottom: 8px;
+
+            color: #3f4d63;
+
             font-size: 13px;
+
             font-weight: 600;
         }
+
 
         input,
         select {
             width: 100%;
-            height: 46px;
-            padding: 0 14px;
-            border: 1px solid #d9dee7;
-            border-radius: 9px;
+
+            height: 48px;
+
+            padding:
+                0 14px;
+
+            border:
+                1px solid #dce2eb;
+
+            border-radius: 10px;
+
             background: #ffffff;
+
             color: #2d3748;
+
             font-size: 14px;
+
             outline: none;
-            transition: all 0.2s ease;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
         }
 
-        button {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            background: #6c5ce7;
-            color: white;
-            font-weight: bold;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        input:focus,
-        select:focus {
-            border-color: #6c5ce7;
-            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.12);
-        }
 
         input::placeholder {
             color: #a0aec0;
         }
 
-        button {
+
+        input:focus,
+        select:focus {
+            border-color: #6c5ce7;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(108, 92, 231, 0.10);
+        }
+
+
+        /* ==========================================
+                          BOTÓN PRINCIPAL
+           ========================================== */
+
+        .btn-principal {
             width: 100%;
-            min-height: 46px;
-            padding: 11px 16px;
+
+            min-height: 50px;
+
             border: none;
-            border-radius: 9px;
-            background: #6c5ce7;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7565e8,
+                    #6252d8
+                );
+
             color: #ffffff;
-            font-weight: 600;
+
             font-size: 14px;
+
+            font-weight: 700;
+
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 10px rgba(108, 92, 231, 0.20);
+
+            box-shadow:
+                0 7px 16px
+                rgba(108, 92, 231, 0.22);
+
+            transition:
+                all 0.2s ease;
         }
 
-         button:hover {
-             background: #5b4cc4;
-             transform: translateY(-1px);
+
+        .btn-principal:hover {
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 10px 20px
+                rgba(108, 92, 231, 0.27);
         }
 
-        button:active {
-             transform: translateY(0);
-        }    
 
-        button:disabled {
+        .btn-principal:disabled {
             opacity: 0.6;
+
             cursor: not-allowed;
+
             transform: none;
         }
 
-        .separator {
-            margin: 28px 0;
-            border-top: 1px solid #e5e9f0;
+
+        /* ==========================================
+                         MENSAJE REGISTRO
+           ========================================== */
+
+        #statusMessage {
+            display: none;
+
+            margin-top: 18px;
+
+            padding: 13px;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            font-size: 13px;
+
+            font-weight: 600;
         }
 
-        #statusMessage,
-        #searchMessage {
+
+        /* ==========================================
+                            MODAL
+           ========================================== */
+
+        .modal-overlay {
+            position: fixed;
+
+            inset: 0;
+
             display: none;
-            margin-top: 15px;
-            padding: 12px 14px;
-            border-radius: 9px;
-            font-weight: 600;
-            text-align: center;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(15, 23, 42, 0.48);
+
+            backdrop-filter:
+                blur(4px);
+
+            z-index: 9999;
+        }
+
+
+        .modal-consulta {
+            width: 100%;
+
+            max-width: 440px;
+
+            padding: 26px;
+
+            background: #ffffff;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 25px 60px
+                rgba(0, 0, 0, 0.20);
+
+            animation:
+                aparecerModal
+                0.2s ease;
+        }
+
+
+        @keyframes aparecerModal {
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(12px)
+                    scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+
+        }
+
+
+        /* ==========================================
+                       CABECERA MODAL
+           ========================================== */
+
+        .modal-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-start;
+
+            margin-bottom: 24px;
+        }
+
+
+        .modal-header h3 {
+            margin: 0;
+
+            color: #27364f;
+
+            font-size: 19px;
+        }
+
+
+        .modal-header p {
+            margin: 5px 0 0;
+
+            color: #718096;
+
             font-size: 13px;
         }
 
+
+        /* ==========================================
+                           CERRAR
+           ========================================== */
+
+        .btn-cerrar {
+            width: 34px;
+
+            height: 34px;
+
+            min-height: 34px;
+
+            padding: 0;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #f1f3f7;
+
+            color: #64748b;
+
+            font-size: 22px;
+
+            line-height: 1;
+
+            cursor: pointer;
+
+            box-shadow: none;
+        }
+
+
+        .btn-cerrar:hover {
+            background: #e5e7eb;
+
+            color: #334155;
+
+            transform: none;
+        }
+
+
+        /* ==========================================
+                       BOTÓN CONSULTAR
+           ========================================== */
+
+        .btn-consultar {
+            width: 100%;
+
+            min-height: 48px;
+
+            background: #6c5ce7;
+
+            border: none;
+
+            border-radius: 10px;
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        /* ==========================================
+                       MENSAJE CONSULTA
+           ========================================== */
+
+        #searchMessage {
+            display: none;
+
+            margin-top: 15px;
+
+            padding: 12px;
+
+            border-radius: 9px;
+
+            text-align: center;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        /* ==========================================
+                           RESULTADO
+           ========================================== */
+
         #resultadoConsulta {
             display: none;
-            margin-top: 20px;
-            padding: 20px;
+
+            margin-top: 22px;
+
+            padding: 18px;
+
             background: #f8fafc;
+
+            border:
+                1px solid #e2e8f0;
+
             border-radius: 12px;
-            border: 1px solid #e2e8f0;
         }
+
 
         .dato {
-            margin-bottom: 13px;
+            margin-bottom: 12px;
+
             color: #4a5568;
-            font-size: 14px;
+
+            font-size: 13px;
         }
 
-        .dato:last-child {
-            margin-bottom: 0;
-        }
 
         .dato strong {
             display: inline-block;
+
             min-width: 105px;
+
             color: #2f3b52;
         }
 
+
+        /* ==========================================
+                           ESTADO
+           ========================================== */
+
         .estado {
             display: inline-block;
-            padding: 6px 12px;
+
+            padding:
+                6px 12px;
+
             border-radius: 20px;
+
             background: #6c5ce7;
-            color: #ffffff;
-            font-weight: 600;
+
+            color: white;
+
             font-size: 12px;
-            min-width: 80px;
+
+            font-weight: 700;
+
             text-align: center;
         }
+
+
+        /* ==========================================
+                           RETIRO
+           ========================================== */
 
         #accionRetiro {
             margin-top: 18px !important;
         }
 
-        #btnRegistrarRetiro {
-            background: #10b981 !important;
-            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.18);
+
+        .btn-retiro {
+            width: 100%;
+
+            min-height: 46px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #10b981;
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
         }
 
-        #btnRegistrarRetiro:hover {
-            background: #059669 !important;
+
+        .btn-retiro:hover {
+            background: #059669;
         }
+
+
+        /* ==========================================
+                           RESPONSIVE
+           ========================================== */
 
         @media (max-width: 600px) {
-
             body {
                 padding: 15px 10px;
             }
 
+
             .card {
-                padding: 22px 18px;
-                border-radius: 14px;
+                margin: 10px auto;
+
+                padding: 24px 20px;
+
+                border-radius: 15px;
             }
+
 
             h2 {
-                font-size: 22px;
+                font-size: 21px;
             }
 
-            h3 {
-                font-size: 18px;
-            }
-        }
-        
-        .btn-consulta {
-            background: #ffffff;
-            color: #4a5568;
-            border: 1px solid #d9dee7;
-            box-shadow: none;
-            font-size: 14px;
-        }
-        
-        .btn-consultar:hover {
-            background: #f8fafc;
-            color: #6c5ce7;
-            border-color: #6c5ce7;
-        }
-
-
-        /* ==========================================
-                         PANEL CONSULTA
-         ========================================== */
-
-        .panel-consulta {
-            display: none;
-            margin-top: 18px;
-            padding: 20px;
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-        }
-
-
-        /* ==========================================
-                   ENCABEZADO CONSULTA
-         ========================================== */
-        
-        .consulta-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .consulta-header h3 {
-            margin: 0;
-        }
-
-
-        /* ==========================================
-                        BOTÓN CERRAR
-         ========================================== */
-
-        .btn-cerrar {
-            width: 34px;
-            min-height: 34px;
-            height: 34px;
-            padding: 0;
-            border-radius: 50%;
-            background: #edf2f7;
-            color: #4a5568;
-            font-size: 22px;
-            line-height: 1;
-            box-shadow: none;
-        }
-
-        .btn-cerrar:hover {
-            background: #e2e8f0;
-            color: #2d3748;
-            transform: none;
         }
     </style>
 </head>
 
 <body>
 
+<body>
+
 <div class="card">
 
-    <h2>Control Encomiendas</h2>
+    <!-- =============================== -->
+    <!--            CABECERA             -->
+    <!-- =============================== -->
 
-    <!-- ========================= -->
-    <!--  REGISTRO DE ENCOMIENDA   -->
-    <!-- ========================= -->
+    <div class="header">
+
+        <div class="header-title">
+
+            <div class="header-icon">
+                📦
+            </div>
+
+            <div>
+                <h2>Control Encomiendas</h2>
+                <p>Gestión digital de conserjería</p>
+            </div>
+
+        </div>
+
+        <!-- LUPA -->
+        <button
+            type="button"
+            id="btnAbrirConsulta"
+            class="btn-lupa"
+            title="Consultar encomienda"
+            aria-label="Consultar encomienda"
+        >
+            🔍
+        </button>
+
+    </div>
+
+
+    <!-- =============================== -->
+    <!--      REGISTRO DE ENCOMIENDA     -->
+    <!-- =============================== -->
 
     <form
         id="encomiendaForm"
@@ -304,38 +657,74 @@
     >
 
         <div class="group">
-            <label>Nombre/Apellido del Residente</label>
+
+            <label>
+                Nombre/Apellido del Residente
+            </label>
+
             <input
                 type="text"
                 name="nombre"
                 required
                 placeholder="Ej: Juan Pérez"
             >
+
         </div>
 
+
         <div class="group">
-            <label>Número Depto</label>
+
+            <label>
+                Número Depto
+            </label>
+
             <input
                 type="number"
                 name="depto"
                 required
                 placeholder="Ej: 119"
             >
+
         </div>
 
-        <div class="group">
-            <label>Bulto/Paquete</label>
 
-            <select name="bulto" required>
-                <option value="">Elegir...</option>
-                <option value="Paquete">Paquete</option>
-                <option value="Sobre">Sobre / Documento</option>
-                <option value="Caja">Caja / Bulto</option>
+        <div class="group">
+
+            <label>
+                Bulto/Paquete
+            </label>
+
+            <select
+                name="bulto"
+                required
+            >
+
+                <option value="">
+                    Elegir...
+                </option>
+
+                <option value="Paquete">
+                    Paquete
+                </option>
+
+                <option value="Sobre">
+                    Sobre / Documento
+                </option>
+
+                <option value="Caja">
+                    Caja / Bulto
+                </option>
+
             </select>
+
         </div>
 
+
         <div class="group">
-            <label>Fono Residente</label>
+
+            <label>
+                Fono Residente
+            </label>
 
             <input
                 type="tel"
@@ -344,109 +733,166 @@
                 placeholder="Ej: 56912345678"
                 pattern="[0-9]{11}"
             >
+
         </div>
 
-        <button type="submit">
-            Registrar y Enviar
+
+        <button
+            type="submit"
+            class="btn-principal"
+        >
+            📦 Registrar encomienda
         </button>
 
     </form>
 
+
+    <!-- MENSAJE REGISTRO -->
+
     <div id="statusMessage"></div>
 
-    <!-- ========================= -->
-    <!--        SEPARADOR          -->
-    <!-- ========================= -->
 
-    <div class="separator"></div>
-
-    <!-- ========================= -->
-    <!--         CONSULTA          -->
-    <!-- ========================= -->
-
-    <button type="button" id="btnAbrirConsulta" class="btn-Consulta">
-        🔎 Consultar Encomienda
-    </button>
-    
-    <div id="panelConsulta" class="panel-Consulta">
-        <div class="consulta-header">
-            <h3>🔎 Consultar Encomienda</h3>
-            <button type="button" id="btnCerrarConsulta" class="btn-cerrar">x
-            </button>
-        </div>
-
-    <div class="grup">
-        <label>ID de encomienda</label>
-        <input type="text" id="idConsulta" placeholder="Ej: ENC-00001" autocomplete="off">
-    </div>
-
-    <button type="button" id="btnConsultar">
-        Consultar
-    </button>
-
-    <div id="searchMessage"></div>
 </div>
-    
 
-    <!-- ========================= -->
-    <!--        RESULTADO          -->
-    <!-- ========================= -->
 
-    <div id="resultadoConsulta">
+<!-- ====================================== -->
+<!--          MODAL DE CONSULTA             -->
+<!-- ====================================== -->
 
-        <div class="dato">
-            <strong>ID:</strong>
-            <span id="resultadoId"></span>
-        </div>
+<div
+    id="modalConsulta"
+    class="modal-overlay"
+>
 
-        <div class="dato">
-            <strong>Residente:</strong>
-            <span id="resultadoNombre"></span>
-        </div>
+    <div class="modal-consulta">
 
-        <div class="dato">
-            <strong>Departamento:</strong>
-            <span id="resultadoDepto"></span>
-        </div>
+        <div class="modal-header">
 
-        <div class="dato">
-            <strong>Tipo:</strong>
-            <span id="resultadoBulto"></span>
-        </div>
+            <div>
 
-        <div class="dato">
-            <strong>Ingreso:</strong>
-            <span id="resultadoIngreso"></span>
-        </div>
+                <h3>
+                    🔍 Consultar encomienda
+                </h3>
 
-        <div class="dato">
-            <strong>Estado:</strong>
-            <span
-                class="estado"
-                id="resultadoEstado"
-            ></span>
-        </div>
+                <p>
+                    Ingresa el ID de la encomienda
+                </p>
 
-        <div
-            class="dato"
-            id="bloqueRetiro"
-            style="display:none;"
-        >
-            <strong>Retiro:</strong>
-            <span id="resultadoRetiro"></span>
-        </div>
-        <div
-            id="accionRetiro"
-            style="display:none; margin-top:15px;"
-        >
+            </div>
+
             <button
                 type="button"
-                id="btnRegistrarRetiro"
-                style="background:#10b981;"
-        >
-                ✅ Registrar retiro 
+                id="btnCerrarConsulta"
+                class="btn-cerrar"
+            >
+                ×
             </button>
-    </div>
+
+        </div>
+
+
+        <div class="group">
+
+            <label>
+                ID de encomienda
+            </label>
+
+            <input
+                type="text"
+                id="idConsulta"
+                placeholder="Ej: ENC-00005"
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <button
+            type="button"
+            id="btnConsultar"
+            class="btn-consultar"
+        >
+            Consultar
+        </button>
+
+
+        <div id="searchMessage"></div>
+
+
+        <!-- ============================== -->
+        <!--       RESULTADO CONSULTA       -->
+        <!-- ============================== -->
+
+        <div id="resultadoConsulta">
+
+            <div class="dato">
+                <strong>ID:</strong>
+                <span id="resultadoId"></span>
+            </div>
+
+            <div class="dato">
+                <strong>Residente:</strong>
+                <span id="resultadoNombre"></span>
+            </div>
+
+            <div class="dato">
+                <strong>Departamento:</strong>
+                <span id="resultadoDepto"></span>
+            </div>
+
+            <div class="dato">
+                <strong>Tipo:</strong>
+                <span id="resultadoBulto"></span>
+            </div>
+
+            <div class="dato">
+                <strong>Ingreso:</strong>
+                <span id="resultadoIngreso"></span>
+            </div>
+
+            <div class="dato">
+
+                <strong>Estado:</strong>
+
+                <span
+                    class="estado"
+                    id="resultadoEstado"
+                ></span>
+
+            </div>
+
+
+            <div
+                class="dato"
+                id="bloqueRetiro"
+                style="display:none;"
+            >
+
+                <strong>
+                    Retiro:
+                </strong>
+
+                <span id="resultadoRetiro"></span>
+
+            </div>
+
+
+            <div
+                id="accionRetiro"
+                style="display:none;"
+            >
+
+                <button
+                    type="button"
+                    id="btnRegistrarRetiro"
+                    class="btn-retiro"
+                >
+                    ✅ Registrar retiro
+                </button>
+
+            </div>
+
+        </div>
 
     </div>
 
@@ -1172,23 +1618,35 @@ function consultarID(id) {
     const btnCerrarConsulta =
         document.getElementById('btnCerrarConsulta');
 
-    const panelConsulta =
-        document.getElementById('panelConsulta');
+    const modalConsulta =
+        document.getElementById('modalConsulta');
+
 
     btnAbrirConsulta.addEventListener(
         'click',
-        function(){
-            panelConsulta.style.display ='block';
-            btnAbrirConsulta.style.display ='none';
-            document.getElementById('idConsulta').focus();
+        function() {
+            modalConsulta.style.display = 'flex';
+
+            document
+                .getElementById('idConsulta')
+                .focus();
         }
     );
 
     btnCerrarConsulta.addEventListener(
         'click',
-        function(){
-            panelConsulta.style.display ='none';
-            btnAbrirConsulta.style.display ='block';
+        function() {
+            modalConsulta.style.display = 'none';
+        }
+    );
+
+    modalConsulta.addEventListener(
+        'click',
+        function(e) {
+
+            if (e.target === modalConsulta) {
+                modalConsulta.style.display = 'none';
+            }
         }
     );
 </script>
