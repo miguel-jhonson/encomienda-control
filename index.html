@@ -216,6 +216,74 @@
                 font-size: 18px;
             }
         }
+        
+        .btn-consulta {
+            background: #ffffff;
+            color: #4a5568;
+            border: 1px solid #d9dee7;
+            box-shadow: none;
+            font-size: 14px;
+        }
+        
+        .btn-consultar:hover {
+            background: #f8fafc;
+            color: #6c5ce7;
+            border-color: #6c5ce7;
+        }
+
+
+        /* ==========================================
+                         PANEL CONSULTA
+         ========================================== */
+
+        .panel-consulta {
+            display: none;
+            margin-top: 18px;
+            padding: 20px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+        }
+
+
+        /* ==========================================
+                   ENCABEZADO CONSULTA
+         ========================================== */
+        
+        .consulta-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .consulta-header h3 {
+            margin: 0;
+        }
+
+
+        /* ==========================================
+                        BOTÓN CERRAR
+         ========================================== */
+
+        .btn-cerrar {
+            width: 34px;
+            min-height: 34px;
+            height: 34px;
+            padding: 0;
+            border-radius: 50%;
+            background: #edf2f7;
+            color: #4a5568;
+            font-size: 22px;
+            line-height: 1;
+            box-shadow: none;
+        }
+
+        .btn-cerrar:hover {
+            background: #e2e8f0;
+            color: #2d3748;
+            transform: none;
+        }
     </style>
 </head>
 
@@ -296,17 +364,20 @@
     <!--         CONSULTA          -->
     <!-- ========================= -->
 
-    <h3>🔎 Consultar Encomienda</h3>
+    <button type="button" id="btnAbrirConsulta" class="btn-Consulta">
+        🔎 Consultar Encomienda
+    </button>
+    
+    <div id="panelConsulta" class="panel-Consulta">
+        <div class="consulta-header">
+            <h3>🔎 Consultar Encomienda</h3>
+            <button type="button" id="btnCerrarConsulta" class="btn-cerrar">x
+            </button>
+        </div>
 
-    <div class="group">
+    <div class="grup">
         <label>ID de encomienda</label>
-
-        <input
-            type="text"
-            id="idConsulta"
-            placeholder="Ej: ENC-00005"
-            autocomplete="off"
-        >
+        <input type="text" id="idConsulta" placeholder="Ej: ENC-00001" autocomplete="off">
     </div>
 
     <button type="button" id="btnConsultar">
@@ -314,6 +385,8 @@
     </button>
 
     <div id="searchMessage"></div>
+</div>
+    
 
     <!-- ========================= -->
     <!--        RESULTADO          -->
@@ -1086,6 +1159,38 @@ function consultarID(id) {
 
     }
 
+
+
+    // ========================================== //
+    //           ABRIR / CERRAR CONSULTA          //
+    // ========================================== //
+
+    
+    const btnAbrirConsulta =
+        document.getElementById('btnAbrirConsulta');
+
+    const btnCerrarConsulta =
+        document.getElementById('btnCerrarConsulta');
+
+    const panelConsulta =
+        document.getElementById('panelConsulta');
+
+    btnAbrirConsulta.addEventListener(
+        'click',
+        function(){
+            panelConsulta.style.display ='block';
+            btnAbrirConsulta.style.display ='none';
+            document.getElementById('idConsulta').focus();
+        }
+    );
+
+    btnCerrarConsulta.addEventListener(
+        'click',
+        function(){
+            panelConsulta.style.display ='none';
+            btnAbrirConsulta.style.display ='block';
+        }
+    );
 </script>
 
 </body>
