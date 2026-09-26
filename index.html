@@ -559,56 +559,44 @@
     <form id="encomiendaForm" action="https://script.google.com/macros/s/AKfycbweVE252ukrunlxgLPht9Xcgn1JZd5dB0yEwX43zgne6S8A1ifVGOAVJ4-k7uKE4Ua0xg/exec" method="POST">
 
         <div class="grup">
-            <label for="nombreResidente" class="form-label">
+            <label>
                 Nombre/Apellido del Residente
             </label>
-            <input type="text" class="form-control" id="nombreResidente" name="nombre" required placeholder="Ej: Juan Pérez">
-            <div class="invalid-feedback">
-                Por favor, ingresa el nombre del residente.
-            </div>
+            <input type="text" id="nombreResidente" name="nombre" required placeholder="Ej: Juan Pérez">
         </div>
 
         <div class="grup">
-            <label form="numeroDepto" class="form-label">
+            <label>
                 Número Depto
             </label>
-            <input type="text" id="numeroDepto" name="depto" required placeholder="Ej: 119">
-            <div class="invalid-feedback">
-                El número de departamento es obligatorio.
-            </div>
+            <input type="number" id="numeroDepto" name="depto" required placeholder="Ej: 119">
         </div>
 
         <div class="grup">
-            <label for="tipoBulto" class="form-label">
+            <label>
                 Bulto/Paquete
             </label>
-            <select class="form-select" id="tipoBulto" name="bulto" required>
-                <option selected disabled value="">
+            <select name="bulto" required>
+                <option value="">
                     Elegir...
                 </option>
-                <option valor="paquete" value="Paquete">
+                <option value="Paquete">
                     Paquete
                 </option>
-                <option valor="sobre" value="Sobre">
+                <option  value="Sobre">
                     Sobre / Documento
                 </option>
-                <option valor="caja" value="Caja">
+                <option value="Caja">
                     Caja / Bulto
                 </option>
             </select>
-            <div class="invalid-feedback">
-                Selecciona el tipo de bulto.
-            </div>
         </div>
 
         <div class="grup">
-            <label for="fonoResidente" class="form-label">
+            <label>
                 Fono Residente
             </label>
-            <input type="tel" class="form-control" name="fono" required placeholder="Ej: 56912345678" pattern="[0-9]{11}">
-            <div class="invalid-feedback">
-                Ingresa un número de teléfono válido.
-            </div>
+            <input type="tel" name="fono" required placeholder="Ej: 56912345678" pattern="[0-9]{11}">
         </div>
 
         <button type="submit" class="btn btn-primary w-100">
