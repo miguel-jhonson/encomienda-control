@@ -548,7 +548,7 @@
 
         <!-- LUPA -->
         
-        <button type="button" id="btnConsultar" class="btn-lupa" title="Consultar encomienda" aria-label="Consultar encomienda">🔍</button>
+        <button type="button" id="btnAbrirConsulta" class="btn-lupa" title="Consultar encomienda" aria-label="Consultar encomienda">🔍</button>
     </div>
 
 
@@ -720,13 +720,34 @@
 
 
     const formulario = document.getElementById('encomiendaForm');
+    const btnAbrirConsulta = document.getElementById('btnAbrirConsulta');
     const btnConsultar = document.getElementById('btnConsultar');
      const idConsulta = document.getElementById('idConsulta');
     const resultadoConsulta = document.getElementById('resultadoConsulta');
     const searchMessage = document.getElementById('searchMessage');
 
+    btnAbrirConsulta.addEventListener('click', function() {
 
+        modalConsulta.style.display = 'flex';
+        document.getElementById('idConsulta').focus();
+        }
+    );
 
+    btnCerrarConsulta.addEventListener('click', function() {
+
+        modalConsulta.style.display = 'none';
+        }
+    );
+
+    modalConsulta.addEventListener('click', function(e) {
+
+        if (e.target === modalConsulta) {
+            
+            modalConsulta.style.display = 'none';
+            }
+        }
+    );
+    
 
      // ============================================= //
      //            ESTILOS DEL NUEVO MODAL            //
