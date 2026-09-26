@@ -2020,68 +2020,6 @@
         searchMessage.innerText = mensaje;
     }
 
-
-    (() => {
-  'use strict'
-
-  // Seleccionamos el formulario
-  const forms = document.querySelectorAll('.needs-validation')
-
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      // 1. SIEMPRE detenemos el envío tradicional para manejarlo nosotros
-      event.preventDefault()
-      event.stopPropagation()
-
-      // 2. Verificamos si los campos cumplen las reglas (Bootstrap)
-      if (!form.checkValidity()) {
-        form.classList.add('was-validated')
-        return; // Salimos de la función, no enviamos nada
-      }
-
-      // Si todo es válido, marcamos el formulario como validado
-      form.classList.add('was-validated')
-
-      // 3. Preparamos el envío de datos
-      const submitButton = form.querySelector('button[type="submit"]')
-      const statusMessage = document.getElementById('statusMessage')
-      const actionURL = form.getAttribute('action') // Toma la URL de tu Google Script
-      const formData = new FormData(form) // Captura todos los datos de los inputs
-
-      // Cambiamos el estado del botón para que el usuario sepa que está cargando
-      const originalButtonText = submitButton.innerHTML
-      submitButton.innerHTML = '⏳ Registrando...'
-      submitButton.disabled = true
-      statusMessage.innerHTML = '' // Limpiamos mensajes anteriores
-
-      // 4. Enviamos los datos a Google Apps Script
-      fetch(actionURL, {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => {
-        // Mostramos el mensaje de éxito usando las clases de alerta de Bootstrap
-        statusMessage.innerHTML = '<div class="alert alert-success mt-3">Encomienda registrada con éxito.</div>'
-        
-        // Limpiamos el formulario para el siguiente registro
-        form.reset()
-        form.classList.remove('was-validated') 
-      })
-      .catch(error => {
-        // En caso de error
-        console.error('Error al registrar:', error)
-        statusMessage.innerHTML = '<div class="alert alert-danger mt-3">Hubo un error de conexión. Intenta nuevamente.</div>'
-      })
-      .finally(() => {
-        // Devolvemos el botón a la normalidad
-        submitButton.innerHTML = originalButtonText
-        submitButton.disabled = false
-      })
-
-    }, false)
-  })
-})()
-
 </script>
 
 </body>
