@@ -556,28 +556,40 @@
     <!--      REGISTRO DE ENCOMIENDA     -->
     <!-- =============================== -->
 
-    <form id="encomiendaForm" action="https://script.google.com/macros/s/AKfycbweVE252ukrunlxgLPht9Xcgn1JZd5dB0yEwX43zgne6S8A1ifVGOAVJ4-k7uKE4Ua0xg/exec" method="POST">
+    <form id="encomiendaForm" class="needs-validation" novalidate action="https://script.google.com/macros/s/AKfycbweVE252ukrunlxgLPht9Xcgn1JZd5dB0yEwX43zgne6S8A1ifVGOAVJ4-k7uKE4Ua0xg/exec" method="POST">
 
         <div class="group">
-            <label>
+            <label for="nombre">
                 Nombre/Apellido del Residente
             </label>
-            <input type="text" name="nombre" required placeholder="Ej: Juan Pérez">
+            <input type="text" id="nombre" name="nombre" class="form-control" minlength="3" required placeholder="Ej: Juan Pérez">
+            <div class="invalid-feedback">
+                Ingresa el nombre del residente.
+            </div>
+             <div class="valid-feedback">
+                Nombre válido.
+            </div>
         </div>
 
         <div class="group">
-            <label>
+            <label for="depto">
                 Número Depto
             </label>
-            <input type="number" name="depto" required placeholder="Ej: 119">
+            <input type="number" id="depto" name="depto" class="form-control" min="1" required placeholder="Ej: 119">
+             <div class="invalid-feedback">
+                Ingresa un número de departamento válido.
+            </div>
+             <div class="valid-feedback">
+                Departamento válido.
+            </div>
         </div>
 
         <div class="group">
-            <label>
+            <label for="bulto">
                 Bulto/Paquete
             </label>
-            <select name="bulto" required>
-                <option value="">
+            <select id="bulto" class="form-select" name="bulto" required>
+                <option value="" selected disabled>
                     Elegir...
                 </option>
                 <option value="Paquete">
@@ -590,19 +602,30 @@
                     Caja / Bulto
                 </option>
             </select>
+             <div class="invalid-feedback">
+                Selecciona el tipo de encomienda.
+            </div>
+             <div class="valid-feedback">
+                Tipo seleccionada.
+            </div>
         </div>
 
         <div class="group">
-            <label>
+            <label for="fono">
                 Fono Residente
             </label>
-            <input type="tel" name="fono" required placeholder="Ej: 56912345678" pattern="[0-9]{11}">
+            <input type="tel" id="fono" class="form-control" name="fono" required placeholder="Ej: 56912345678" pattern="[0-9]{11}" maxlength="11" inputmode="numeric">
+             <div class="invalid-feedback">
+                Ingresa un teléfono valido de 11 digitos.
+            </div>
+             <div class="valid-feedback">
+                Teléfono válido.
+            </div>
         </div>
 
         <button type="submit" class="btn-principal">
             📦 Registrar encomienda
         </button>
-
     </form>
 
 
@@ -703,6 +726,112 @@
 </div>
 
 <script>
+
+
+
+    // ============================================= //
+    //           VALIDACIÓN DEL FORMULARIO           //
+    // ============================================= //
+
+    
+    const formulario = document.getElementById('encomiendaForm');
+    formulario.addEventListener('submit', function(event) {
+        
+        event.preventDefault();
+
+
+        // ------------------------------ //
+        //    VALIDAR ANTES DE ENVIAR     //
+        // ------------------------------ //
+
+
+    
+        if (!formulario.checkValidity()) {
+
+            formulario.classList.add('was-validated');
+            return;
+        }
+
+        formulario.classList.add('was-validated');
+
+
+        // ------------------------------ //
+        //       BLOQUEAR BOTÓN           //
+        // ------------------------------ //
+    
+
+        const button = formulario.querySelector('button[type="submit"]');
+
+        button.disabled = true;
+        button.innerText = 'Procesando...';
+
+
+        // ------------------------------ //
+        //       PREPARAR DATOS           //
+        // ------------------------------ //
+    
+
+        const formData = new FormData(formulario);
+        const data = new URLSearchParams(formData);
+
+
+        // ------------------------------ //
+        //          ENVIAR DATOS          //
+        // ------------------------------ //
+
+        fetch(formulario.action, {
+                method: 'POST',
+                body: data,
+                mode: 'no-cors'
+            }
+        )
+
+        .then(function() {
+            
+
+            // ------------------------------ //
+            //        MOSTRAR PRELOADER       //
+            // ------------------------------ //
+            
+
+            mostrarPreloaderRegistro();
+
+
+            // ------------------------------ //
+            //      ESPERAR ANIMACIÓN         //
+            // ------------------------------ //
+
+            setTimeout(function() {
+
+                ocultarPreloaderRegistro();
+                mostrarRegistroExitoso();
+
+                formulario.reset();
+                formulario.classList.remove('was-validated');
+            }, 1200);
+        })
+
+        .catch(function(error) {
+
+            console.error('Error registrando encomienda:', error);
+
+            ocultarPreloaderRegistro();
+            mostrarMensajeError('No fue posible registrar la encomienda.');
+
+        })
+
+        .finally(function() {
+
+            button.disabled = false;
+            button.innerText = '📦 Registrar encomienda';
+
+        });
+    }
+);
+    
+
+    
+    
 
     
     // ============================================= //
