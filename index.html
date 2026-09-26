@@ -618,31 +618,18 @@
     <!-- =============================== -->
 
     <div class="header">
-
+        
         <div class="header-title">
-
-            <div class="header-icon">
-                📦
-            </div>
-
+            <div class="header-icon">📦</div>
             <div>
                 <h2>Control Encomiendas</h2>
                 <p>Gestión digital de conserjería</p>
             </div>
-
         </div>
 
         <!-- LUPA -->
-        <button
-            type="button"
-            id="btnAbrirConsulta"
-            class="btn-lupa"
-            title="Consultar encomienda"
-            aria-label="Consultar encomienda"
-        >
-            🔍
-        </button>
-
+        
+        <button type="button" id="btnAbrirConsulta" class="btn-lupa" title="Consultar encomienda" aria-label="Consultar encomienda">🔍</button>
     </div>
 
 
@@ -650,100 +637,52 @@
     <!--      REGISTRO DE ENCOMIENDA     -->
     <!-- =============================== -->
 
-    <form
-        id="encomiendaForm"
-        action="https://script.google.com/macros/s/AKfycbweVE252ukrunlxgLPht9Xcgn1JZd5dB0yEwX43zgne6S8A1ifVGOAVJ4-k7uKE4Ua0xg/exec"
-        method="POST"
-    >
+    <form id="encomiendaForm" action="https://script.google.com/macros/s/AKfycbweVE252ukrunlxgLPht9Xcgn1JZd5dB0yEwX43zgne6S8A1ifVGOAVJ4-k7uKE4Ua0xg/exec" method="POST">
 
         <div class="group">
-
             <label>
                 Nombre/Apellido del Residente
             </label>
-
-            <input
-                type="text"
-                name="nombre"
-                required
-                placeholder="Ej: Juan Pérez"
-            >
-
+            <input type="text" name="nombre" required placeholder="Ej: Juan Pérez">
         </div>
 
-
         <div class="group">
-
             <label>
                 Número Depto
             </label>
-
-            <input
-                type="number"
-                name="depto"
-                required
-                placeholder="Ej: 119"
-            >
-
+            <input type="number" name="depto" required placeholder="Ej: 119">
         </div>
 
-
         <div class="group">
-
             <label>
                 Bulto/Paquete
             </label>
-
-            <select
-                name="bulto"
-                required
-            >
-
+            <select name="bulto" required>
                 <option value="">
                     Elegir...
                 </option>
-
                 <option value="Paquete">
                     Paquete
                 </option>
-
                 <option value="Sobre">
                     Sobre / Documento
                 </option>
-
                 <option value="Caja">
                     Caja / Bulto
                 </option>
-
             </select>
-
         </div>
 
-
         <div class="group">
-
             <label>
                 Fono Residente
             </label>
-
-            <input
-                type="tel"
-                name="fono"
-                required
-                placeholder="Ej: 56912345678"
-                pattern="[0-9]{11}"
-            >
-
+            <input type="tel" name="fono" required placeholder="Ej: 56912345678" pattern="[0-9]{11}">
         </div>
 
-
-        <button
-            type="submit"
-            class="btn-principal"
-        >
+        <button type="submit" class="btn-principal">
             📦 Registrar encomienda
         </button>
-
     </form>
 
 
@@ -751,70 +690,41 @@
 
     <div id="statusMessage"></div>
 
-
 </div>
 
 
 <!-- ====================================== -->
 <!--          MODAL DE CONSULTA             -->
 <!-- ====================================== -->
+    
 
-<div
-    id="modalConsulta"
-    class="modal-overlay"
->
+<div id="modalConsulta" class="modal-overlay">
 
     <div class="modal-consulta">
-
         <div class="modal-header">
-
             <div>
-
                 <h3>
                     🔍 Consultar encomienda
                 </h3>
-
                 <p>
                     Ingresa el ID de la encomienda
                 </p>
-
             </div>
-
-            <button
-                type="button"
-                id="btnCerrarConsulta"
-                class="btn-cerrar"
-            >
+            <button type="button" id="btnCerrarConsulta" class="btn-cerrar">
                 ×
             </button>
-
         </div>
 
-
         <div class="group">
-
             <label>
                 ID de encomienda
             </label>
-
-            <input
-                type="text"
-                id="idConsulta"
-                placeholder="Ej: ENC-00005"
-                autocomplete="off"
-            >
-
+            <input type="text" id="idConsulta" placeholder="Ej: ENC-00005" autocomplete="off">
         </div>
 
-
-        <button
-            type="button"
-            id="btnConsultar"
-            class="btn-consultar"
-        >
+        <button type="button" id="btnConsultar" class="btn-consultar">
             Consultar
         </button>
-
 
         <div id="searchMessage"></div>
 
@@ -823,6 +733,7 @@
         <!--       RESULTADO CONSULTA       -->
         <!-- ============================== -->
 
+        
         <div id="resultadoConsulta">
 
             <div class="dato">
@@ -851,804 +762,688 @@
             </div>
 
             <div class="dato">
-
                 <strong>Estado:</strong>
-
-                <span
-                    class="estado"
-                    id="resultadoEstado"
-                ></span>
-
+                <span class="estado" id="resultadoEstado"></span>
             </div>
 
-
-            <div
-                class="dato"
-                id="bloqueRetiro"
-                style="display:none;"
-            >
-
+            <div class="dato" id="bloqueRetiro" style="display:none;">
                 <strong>
                     Retiro:
                 </strong>
-
                 <span id="resultadoRetiro"></span>
-
             </div>
 
-
-            <div
-                id="accionRetiro"
-                style="display:none;"
-            >
-
-                <button
-                    type="button"
-                    id="btnRegistrarRetiro"
-                    class="btn-retiro"
-                >
+            <div id="accionRetiro" style="display:none;">
+                <button type="button" id="btnRegistrarRetiro" class="btn-retiro">
                     ✅ Registrar retiro
                 </button>
-
             </div>
-
         </div>
-
     </div>
-
 </div>
 
 <script>
 
-    // ========================================== //
-    //               CONFIGURACIÓN                //
-    // ========================================== //
-
-    const SCRIPT_URL =
-        "https://script.google.com/macros/s/AKfycbweVE252ukrunlxgLPht9Xcgn1JZd5dB0yEwX43zgne6S8A1ifVGOAVJ4-k7uKE4Ua0xg/exec";
-
-
-    // ========================================== //
-    //          REGISTRO DE ENCOMIENDA            //
-    // ========================================== //
-
-    document
-        .getElementById('encomiendaForm')
-        .addEventListener('submit', function(e) {
-
-            e.preventDefault();
-
-            const form = e.target;
-            const button = form.querySelector('button');
-            const statusMessage =
-                document.getElementById('statusMessage');
-
-            button.disabled = true;
-            button.innerText = 'Procesando...';
-
-            statusMessage.style.display = 'none';
-            statusMessage.style.opacity = '1';
-
-            const formData = new FormData(form);
-            const data = new URLSearchParams(formData);
-
-            fetch(form.action, {
-                method: 'POST',
-                body: data,
-                mode: 'no-cors'
-            })
-            .then(() => {
-
-                statusMessage.style.backgroundColor = '#10b981';
-                statusMessage.style.color = '#fff';
-                statusMessage.style.display = 'block';
-                statusMessage.innerText = '✅ Registro Exitoso';
-
-                form.reset();
-
-                setTimeout(function() {
-
-                    statusMessage.style.opacity = '0';
-
-                    setTimeout(function() {
-                        statusMessage.style.display = 'none';
-                    }, 500);
-
-                }, 5000);
-
-            })
-            .catch(error => {
-
-                statusMessage.style.backgroundColor = '#ef4444';
-                statusMessage.style.color = '#fff';
-                statusMessage.style.display = 'block';
-                statusMessage.innerText =
-                    '❌ Error de Red: ' + error;
-
-                setTimeout(function() {
-                    statusMessage.style.display = 'none';
-                }, 5000);
-
-            })
-            .finally(() => {
-
-                button.disabled = false;
-                button.innerText = 'Registrar y Enviar';
-
-            });
-
-        });
-
-
-    // ========================================== //
-    //          CONSULTA DE ENCOMIENDA            //
-    // ========================================== //
-
-    const btnConsultar =
-        document.getElementById('btnConsultar');
-
-    const idConsulta =
-        document.getElementById('idConsulta');
-
-    const resultadoConsulta =
-        document.getElementById('resultadoConsulta');
-
-    const searchMessage =
-        document.getElementById('searchMessage');
-
-
-    // ========================================== //
-    //            CONSULTAR ENCOMIENDA            //
-    // ========================================== //
-
-    btnConsultar.addEventListener('click', function() {
-
-    const id = idConsulta.value.trim().toUpperCase();
-
-    resultadoConsulta.style.display = 'none';
-    searchMessage.style.display = 'none';
-
-    if (!id) {
-        mostrarMensajeBusqueda(
-            '⚠️ Ingresa un ID de encomienda.',
-            '#f59e0b'
-        );
-        return;
-    }
-
-    btnConsultar.disabled = true;
-    btnConsultar.innerText = 'Consultando...';
-
-    const callbackName =
-        'consultaEncomienda_' + Date.now();
-        console.log('CALLBACK GENERADO:', callbackName);
-
-    const scriptConsulta =
-        document.createElement('script');
-
-    window[callbackName] = function(data) {
-
-        try {
-
-            if (data && data.encontrado) {
-
-                mostrarResultado(data);
-
-            } else {
-
-                mostrarMensajeBusqueda(
-                    '❌ ' +
-                    (
-                        data && data.mensaje
-                            ? data.mensaje
-                            : 'No se encontró la encomienda.'
-                    ),
-                    '#ef4444'
-                );
-            }
-
-        } catch (error) {
-
-            console.error(
-                'Error procesando consulta:',
-                error
-            );
-
-            mostrarMensajeBusqueda(
-                '❌ Error al procesar la respuesta.',
-                '#ef4444'
-            );
-        }
-
-        btnConsultar.disabled = false;
-        btnConsultar.innerText = 'Consultar';
-
-        delete window[callbackName];
-
-        if (
-            scriptConsulta &&
-            scriptConsulta.parentNode
-        ) {
-            scriptConsulta.parentNode.removeChild(
-                scriptConsulta
-            );
-        }
-    };
-
-    scriptConsulta.src =
-        SCRIPT_URL +
-        '?id=' +
-        encodeURIComponent(id) +
-        '&callback=' +
-        encodeURIComponent(callbackName);
-
-    scriptConsulta.onerror = function() {
-
-        console.error(
-            'No se pudo cargar:',
-            scriptConsulta.src
-        );
-
-        mostrarMensajeBusqueda(
-            '❌ No fue posible consultar el servidor.',
-            '#ef4444'
-        );
-
-        btnConsultar.disabled = false;
-        btnConsultar.innerText = 'Consultar';
-
-        delete window[callbackName];
-
-        if (
-            scriptConsulta &&
-            scriptConsulta.parentNode
-        ) {
-            scriptConsulta.parentNode.removeChild(
-                scriptConsulta
-            );
-        }
-    };
-
-    document.body.appendChild(
-        scriptConsulta
-    );
-
-});
-
-    // --------------------------- //
-    //      MOSTRAR RESULTADO      //
-    // --------------------------- //
-
-function mostrarResultado(data) {
-
-    document.getElementById(
-        'resultadoId'
-    ).textContent =
-        data.id || '';
-
-    document.getElementById(
-        'resultadoNombre'
-    ).textContent =
-        data.nombre || '';
-
-    document.getElementById(
-        'resultadoDepto'
-    ).textContent =
-        data.depto || '';
-
-    document.getElementById(
-        'resultadoBulto'
-    ).textContent =
-        data.bulto || '';
-
-    document.getElementById(
-        'resultadoIngreso'
-    ).textContent =
-        formatearFecha(
-            data.fechaIngreso
-        );
-
-
-    // ---------------- //
-    //      ESTADO      //
-    // ---------------- //
-
-    const estadoElemento =
-        document.getElementById(
-            'resultadoEstado'
-        );
-
-    const estado =
-        String(
-            data.estado || ''
-        ).trim().toUpperCase();
-
-    estadoElemento.textContent =
-        data.estado || 'SIN ESTADO';
-
-
-    // ---------------------- //
-    //      COLOR ESTADO      //
-    // ---------------------- //
-
-    if (estado === 'RECIBIDA') {
-
-        estadoElemento.style.backgroundColor = '#6c5ce7';
-
-    } else if (estado === 'RETIRADA') {
-
-        estadoElemento.style.backgroundColor = '#10b981';
-
-    } else if (estado === 'INCIDENCIA') {
-
-        estadoElemento.style.backgroundColor = '#ef4444';
-
-    } else {
-
-        estadoElemento.style.backgroundColor = '#64748b';
-    }
-
-
-    // -------------------------------- //
-    //      INFORMACIÓN DEL RETIRO      //
-    // -------------------------------- //
-
-    const bloqueRetiro =
-        document.getElementById(
-            'bloqueRetiro'
-        );
-
-    const resultadoRetiro =
-        document.getElementById(
-            'resultadoRetiro'
-        );
-
-    if (
-        data.fechaRetiro || data.horaRetiro
-    ) {
-
-        bloqueRetiro.style.display = 'block';
-        resultadoRetiro.textContent =
-            (
-                data.fechaRetiro || ''
-            ) +
-            ' ' +
-            (
-                data.horaRetiro || ''
-            );
-
-    } else {
-
-        bloqueRetiro.style.display = 'none';
-        resultadoRetiro.textContent = '';
-    }
-
-    // -------------------------------- //
-    //      BOTÓN REGISTRAR RETIRO      //
-    // -------------------------------- //
-
-    const accionRetiro =
-        document.getElementById(
-            'accionRetiro'
-        );
-
-    const btnRegistrarRetiro =
-        document.getElementById(
-            'btnRegistrarRetiro'
-        );
-
-    if (estado === 'RECIBIDA') {
-
-        accionRetiro.style.display = 'block';
-        btnRegistrarRetiro.disabled = false;
-
-    } else {
-
-        accionRetiro.style.display = 'none';
-        btnRegistrarRetiro.disabled = true;
-    }
-
-
-
-    // --------------------------- //
-    //      GUARDAR ID ACTUAL      //
-    // --------------------------- //
-
-    btnRegistrarRetiro.dataset.id = data.id || '';
-
-
-    // --------------------------- //
-    //      MOSTRAR RESULTADO      //
-    // --------------------------- //
-
-    resultadoConsulta.style.display = 'block';
-}
-
-
-// -------------------------- //
-//      REGISTRAR RETIRO      //
-// -------------------------- //
-
-document
-    .getElementById('btnRegistrarRetiro')
-    .addEventListener(
-        'click',
-        function() {
-
-            const boton = this;
-
-            const id =
-                String(
-                    boton.dataset.id || ''
-                )
-                .trim()
-                .toUpperCase();
-
-
-            // -------------------- //
-            //      VALIDAR ID      //
-            // -------------------- //
-
-            if (!id) {
-
-                mostrarMensajeBusqueda(
-                    '❌ No se encontró el ID de la encomienda.', '#ef4444'
-                );
-
-                return;
-            }
-
-
-            // ---------------------- //
-            //      CONFIRMACIÓN      //
-            // ---------------------- //
-
-            const confirmar =
-                confirm(
-                    '¿Confirmas que la encomienda ' + id +
-                    ' fue retirada por el residente?'
-                );
-
-            if (!confirmar) {
-
-                return;
-
-            }
-
-
-            // ------------------------ //
-            //      BLOQUEAR BOTÓN      //
-            // ------------------------ //
-
-            boton.disabled = true;
-
-            boton.innerText = 'Registrando retiro...';
-
-
-            // ------------------------ //
-            //      PREPARAR DATOS      //
-            // ------------------------ //
-
-            const datosRetiro =
-                new URLSearchParams();
-
-
-            datosRetiro.append(
-                'accion',
-                'retirar'
-            );
-
-
-            datosRetiro.append(
-                'id',
-                id
-            );
-
-
-            // ----------------------- //
-            //      ENVIAR RETIRO      //
-            // ----------------------- //
-
-            fetch(
-                SCRIPT_URL,
-                {
-                    method: 'POST',
-                    body: datosRetiro,
-                    mode: 'no-cors'
-                }
-            )
-            .then(function() {
-
-                /*
-                 * Como usamos no-cors,
-                 * el navegador no permite leer
-                 * directamente la respuesta.
-                 *
-                 * Esperamos un momento para que
-                 * Apps Script termine de actualizar
-                 * Google Sheets.
-                 */
-
-                setTimeout(
-                    function() {
-
-                        consultarID(
-                            id
-                        );
-
-                    },
-                    1200
-                );
-
-            })
-            .catch(
-                function(error) {
-
-                    console.error(
-                        'Error registrando retiro:', error
-                    );
-
-                    mostrarMensajeBusqueda(
-                        '❌ Error al registrar el retiro.', '#ef4444'
-                    );
-  
-                    boton.disabled = false;
-
-                    boton.innerText = '✅ Registrar retiro';
-                }
-            );
-
-        }
-    );
-
-
-// ------------------------- //
-//      CONFIRMAR RETIRO     //
-// ------------------------- //
-
-function consultarID(id) {
-
-    const boton =
-        document.getElementById(
-            'btnRegistrarRetiro'
-        );
-
-    const callbackName =
-        'confirmarRetiro_' + Date.now();
-
-    const scriptConsulta =
-        document.createElement('script');
-
-
-    // ------------------ //
-    //      CALLBACK      //
-    // ------------------ //
-
-    window[callbackName] =
-        function(data) {
-
-            try {
-
-                if (
-                    data &&
-                    data.encontrado
-                ) {
-
-                    mostrarResultado(
-                        data
-                    );
-
-                    const estado =
-                        String(
-                            data.estado || ''
-                        )
-                        .trim()
-                        .toUpperCase();
-
-                    if (
-                        estado === 'RETIRADA'
-                    ) {
-
-                        mostrarMensajeBusqueda(
-                            '✅ Retiro registrado correctamente.', '#10b981'
-                        );
-
-                    } else {
-
-                        mostrarMensajeBusqueda(
-                            '⚠️ El retiro fue enviado, pero aún no se pudo confirmar.', '#f59e0b'
-                        );
-                    }
-
-                } else {
-
-                    mostrarMensajeBusqueda(
-                        '❌ No se pudo consultar la encomienda.', '#ef4444'
-                    );
-
-                }
-                
-            } catch (error) {
-
-                console.error(
-                    'Error confirmando retiro:', error
-                );
-
-                mostrarMensajeBusqueda(
-                    '❌ Error al procesar la confirmación.', '#ef4444'
-                );
-            }
-
-
-            // ------------------------ //
-            //      RESTAURAR BOTÓN     //
-            // ------------------------ //
-
-            if (boton) {
-
-                boton.disabled = false;
-                boton.innerText = '✅ Registrar retiro';
-            }
-
-
-            // ----------------- //
-            //      LIMPIAR      //
-            // ----------------- //
-
-            delete window[callbackName];
-
-            if (
-                scriptConsulta && scriptConsulta.parentNode
-            ) {
-
-                scriptConsulta.parentNode
-                    .removeChild(
-                        scriptConsulta
-                    );
-            }
-        };
-
-
-    // ------------------- //
-    //      URL JSONP      //
-    // ------------------- //
-
-    scriptConsulta.src =
-        SCRIPT_URL + '?id=' +
-        encodeURIComponent(id) + '&callback=' +
-        encodeURIComponent(
-            callbackName
-        );
-
-
-    // --------------- //
-    //      ERROR      //
-    // --------------- //
-
-    scriptConsulta.onerror =
-        function() {
-
-            mostrarMensajeBusqueda(
-                '❌ No fue posible verificar el retiro.', '#ef4444'
-            );
-
-
-            if (boton) {
-
-                boton.disabled = false;
-                boton.innerText = '✅ Registrar retiro';
-
-            }
-
-            delete window[callbackName];
-
-            if (
-                scriptConsulta && scriptConsulta.parentNode
-            ) {
-
-                scriptConsulta.parentNode.removeChild(
-                        scriptConsulta
-                    );
-            }
-
-        };
-
-
-    // ------------------ //
-    //      EJECUTAR      //
-    // ------------------ //
-
-    document.body.appendChild(
-        scriptConsulta
-    );
-
-}
-//==============================================================================================================================================//
-    // ========================================== //
-    //             FORMATO DE FECHA               //
-    // ========================================== //
-
-    function formatearFecha(valor) {
-
-        if (!valor) {
-            return '';
-        }
-
-        const fecha = new Date(valor);
-
-        if (isNaN(fecha.getTime())) {
-            return valor;
-        }
-
-        return fecha.toLocaleString('es-CL', {
-            dateStyle: 'short',
-            timeStyle: 'medium'
-        });
-
-    }
-
-
-    // ========================================== //
-    //             MENSAJE DE CONSULTA            //
-    // ========================================== //
-
-    function mostrarMensajeBusqueda(
-        mensaje,
-        color
-    ) {
-
-        searchMessage.style.backgroundColor = color;
-        searchMessage.style.color = '#fff';
-        searchMessage.style.display = 'block';
-        searchMessage.style.opacity = '1';
-        searchMessage.innerText = mensaje;
-
-    }
-
-
-
-    // ========================================== //
-    //           ABRIR / CERRAR CONSULTA          //
-    // ========================================== //
-
     
-    const btnAbrirConsulta =
-        document.getElementById('btnAbrirConsulta');
+    // ============================================= //
+    //                 CONFIGURACIÓN                 //
+    // ============================================= //
+    
 
-    const btnCerrarConsulta =
-        document.getElementById('btnCerrarConsulta');
-
-    const modalConsulta =
-        document.getElementById('modalConsulta');
+    const SCRIPT_URL ="https://script.google.com/macros/s/AKfycbweVE252ukrunlxgLPht9Xcgn1JZd5dB0yEwX43zgne6S8A1ifVGOAVJ4-k7uKE4Ua0xg/exec";
 
 
-    btnAbrirConsulta.addEventListener(
-        'click',
-        function() {
-            modalConsulta.style.display = 'flex';
 
-            document
-                .getElementById('idConsulta')
-                .focus();
+    // ============================================= //
+    //            REFERENCIAS PRINCIPALES            //
+    // ============================================= //
+
+
+
+    const formulario = document.getElementById('encomiendaForm');
+
+    const btnConsultar = document.getElementById('btnConsultar');
+
+     const idConsulta = document.getElementById('idConsulta');
+
+    const resultadoConsulta = document.getElementById('resultadoConsulta');
+
+    const searchMessage = document.getElementById('searchMessage');
+
+
+
+
+     // ============================================= //
+     //            ESTILOS DEL NUEVO MODAL            //
+     // ============================================= //
+
+
+
+    const estiloInterfaz = document.createElement('style');
+
+    estiloInterfaz.textContent = ´
+
+        
+        /* --------------------------- //
+        //        MODAL GENERAL        //
+        // --------------------------- */
+        
+    
+        .modal-sistema {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background: rgba(15, 23, 42, 0.58);
+
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+
+            opacity: 0;
+            visibility: hidden;
+
+            transition:
+                opacity .25s ease,
+                visibility .25s ease;
         }
+
+        .modal-sistema.activo {
+            opacity: 1;
+            visibility: visible;
+        }
+
+
+
+         /* ---------------------- //
+         //       CAJA MODAL       //
+         // ---------------------- */
+
+
+        .modal-sistema-contenido {
+            position: relative;
+            width: 100%;
+            max-width: 430px;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 26px;
+            
+            box-shadow:
+                0 20px 60px rgba(15, 23, 42, .22);
+
+            transform:
+                translateY(18px)
+                scale(.97);
+            transition:
+                transform: .25s ease;
+        }
+
+        .modal-sistema-activo
+        .modal-sistema-contenido {
+            transform: 
+                translateY(0)
+                scale(1);
+        }
+
+
+
+         /* ------------------ //
+         //       TITULO       //
+         // ------------------ */
+
+
+        .modal-sistema-titulo {
+            margin: 0 0 6px 0;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .modal-sistema-subtitulo {
+            margin: 0 0 20px; 0;
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+
+
+        /* --------------------------- //
+        //        BOTON CERRAR         //
+        // --------------------------- */
+
+
+
+        .modal-sistema-cerrar {
+
+            position: absolute;
+
+            top: 14px;
+            right: 14px;
+
+            width: 34px;
+            height: 34px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #f1f5f9;
+
+            color: #64748b;
+
+            font-size: 18px;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            transition: .2s ease;
+            
+        }
+
+        .modal-sistema-cerrar:hover {
+            blackground: #e2e8f0;
+            color: #1e2e93b;
+        }
+
+
+
+        /* ------------------------------- //
+        //        ACCIONES DEL MODAL       //
+        // ------------------------------- */
+
+
+
+        .modal-sistema-acciones {
+            display: flex;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .modal-sistema-acciones button {
+            flex: 1;
+            min-height: 44px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+
+            transition: 
+                transform .15s ease;
+                opacity .15s ease;
+        }
+
+        .modal-sistema-acciones button:hover {
+            transform : translateY(-1px);
+        }
+
+        .btn-modal-cancelar {
+
+            background: #f1f5f9;
+
+            color: #475569;
+        }
+
+        .btn-modal-confirmar {
+
+            background: #4caf50;
+
+            color: #fff;
+
+            box-shadow:
+                0 5px 14px rgba(76, 175, 80, .25);
+        }
+
+
+
+        /* ------------------------------- //
+        //        PRELOADER RETIRO         //
+        // ------------------------------- */
+
+
+
+        .modal-proceso {
+
+            display: none;
+
+            text-align: center;
+        }
+
+        .modal-proceso.activo {
+
+            display: block;
+        }
+
+        .modal-proceso-texto {
+
+            margin-top: 15px;
+
+            color: #475569;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+
+        /* -------------------------------------- //
+        //        OVERLAY DE PROCESAMIENTO        //
+        // -------------------------------------- */
+
+
+
+        .procesando-registro {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 100000;
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: rgba(15, 23, 42, .48);
+
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+
+        .procesando-registro.activo {
+
+            display: flex;
+        }
+
+        .procesando-registro-caja {
+
+            min-width: 230px;
+
+            padding: 28px 30px;
+
+            border-radius: 18px;
+
+            background: #ffffff;
+
+            text-align: center;
+
+            box-shadow:
+                0 20px 60px rgba(15, 23, 42, .20);
+        }
+
+        .procesando-registro-texto {
+
+            margin-top: 14px;
+
+            color: #475569;
+
+            font-weight: 600;
+
+            font-size: 14px;
+        }
+
+
+
+        /* ------------------------------- //
+        //        ESTADO DE ÉXITO          //
+        // ------------------------------- */
+
+
+
+        .resultado-exito {
+
+            position: fixed;
+
+            left: 50%;
+
+            top: 24px;
+
+            z-index: 100001;
+
+            transform:
+                translate(-50%, -20px);
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            padding: 13px 20px;
+
+            border-radius: 12px;
+
+            background: #10b981;
+
+            color: #fff;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            box-shadow:
+                0 10px 30px rgba(16, 185, 129, .25);
+
+            transition:
+                opacity .25s ease,
+                transform .25s ease;
+        }
+
+        .resultado-exito.visible {
+
+            opacity: 1;
+
+            transform:
+                translate(-50%, 0);
+        }
+
+
+
+        /* ---------------------------- //
+        //        BOTON RETIRO          //
+        // ---------------------------- */
+
+
+
+        #btnRegistrarRetiro {
+
+            background: #4caf50 !important;
+
+            color: #fff !important;
+
+            border: none !important;
+
+            box-shadow:
+                0 5px 14px rgba(76, 175, 80, .22);
+
+            transition:
+                transform .15s ease,
+                box-shadow .15s ease;
+        }
+
+        #btnRegistrarRetiro:hover {
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 7px 18px rgba(76, 175, 80, .30);
+        }
+
+        #btnRegistrarRetiro:disabled {
+
+            transform: none;
+
+            opacity: .65;
+        }
+    
+    ´;
+
+    document.head.appendChild(estiloInterfaz);
+
+
+
+    // =============================================== //
+    //            CREAR PRELOADER DE RETIRO            //
+    // =============================================== //
+
+
+
+    function crearPreloaderColors() {
+        return ´
+            <div class="preloader pl-lg">
+            <svg class="pl-circular" viewBox="25 25 50 50">
+            <circle class="plc-path" cx="50" cy="50" r="20"/>
+            </svg>
+            </div> 
+        ´;
+    }
+
+
+
+    // ==================================================== //
+    //            CREAR PRELOADER LINEAR DE RETIRO          //
+    // ==================================================== //
+
+
+
+    function crearLoaderLinear() {
+        return ´
+            <div class="loader loader-pink" style="margin:0 auto; width:45px; height:45px;"></div>
+        ´;
+    }
+
+
+
+
+    // ==================================== //
+    //           OVERLAY REGISTRO           //
+    // ==================================== //
+
+
+
+    const overlayRegistro =
+        document.createElement('div');
+
+    overlayRegistro.className =
+        'procesando-registro';
+
+    overlayRegistro.innerHTML = ´
+
+        <div class="procesando-registro-caja">
+
+            <div id="loaderRegistroVisual">
+                ${crearLoaderLinear()}
+            </div>
+
+            <div
+                class="procesando-registro-texto">
+                    Registrando encomienda...
+            </div>
+        </div>
+    ´;
+
+    document.body.appendChild(
+        overlayRegistro
     );
 
-    btnCerrarConsulta.addEventListener(
-        'click',
-        function() {
-            modalConsulta.style.display = 'none';
-        }
+
+
+
+    // ==================================== //
+    //           MENSAJE DE ÉXITO           //
+    // ==================================== //
+
+
+
+
+    const mensajeExito = document.createElement('div');
+
+    mensajeExito.className = 'resultado-exito';
+
+    mensajeExito.innerHTML = '✓ Registro realizado correctamente';
+
+    document.body.appendChild(
+        mensajeExitoso
     );
 
-    modalConsulta.addEventListener(
+
+
+     // ==================================================== //
+     //            MODAL DE CONFIRMACIÓN RETIRO              //
+     // ==================================================== //
+
+
+
+    const modalRetiro = document.createElement('div');
+
+    modalRetiro.className = 'modal-sistema';
+
+    modalRetiro.innerHTML =´
+        
+        <div class="modal-sistema-contenido">
+        
+        <button type="button" class="modal-sistema-cerrar" id="cerrarModalRetiro">
+                ×
+            </button>
+
+            <div id="confirmacionRetiro">
+
+                <h3 class="modal-sistema-titulo">
+                    Confirmar retiro
+                </h3>
+                <p class="modal-sistema-subtitulo" id="textoConfirmacionRetiro">
+                    ¿Confirmas que la encomienda fue retirada por el residente?
+                </p>
+
+                <div class="modal-sistema-acciones">
+
+                    <button type="button" class="btn-modal-cancelar" id="cancelarRetiro">
+                        Cancelar
+                    </button>
+                    <button type="button" class="btn-modal-confirmar" id="confirmarRetiro">
+                        ✓ Confirmar
+                    </button>
+
+                </div>
+            </div>
+
+            <div class="modal-proceso" id="procesoRetiro">
+
+                ${crearPreloaderColors()}
+
+                <div class="modal-proceso-texto">
+                    Registrando retiro...
+                </div>
+                    
+            </div>
+        </div>
+    ´;
+
+    document.body.appendChild(
+        modalRetiro
+    );
+
+
+
+
+     // =========================================================
+     //           REFERENCIAS MODAL RETIRO
+     // =========================================================
+
+
+
+     const cerrarModalRetiro = document.getElementById(
+            'cerrarModalRetiro'
+        );
+
+    const cancelarRetiro = document.getElementById(
+            'cancelarRetiro'
+        );
+
+    const confirmarRetiro = document.getElementById(
+            'confirmarRetiro'
+        );
+
+    const textoConfirmacionRetiro = document.getElementById(
+            'textoConfirmacionRetiro'
+        );
+
+    const confirmacionRetiro = document.getElementById(
+            'confirmacionRetiro'
+        );
+
+    const procesoRetiro = document.getElementById(
+            'procesoRetiro'
+        );
+
+    let idRetiroPendiente = '';
+
+
+
+    // ============================
+    //          ABRIR MODAL
+    // ============================
+
+
+
+    function abrirModalRetiro(id) {
+
+        idRetiroPendiente =
+            String(id || '')
+            .trim()
+            .toUpperCase();
+
+        textoConfirmacionRetiro.innerHTML =
+            '¿Confirmas que la encomienda ' +
+            '<strong>' + idRetiroPendiente +
+            '</strong> fue retirada por el residente?';
+
+        confirmacionRetiro.style.display =
+            'block';
+
+        procesoRetiro.classList.remove(
+            'activo'
+        );
+
+        modalRetiro.classList.add(
+            'activo'
+        );
+    }
+
+
+
+
+     // ============================
+     //         CERRAR MODAL
+     // ============================
+
+
+
+    function cerrarModal() {
+
+        modalRetiro.classList.remove(
+            'activo'
+        );
+
+        idRetiroPendiente = '';
+    }
+
+    cerrarModalRetiro.addEventListener(
+        'click',
+        cerrarModal
+    );
+
+    cancelarRetiro.addEventListener(
+        'click',
+        cerrarModal
+    );
+
+    modalRetiro.addEventListener(
         'click',
         function(e) {
 
-            if (e.target === modalConsulta) {
-                modalConsulta.style.display = 'none';
+            if (e.target === modalRetiro) {
+                cerrarModal();
             }
         }
     );
+
+
+
+
+    // =========================================================
+    //            REGISTRO DE ENCOMIENDA
+    // =========================================================
 </script>
 
 </body>
