@@ -747,12 +747,21 @@
 
 
     
+        console.log('¿Formulario válido?:', formulario.checkValidity());
+        console.log('Nombre:', document.getElementById('nombre').value);
+        console.log('Depto:', document.getElementById('depto').value);
+        console.log('Bulto:', document.getElementById('bulto').value);
+        console.log('Fono:', document.getElementById('fono').value);
+
+
         if (!formulario.checkValidity()) {
 
+            console.log('ENVÍO BLOQUEADO POR VALIDACIÓN');
             formulario.classList.add('was-validated');
             return;
         }
 
+        console.log('FORMULARIO VÁLIDO — SE PUEDE ENVIAR');
         formulario.classList.add('was-validated');
 
 
