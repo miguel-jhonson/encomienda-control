@@ -404,6 +404,67 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* BANNER FLOTANTE DE ALERTA */
+        .alerta-banner {
+            position: relative;
+            width: 100%;
+            margin-bottom: 16px;
+            padding: 12px 36px 12px 14px;
+            background-color: #fff8e6;
+            border: 1px solid #ffe599;
+            border-left: 5px solid #f59e0b;
+            border-radius: 10px;
+            color: #78350f;
+            font-size: 13px;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.12);
+            box-sizing: border-box;
+            animation: fadeInDown 0.25s ease-out;
+        }
+
+        .alerta-contenido {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .alerta-ids {
+            font-weight: 700;
+            color: #b45309;
+            font-size: 13px;
+            word-break: break-all;
+        }
+
+        .alerta-cerrar {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            font-size: 20px;
+            font-weight: bold;
+            color: #92400e;
+            cursor: pointer;
+            line-height: 1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: background 0.15s ease;
+        }
+
+        .alerta-cerrar:hover {
+            background: rgba(146, 64, 14, 0.15);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+              }
+        }
     </style>
 </head>
 
@@ -1183,6 +1244,12 @@
         const estadoElemento = document.getElementById('resultadoEstado');
         const estado = String(data.estado || '').trim().toUpperCase();
 
+        const alerta = document.getElementById('alertaMultiples');
+        if (alerta) {
+            alerta.style.display = 'none';
+        }
+    }
+
         const alertaMultiples = document.getElementById('alertaMultiples');
         const numDeptoAlerta = document.getElementById('numDeptoAlerta');
         const cantPendientes = document.getElementById('cantPendientes');
@@ -1190,13 +1257,14 @@
 
         // Verificar si hay más de 1 paquete pendiente para este departamento
         if (data.totalPendientesDepto && data.totalPendientesDepto > 1) {
-            alertaMultiples.style.display = 'block';
             numDeptoAlerta.textContent = data.depto || '';
             cantPendientes.textContent = data.totalPendientesDepto;
 
             if (data.idsPendientes && Array.isArray(data.idsPendientes)) {
                 listaIdsPendientes.textContent = 'IDs: ' + data.idsPendientes.join(' • ');
             }
+            // Mostrar el banner
+            alertaMultiples.style.display = 'block';
         } else {
             alertaMultiples.style.display = 'none';
         }    
