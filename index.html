@@ -15,29 +15,14 @@
             margin: 0;
             min-height: 100vh;
             padding: 30px 15px;
-            font-family:
-            Arial,
-            sans-serif;
-            background:
-                linear-gradient(
-                    135deg,
-                    #f4f6fb 0%,
-                    #eef1f7 100%
-                );
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f4f6fb 0%, #eef1f7 100%);
             color: #26334a;
         }
 
-
-
-
-        
         /* ==========================================
                        TARJETA PRINCIPAL
          ========================================== */
-
-
-
-        
         .card {
             width: 100%;
             max-width: 520px;
@@ -45,22 +30,12 @@
             padding: 32px;
             background: #ffffff;
             border-radius: 18px;
-            box-shadow:
-                0 20px 45px
-                rgba(31, 41, 55, 0.10);
+            box-shadow: 0 20px 45px rgba(31, 41, 55, 0.10);
         }
-
-
-
-        
 
         /* ==========================================
                            CABECERA
          ========================================== */
-
-        
-        
-        
         .header {
             display: flex;
             align-items: center;
@@ -81,9 +56,7 @@
             align-items: center;
             justify-content: center;
             border-radius: 12px;
-            background:
-                rgba(108, 92, 231, 0.10);
-
+            background: rgba(108, 92, 231, 0.10);
             font-size: 22px;
         }
 
@@ -100,17 +73,9 @@
             font-size: 13px;
         }
 
-
-
-
-        
         /* ==========================================
                          BOTÓN LUPA
          ========================================== */
-
-
-
-        
         .btn-lupa {
             width: 44px;
             height: 44px;
@@ -126,32 +91,19 @@
             font-size: 20px;
             cursor: pointer;
             box-shadow: none;
-            transition:
-                all 0.2s ease;
+            transition: all 0.2s ease;
         }
-
 
         .btn-lupa:hover {
             color: #6c5ce7;
             border-color: #6c5ce7;
-            background:
-                rgba(108, 92, 231, 0.06);
-
+            background: rgba(108, 92, 231, 0.06);
             transform: translateY(-1px);
         }
-
-
-
-        
 
         /* ==========================================
                          FORMULARIO
          ========================================== */
-
-
-
-
-        
         .group {
             margin-bottom: 21px;
         }
@@ -166,75 +118,54 @@
 
         input,
         select {
-            width: 100%;
-            height: 48px;
-            padding:
-                0 14px;
-
-            border:
-                1px solid #dce2eb;
-
-            border-radius: 10px;
-            background: #ffffff;
-            color: #2d3748;
-            font-size: 14px;
-            outline: none;
-            transition:
-                border-color 0.2s ease,
-                box-shadow 0.2s ease;
+          width: 100%;
+          height: 48px;
+          padding: 0 14px;
+          border: 1px solid #dce2eb;
+          border-radius: 10px;
+          background: #ffffff;
+          color: #2d3748;
+          font-size: 14px;
+          outline: none;
+          transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
-        input::placeholder {
-            color: #a0aec0;
+        input::placeholder,
+        .form-control::placeholder {
+            color: #a0aec0 !important;
+            opacity: 1;
+        }
+
+        select option {
+          color: #2d3748;
         }
 
         input:focus,
         select:focus {
-            border-color: #6c5ce7;
-            box-shadow:
-                0 0 0 3px
-                rgba(108, 92, 231, 0.10);
+          border-color: #6c5ce7;
+          box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.10);
         }
-
-
-        
 
         /* ==========================================
                           BOTÓN PRINCIPAL
            ========================================== */
-
-
-
-        
         .btn-principal {
             width: 100%;
             min-height: 50px;
             border: none;
             border-radius: 10px;
-            background:
-                linear-gradient(
-                    135deg,
-                    #7565e8,
-                    #6252d8
-                );
-
+            background: linear-gradient(135deg, #7565e8, #6252d8);
             color: #ffffff;
             font-size: 14px;
             font-weight: 700;
             cursor: pointer;
-            box-shadow:
-                0 7px 16px
-                rgba(108, 92, 231, 0.22);
-
-            transition:
-                all 0.2s ease;
+            box-shadow: 0 7px 16px rgba(108, 92, 231, 0.22);
+            transition: all 0.2s ease;
         }
 
         .btn-principal:hover {
             transform: translateY(-1px);
-            box-shadow:
-                0 10px 20px
-                rgba(108, 92, 231, 0.27);
+            box-shadow: 0 10px 20px rgba(108, 92, 231, 0.27);
         }
 
         .btn-principal:disabled {
@@ -243,15 +174,9 @@
             transform: none;
         }
 
-
-        
-        
         /* ==========================================
                          MENSAJE REGISTRO
            ========================================== */
-
-
-        
         #statusMessage {
             display: none;
             margin-top: 18px;
@@ -262,16 +187,9 @@
             font-weight: 600;
         }
 
-
-
-        
         /* ==========================================
                             MODAL
            ========================================== */
-
-
-
-        
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -279,15 +197,10 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
-            background:
-                rgba(15, 23, 42, 0.48);
-
-            backdrop-filter:
-                blur(4px);
-
+            background: rgba(15, 23, 42, 0.48);
+            backdrop-filter: blur(4px);
             z-index: 9999;
         }
-
 
         .modal-consulta {
             width: 100%;
@@ -295,42 +208,24 @@
             padding: 26px;
             background: #ffffff;
             border-radius: 16px;
-            box-shadow:
-                0 25px 60px
-                rgba(0, 0, 0, 0.20);
-
-            animation:
-                aparecerModal
-                0.2s ease;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.20);
+            animation: aparecerModal 0.2s ease;
         }
 
         @keyframes aparecerModal {
             from {
                 opacity: 0;
-                transform:
-                    translateY(12px)
-                    scale(0.98);
+                transform: translateY(12px) scale(0.98);
             }
-
             to {
                 opacity: 1;
-                transform:
-                    translateY(0)
-                    scale(1);
+                transform: translateY(0) scale(1);
             }
-
         }
 
-
-
-        
         /* ==========================================
                        CABECERA MODAL
            ========================================== */
-
-
-
-        
         .modal-header {
             display: flex;
             justify-content: space-between;
@@ -350,16 +245,9 @@
             font-size: 13px;
         }
 
-
-
-        
         /* ==========================================
                            CERRAR
            ========================================== */
-
-
-
-        
         .btn-cerrar {
             width: 34px;
             height: 34px;
@@ -381,16 +269,9 @@
             transform: none;
         }
 
-
-        
-
         /* ==========================================
                        BOTÓN CONSULTAR
            ========================================== */
-
-
-
-        
         .btn-consultar {
             width: 100%;
             min-height: 48px;
@@ -403,15 +284,9 @@
             cursor: pointer;
         }
 
-
-        
-        
         /* ==========================================
                        MENSAJE CONSULTA
            ========================================== */
-
-
-        
         #searchMessage {
             display: none;
             margin-top: 15px;
@@ -420,25 +295,18 @@
             text-align: center;
             font-size: 13px;
             font-weight: 600;
+            transition: opacity 0.4s ease;
         }
 
-
-
-        
         /* ==========================================
                            RESULTADO
            ========================================== */
-
-
-        
         #resultadoConsulta {
             display: none;
             margin-top: 22px;
             padding: 18px;
             background: #f8fafc;
-            border:
-                1px solid #e2e8f0;
-            
+            border: 1px solid #e2e8f0;
             border-radius: 12px;
         }
 
@@ -454,16 +322,12 @@
             color: #2f3b52;
         }
 
-
         /* ==========================================
                            ESTADO
            ========================================== */
-
         .estado {
             display: inline-block;
-            padding:
-                6px 12px;
-            
+            padding: 6px 12px;
             border-radius: 20px;
             background: #6c5ce7;
             color: white;
@@ -472,14 +336,9 @@
             text-align: center;
         }
 
-
-        
-
         /* ==========================================
                            RETIRO
            ========================================== */
-
-        
         #accionRetiro {
             margin-top: 18px !important;
         }
@@ -500,14 +359,9 @@
             background: #059669;
         }
 
-
-        
         /* ==========================================
                            RESPONSIVE
            ========================================== */
-
-
-        
         @media (max-width: 600px) {
             body {
                 padding: 15px 10px;
@@ -522,12 +376,9 @@
             h2 {
                 font-size: 21px;
             }
-
         }
     </style>
 </head>
-
-<body>
 
 <body>
 
@@ -536,9 +387,7 @@
     <!-- =============================== -->
     <!--            CABECERA             -->
     <!-- =============================== -->
-
     <div class="header">
-        
         <div class="header-title">
             <div class="header-icon">📦</div>
             <div>
@@ -548,78 +397,59 @@
         </div>
 
         <!-- LUPA -->
-        
         <button type="button" id="btnAbrirConsulta" class="btn-lupa" title="Consultar encomienda" aria-label="Consultar encomienda">🔍</button>
     </div>
-
 
     <!-- =============================== -->
     <!--      REGISTRO DE ENCOMIENDA     -->
     <!-- =============================== -->
-
-    <form id="encomiendaForm" class="needs-validation" novalidate action="https://script.google.com/macros/s/AKfycbweVE252ukrunlxgLPht9Xcgn1JZd5dB0yEwX43zgne6S8A1ifVGOAVJ4-k7uKE4Ua0xg/exec" method="POST">
+    <form id="encomiendaForm" class="needs-validation" action="https://script.google.com/macros/s/AKfycbweVE252ukrunlxgLPht9Xcgn1JZd5dB0yEwX43zgne6S8A1ifVGOAVJ4-k7uKE4Ua0xg/exec" method="POST" novalidate>
 
         <div class="group">
-            <label for="nombre">
-                Nombre/Apellido del Residente
-            </label>
+            <label for="nombre">Nombre/Apellido del Residente</label>
             <input type="text" id="nombre" name="nombre" class="form-control" minlength="3" required placeholder="Ej: Juan Pérez">
             <div class="invalid-feedback">
                 Ingresa el nombre del residente.
             </div>
-             <div class="valid-feedback">
+            <div class="valid-feedback">
                 Nombre válido.
             </div>
         </div>
 
         <div class="group">
-            <label for="depto">
-                Número Depto
-            </label>
+            <label for="depto">Número Depto</label>
             <input type="number" id="depto" name="depto" class="form-control" min="1" required placeholder="Ej: 119">
-             <div class="invalid-feedback">
+            <div class="invalid-feedback">
                 Ingresa un número de departamento válido.
             </div>
-             <div class="valid-feedback">
+            <div class="valid-feedback">
                 Departamento válido.
             </div>
         </div>
 
         <div class="group">
-            <label for="bulto">
-                Bulto/Paquete
-            </label>
+            <label for="bulto">Bulto/Paquete</label>
             <select id="bulto" class="form-select" name="bulto" required>
-                <option value="" selected disabled>
-                    Elegir...
-                </option>
-                <option value="Paquete">
-                    Paquete
-                </option>
-                <option value="Sobre">
-                    Sobre / Documento
-                </option>
-                <option value="Caja">
-                    Caja / Bulto
-                </option>
+                <option value="" selected disabled>Elegir...</option>
+                <option value="Paquete">Paquete</option>
+                <option value="Sobre">Sobre / Documento</option>
+                <option value="Caja">Caja / Bulto</option>
             </select>
-             <div class="invalid-feedback">
+            <div class="invalid-feedback">
                 Selecciona el tipo de encomienda.
             </div>
-             <div class="valid-feedback">
+            <div class="valid-feedback">
                 Tipo seleccionada.
             </div>
         </div>
 
         <div class="group">
-            <label for="fono">
-                Fono Residente
-            </label>
+            <label for="fono">Fono Residente</label>
             <input type="tel" id="fono" class="form-control" name="fono" required placeholder="Ej: 56912345678" pattern="[0-9]{11}" maxlength="11" inputmode="numeric">
-             <div class="invalid-feedback">
+            <div class="invalid-feedback">
                 Ingresa un teléfono valido de 11 digitos.
             </div>
-             <div class="valid-feedback">
+            <div class="valid-feedback">
                 Teléfono válido.
             </div>
         </div>
@@ -629,57 +459,37 @@
         </button>
     </form>
 
-
     <!-- MENSAJE REGISTRO -->
-
     <div id="statusMessage"></div>
 
 </div>
 
-
 <!-- ====================================== -->
 <!--          MODAL DE CONSULTA             -->
 <!-- ====================================== -->
-    
-
 <div id="modalConsulta" class="modal-overlay">
-
     <div class="modal-consulta">
         <div class="modal-header">
             <div>
-                <h3>
-                    🔍 Consultar encomienda
-                </h3>
-                <p>
-                    Ingresa el ID de la encomienda
-                </p>
+                <h3>🔍 Consultar encomienda</h3>
+                <p>Ingresa el ID de la encomienda</p>
             </div>
-            <button type="button" id="btnCerrarConsulta" class="btn-cerrar">
-                ×
-            </button>
+            <button type="button" id="btnCerrarConsulta" class="btn-cerrar">×</button>
         </div>
 
         <div class="group">
-            <label>
-                ID de encomienda
-            </label>
+            <label>ID de encomienda</label>
             <input type="text" id="idConsulta" placeholder="Ej: ENC-00005" autocomplete="off">
         </div>
 
-        <button type="button" id="btnConsultar" class="btn-consultar">
-            Consultar
-        </button>
+        <button type="button" id="btnConsultar" class="btn-consultar">Consultar</button>
 
         <div id="searchMessage"></div>
-
 
         <!-- ============================== -->
         <!--       RESULTADO CONSULTA       -->
         <!-- ============================== -->
-
-        
         <div id="resultadoConsulta">
-
             <div class="dato">
                 <strong>ID:</strong>
                 <span id="resultadoId"></span>
@@ -711,9 +521,7 @@
             </div>
 
             <div class="dato" id="bloqueRetiro" style="display:none;">
-                <strong>
-                    Retiro:
-                </strong>
+                <strong>Retiro:</strong>
                 <span id="resultadoRetiro"></span>
             </div>
 
@@ -728,205 +536,147 @@
 
 <script>
 
- 
-
     // ============================================= //
     //           VALIDACIÓN DEL FORMULARIO           //
     // ============================================= //
-
-    
     const formulario = document.getElementById('encomiendaForm');
-    formulario.addEventListener('submit', function(event) {
-        
-        event.preventDefault();
+    if (formulario) {
+      formulario.addEventListener('submit', function (e) {
+        e.preventDefault();
 
+        const form = e.target;
+        const button = form.querySelector('button[type="submit"]') || form.querySelector('button');
+        const statusMessage = document.getElementById('statusMessage');
 
-        // ------------------------------ //
-        //    VALIDAR ANTES DE ENVIAR     //
-        // ------------------------------ //
+        // 1. APLICA ESTILOS VISUALES DE BOOTSTRAP
+        form.classList.add('was-validated');
 
-
-    
-        //console.log('¿Formulario válido?:', formulario.checkValidity());
-        //console.log('Nombre:', document.getElementById('nombre').value);
-        //console.log('Depto:', document.getElementById('depto').value);
-        //console.log('Bulto:', document.getElementById('bulto').value);
-        //console.log('Fono:', document.getElementById('fono').value);
-
-
-        if (!formulario.checkValidity()) {
-
-            console.log('ENVÍO BLOQUEADO POR VALIDACIÓN');
-            formulario.classList.add('was-validated');
-            return;
+        // 2. VERIFICA VALIDACIÓN
+        if (!form.checkValidity()) {
+          console.log('ENVÍO BLOQUEADO: Campos incompletos o inválidos.');
+          return;
         }
 
-        console.log('FORMULARIO VÁLIDO — SE PUEDE ENVIAR');
-        formulario.classList.add('was-validated');
-
-
-        // ------------------------------ //
-        //       BLOQUEAR BOTÓN           //
-        // ------------------------------ //
-    
-
-        const button = formulario.querySelector('button[type="submit"]');
-
+        // 3. BLOQUEAR BOTÓN Y MOSTRAR PRELOADER
         button.disabled = true;
         button.innerText = 'Procesando...';
 
+        if (overlayRegistro) overlayRegistro.classList.add('activo');
+        if (statusMessage) statusMessage.style.display = 'none';
 
-        // ------------------------------ //
-        //       PREPARAR DATOS           //
-        // ------------------------------ //
-    
-
-        const formData = new FormData(formulario);
+        // 4. PREPARAR DATOS
+        const formData = new FormData(form);
         const data = new URLSearchParams(formData);
 
-
-        // ------------------------------ //
-        //          ENVIAR DATOS          //
-        // ------------------------------ //
-
-        fetch(formulario.action, {
-                method: 'POST',
-                body: data,
-                mode: 'no-cors'
-            }
-        )
-
-        .then(function() {
-            
-
-            // ------------------------------ //
-            //        MOSTRAR PRELOADER       //
-            // ------------------------------ //
-            
-
-            mostrarPreloaderRegistro();
-
-
-            // ------------------------------ //
-            //      ESPERAR ANIMACIÓN         //
-            // ------------------------------ //
-
-            setTimeout(function() {
-
-                ocultarPreloaderRegistro();
-                mostrarRegistroExitoso();
-
-                formulario.reset();
-                formulario.classList.remove('was-validated');
-            }, 1200);
+        // 5. ENVIAR A GOOGLE APPS SCRIPT
+        fetch(form.action, {
+          method: 'POST',
+          body: data,
+          mode: 'no-cors'
         })
+          .then(function () {
+            form.reset();
+            form.classList.remove('was-validated');
 
-        .catch(function(error) {
+            if (overlayRegistro) overlayRegistro.classList.remove('activo');
+            mostrarExitoRegistro();
 
+            if (statusMessage) statusMessage.style.display = 'none';
+          })
+          .catch(function (error) {
             console.error('Error registrando encomienda:', error);
+            if (overlayRegistro) overlayRegistro.classList.remove('activo');
 
-            ocultarPreloaderRegistro();
-            mostrarMensajeError('No fue posible registrar la encomienda.');
+            if (statusMessage) {
+              statusMessage.style.backgroundColor = '#ef4444';
+              statusMessage.style.color = '#fff';
+              statusMessage.style.display = 'block';
+              statusMessage.innerText = '❌ Error de Red';
 
-        })
-
-        .finally(function() {
-
+              setTimeout(function () {
+                statusMessage.style.display = 'none';
+              }, 5000);
+            }
+          })
+          .finally(function () {
             button.disabled = false;
             button.innerText = '📦 Registrar encomienda';
-
         });
-    }
-);
-    
+    });
+}
 
-    
-    
-
-    
     // ============================================= //
     //                 CONFIGURACIÓN                 //
     // ============================================= //
-    
-
-    const SCRIPT_URL ="https://script.google.com/macros/s/AKfycbweVE252ukrunlxgLPht9Xcgn1JZd5dB0yEwX43zgne6S8A1ifVGOAVJ4-k7uKE4Ua0xg/exec";
-
-
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbweVE252ukrunlxgLPht9Xcgn1JZd5dB0yEwX43zgne6S8A1ifVGOAVJ4-k7uKE4Ua0xg/exec";
 
     // ============================================= //
     //            REFERENCIAS PRINCIPALES            //
     // ============================================= //
-
-
-
-    //const formulario = document.getElementById('encomiendaForm');
     const btnAbrirConsulta = document.getElementById('btnAbrirConsulta');
     const btnConsultar = document.getElementById('btnConsultar');
-     const idConsulta = document.getElementById('idConsulta');
+    const idConsulta = document.getElementById('idConsulta');
     const resultadoConsulta = document.getElementById('resultadoConsulta');
     const searchMessage = document.getElementById('searchMessage');
+    const modalConsulta = document.getElementById('modalConsulta');
+    const btnCerrarConsulta = document.getElementById('btnCerrarConsulta');
 
     btnAbrirConsulta.addEventListener('click', function() {
-
         modalConsulta.style.display = 'flex';
-        document.getElementById('idConsulta').focus();
-        }
-    );
+        idConsulta.focus();
+    });
 
     btnCerrarConsulta.addEventListener('click', function() {
-
         modalConsulta.style.display = 'none';
-        }
-    );
+    });
 
     modalConsulta.addEventListener('click', function(e) {
-
         if (e.target === modalConsulta) {
-            
             modalConsulta.style.display = 'none';
-            }
         }
-    );
-    
+    });
 
-     // ============================================= //
-     //            ESTILOS DEL NUEVO MODAL            //
-     // ============================================= //
-
-
-
+    // ============================================= //
+    //            ESTILOS DEL NUEVO MODAL            //
+    // ============================================= //
     const estiloInterfaz = document.createElement('style');
 
     estiloInterfaz.textContent = `
+        /* --------------------------- //
+        //        SPINNER CIRCULAR     //
+        // --------------------------- */
+        .spinner-circular {
+            width: 44px;
+            height: 44px;
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid #6c5ce7;
+            border-radius: 50%;
+            animation: spinCircular 0.8s linear infinite;
+            margin: 0 auto;
+        }
 
-        
+        @keyframes spinCircular {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* --------------------------- //
         //        MODAL GENERAL        //
         // --------------------------- */
-        
-    
         .modal-sistema {
             position: fixed;
             inset: 0;
             z-index: 99999;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             padding: 20px;
-
             background: rgba(15, 23, 42, 0.58);
-
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
-
             opacity: 0;
             visibility: hidden;
-
-            transition:
-                opacity .25s ease,
-                visibility .25s ease;
+            transition: opacity .25s ease, visibility .25s ease;
         }
 
         .modal-sistema.activo {
@@ -934,13 +684,9 @@
             visibility: visible;
         }
 
-
-
-         /* ---------------------- //
-         //       CAJA MODAL       //
-         // ---------------------- */
-
-
+        /* ---------------------- //
+        //       CAJA MODAL       //
+        // ---------------------- */
         .modal-sistema-contenido {
             position: relative;
             width: 100%;
@@ -948,31 +694,18 @@
             background: #ffffff;
             border-radius: 18px;
             padding: 26px;
-            
-            box-shadow:
-                0 20px 60px rgba(15, 23, 42, .22);
-
-            transform:
-                translateY(18px)
-                scale(.97);
-            transition:
-                transform: .25s ease;
+            box-shadow: 0 20px 60px rgba(15, 23, 42, .22);
+            transform: translateY(18px) scale(.97);
+            transition: transform .25s ease;
         }
 
-        .modal-sistema-activo
-        .modal-sistema-contenido {
-            transform: 
-                translateY(0)
-                scale(1);
+        .modal-sistema.activo .modal-sistema-contenido {
+            transform: translateY(0) scale(1);
         }
 
-
-
-         /* ------------------ //
-         //       TITULO       //
-         // ------------------ */
-
-
+        /* ------------------ //
+        //       TITULO       //
+        // ------------------ */
         .modal-sistema-titulo {
             margin: 0 0 6px 0;
             font-size: 20px;
@@ -981,20 +714,15 @@
         }
 
         .modal-sistema-subtitulo {
-            margin: 0 0 20px; 0;
+            margin: 0 0 20px 0;
             color: #64748b;
             font-size: 14px;
             line-height: 1.5;
         }
 
-
-
         /* --------------------------- //
         //        BOTON CERRAR         //
         // --------------------------- */
-
-
-
         .modal-sistema-cerrar {
             position: absolute;
             top: 14px;
@@ -1011,22 +739,16 @@
             align-items: center;
             justify-content: center;
             transition: .2s ease;
-            
         }
 
         .modal-sistema-cerrar:hover {
-            blackground: #e2e8f0;
-            color: #1e2e93b;
+            background: #e2e8f0;
+            color: #1e293b;
         }
-
-
 
         /* ------------------------------- //
         //        ACCIONES DEL MODAL       //
         // ------------------------------- */
-
-
-
         .modal-sistema-acciones {
             display: flex;
             gap: 10px;
@@ -1040,13 +762,11 @@
             border-radius: 10px;
             font-weight: 700;
             cursor: pointer;
-            transition: 
-                transform .15s ease;
-                opacity .15s ease;
+            transition: transform .15s ease, opacity .15s ease;
         }
 
         .modal-sistema-acciones button:hover {
-            transform : translateY(-1px);
+            transform: translateY(-1px);
         }
 
         .btn-modal-cancelar {
@@ -1057,18 +777,12 @@
         .btn-modal-confirmar {
             background: #4caf50;
             color: #fff;
-            box-shadow:
-                0 5px 14px rgba(76, 175, 80, .25);
+            box-shadow: 0 5px 14px rgba(76, 175, 80, .25);
         }
-
-
 
         /* ------------------------------- //
         //        PRELOADER RETIRO         //
         // ------------------------------- */
-
-
-
         .modal-proceso {
             display: none;
             text-align: center;
@@ -1085,14 +799,9 @@
             font-weight: 600;
         }
 
-
-
         /* -------------------------------------- //
         //        OVERLAY DE PROCESAMIENTO        //
         // -------------------------------------- */
-
-
-
         .procesando-registro {
             position: fixed;
             inset: 0;
@@ -1115,8 +824,7 @@
             border-radius: 18px;
             background: #ffffff;
             text-align: center;
-            box-shadow:
-                0 20px 60px rgba(15, 23, 42, .20);
+            box-shadow: 0 20px 60px rgba(15, 23, 42, .20);
         }
 
         .procesando-registro-texto {
@@ -1126,22 +834,15 @@
             font-size: 14px;
         }
 
-
-
         /* ------------------------------- //
         //        ESTADO DE ÉXITO          //
         // ------------------------------- */
-
-
-
         .resultado-exito {
             position: fixed;
             left: 50%;
             top: 24px;
             z-index: 100001;
-            transform:
-                translate(-50%, -20px);
-
+            transform: translate(-50%, -20px);
             opacity: 0;
             pointer-events: none;
             padding: 13px 20px;
@@ -1150,198 +851,105 @@
             color: #fff;
             font-size: 14px;
             font-weight: 700;
-            box-shadow:
-                0 10px 30px rgba(16, 185, 129, .25);
-
-            transition:
-                opacity .25s ease,
-                transform .25s ease;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, .25);
+            transition: opacity .25s ease, transform .25s ease;
         }
 
         .resultado-exito.visible {
             opacity: 1;
-            transform:
-                translate(-50%, 0);
+            transform: translate(-50%, 0);
         }
-
-
 
         /* ---------------------------- //
         //        BOTON RETIRO          //
         // ---------------------------- */
-
-
-
         #btnRegistrarRetiro {
             background: #4caf50 !important;
             color: #fff !important;
             border: none !important;
-            box-shadow:
-                0 5px 14px rgba(76, 175, 80, .22);
-
-            transition:
-                transform .15s ease,
-                box-shadow .15s ease;
+            box-shadow: 0 5px 14px rgba(76, 175, 80, .22);
+            transition: transform .15s ease, box-shadow .15s ease;
         }
 
         #btnRegistrarRetiro:hover {
             transform: translateY(-1px);
-            box-shadow:
-                0 7px 18px rgba(76, 175, 80, .30);
+            box-shadow: 0 7px 18px rgba(76, 175, 80, .30);
         }
 
         #btnRegistrarRetiro:disabled {
             transform: none;
             opacity: .65;
         }
-    
     `;
 
     document.head.appendChild(estiloInterfaz);
 
-
-
     // =============================================== //
-    //            CREAR PRELOADER DE RETIRO            //
+    //            CREAR PRELOADER CIRCULAR             //
     // =============================================== //
-
-
-
-    function crearPreloaderColors() {
-        return `
-            <div class="preloader pl-lg">
-            <svg class="pl-circular" viewBox="25 25 50 50">
-            <circle class="plc-path" cx="50" cy="50" r="20"/>
-            </svg>
-            </div> 
-        `;
+    function crearPreloaderCircular() {
+        return `<div class="spinner-circular"></div>`;
     }
-
-
-
-    // ==================================================== //
-    //            CREAR PRELOADER LINEAR DE RETIRO          //
-    // ==================================================== //
-
-
-
-    function crearLoaderLinear() {
-        return `
-            <div class="loader loader-pink" style="margin:0 auto; width:45px; height:45px;"></div>
-        `;
-    }
-
-
-
 
     // ==================================== //
     //           OVERLAY REGISTRO           //
     // ==================================== //
-
-
-
     const overlayRegistro = document.createElement('div');
-
     overlayRegistro.className = 'procesando-registro';
     overlayRegistro.innerHTML = `
-
         <div class="procesando-registro-caja">
-
             <div id="loaderRegistroVisual">
-                ${crearLoaderLinear()}
+                ${crearPreloaderCircular()}
             </div>
-
-            <div
-                class="procesando-registro-texto">
-                    Registrando encomienda...
+            <div class="procesando-registro-texto">
+                Registrando encomienda...
             </div>
         </div>
     `;
-
     document.body.appendChild(overlayRegistro);
-
-
-
 
     // ==================================== //
     //           MENSAJE DE ÉXITO           //
     // ==================================== //
-
-
-
-
     const mensajeExito = document.createElement('div');
-
     mensajeExito.className = 'resultado-exito';
     mensajeExito.innerHTML = 'Registro realizado correctamente';
-
     document.body.appendChild(mensajeExito);
 
-
-
-     // ==================================================== //
-     //            MODAL DE CONFIRMACIÓN RETIRO              //
-     // ==================================================== //
-
-
-
+    // ==================================================== //
+    //            MODAL DE CONFIRMACIÓN RETIRO              //
+    // ==================================================== //
     const modalRetiro = document.createElement('div');
-
     modalRetiro.className = 'modal-sistema';
-
-    modalRetiro.innerHTML =`
-        
+    modalRetiro.innerHTML = `
         <div class="modal-sistema-contenido">
-        
-        <button type="button" class="modal-sistema-cerrar" id="cerrarModalRetiro">
-                ×
-            </button>
+            <button type="button" class="modal-sistema-cerrar" id="cerrarModalRetiro">×</button>
 
             <div id="confirmacionRetiro">
-
-                <h3 class="modal-sistema-titulo">
-                    Confirmar retiro
-                </h3>
+                <h3 class="modal-sistema-titulo">Confirmar retiro</h3>
                 <p class="modal-sistema-subtitulo" id="textoConfirmacionRetiro">
                     ¿Confirmas que la encomienda fue retirada por el residente?
                 </p>
-
                 <div class="modal-sistema-acciones">
-
-                    <button type="button" class="btn-modal-cancelar" id="cancelarRetiro">
-                        Cancelar
-                    </button>
-                    <button type="button" class="btn-modal-confirmar" id="confirmarRetiro">
-                        Confirmar
-                    </button>
-
+                    <button type="button" class="btn-modal-cancelar" id="cancelarRetiro">Cancelar</button>
+                    <button type="button" class="btn-modal-confirmar" id="confirmarRetiro">Confirmar</button>
                 </div>
             </div>
 
             <div class="modal-proceso" id="procesoRetiro">
-
-                ${crearPreloaderColors()}
-
+                ${crearPreloaderCircular()}
                 <div class="modal-proceso-texto">
                     Registrando retiro...
                 </div>
-                    
             </div>
         </div>
     `;
-
     document.body.appendChild(modalRetiro);
 
-
-
-
-     // =========================================================
-     //           REFERENCIAS MODAL RETIRO
-     // =========================================================
-
-
-
-     const cerrarModalRetiro = document.getElementById('cerrarModalRetiro');
+    // =========================================================
+    //           REFERENCIAS MODAL RETIRO
+    // =========================================================
+    const cerrarModalRetiro = document.getElementById('cerrarModalRetiro');
     const cancelarRetiro = document.getElementById('cancelarRetiro');
     const confirmarRetiro = document.getElementById('confirmarRetiro');
     const textoConfirmacionRetiro = document.getElementById('textoConfirmacionRetiro');
@@ -1350,743 +958,291 @@
     
     let idRetiroPendiente = '';
 
-
-
     // ============================
     //          ABRIR MODAL
     // ============================
-
-
-
     function abrirModalRetiro(id) {
-
-        idRetiroPendiente =
-            String(id || '')
-            .trim()
-            .toUpperCase();
+        idRetiroPendiente = String(id || '').trim().toUpperCase();
 
         textoConfirmacionRetiro.innerHTML =
-            '¿Confirmas que la encomienda ' +
-            '<strong>' + idRetiroPendiente +
-            '</strong> fue retirada por el residente?';
+            '¿Confirmas que la encomienda <strong>' + idRetiroPendiente + '</strong> fue retirada por el residente?';
 
         confirmacionRetiro.style.display = 'block';
         procesoRetiro.classList.remove('activo');
         modalRetiro.classList.add('activo');
     }
 
-
-
-
-     // ============================
-     //         CERRAR MODAL
-     // ============================
-
-
-
+    // ============================
+    //         CERRAR MODAL
+    // ============================
     function cerrarModal() {
-
         modalRetiro.classList.remove('activo');
         idRetiroPendiente = '';
     }
 
-    cerrarModalRetiro.addEventListener('click',cerrarModal);
-    cancelarRetiro.addEventListener('click',cerrarModal);
+    cerrarModalRetiro.addEventListener('click', cerrarModal);
+    cancelarRetiro.addEventListener('click', cerrarModal);
 
-    modalRetiro.addEventListener('click',
-        function(e) {
-
-            if (e.target === modalRetiro) {
-                cerrarModal();
-            }
+    modalRetiro.addEventListener('click', function(e) {
+        if (e.target === modalRetiro) {
+            cerrarModal();
         }
-    );
-
-
-
-
-    // =========================================================
-    //            REGISTRO DE ENCOMIENDA
-    // =========================================================
-
-
-    
-
-    if (formulario) {
-
-        formulario.addEventListener('submit', function(e) {
-
-                e.preventDefault();
-
-                const form = e.target;
-                const button = form.querySelector('button');
-                const statusMessage = document.getElementById('statusMessage');
-
-
-
-                // -----------------------------------------
-                // BLOQUEAR FORMULARIO
-                // -----------------------------------------
-
-                
-                button.disabled = true;
-                button.innerText = 'Procesando...';
-
-
-
-                // -----------------------------------------
-                // MOSTRAR LINEAR PRELOADER
-                // -----------------------------------------
-
-
-                
-                overlayRegistro.classList.add('activo');
-                statusMessage.style.display = 'none';
-                statusMessage.style.opacity = '1';
-
-                const formData = new FormData(form);
-                const data = new URLSearchParams(formData);
-
-
-
-
-                // -----------------------------------------
-                // ENVIAR A APPS SCRIPT
-                // -----------------------------------------
-
-                
-                
-                fetch(form.action, {
-                        method: 'POST',
-                        body: data,
-                        mode: 'no-cors'
-                    }
-                )
-
-                .then(function() {
-
-                        form.reset();
-                        overlayRegistro.classList.remove('activo');
-                        
-                        mostrarExitoRegistro();
-                        statusMessage.style.display = 'none';
-                    }
-                )
-
-                .catch(function(error) {
-
-                        console.error('Error registrando encomienda:', error);
-                        overlayRegistro.classList.remove('activo');
-
-                        statusMessage.style.backgroundColor = '#ef4444';
-                        statusMessage.style.color = '#fff';
-                        statusMessage.style.display = 'block';
-                        statusMessage.innerText ='❌ Error de Red';
-
-                        setTimeout(function() {
-
-                                statusMessage.style.display = 'none';
-                            },
-                            5000
-                        );
-                    }
-                )
-
-                .finally(function() {
-
-                        button.disabled = false;
-                        button.innerText = '📦 Registrar encomienda';
-                    }
-                );
-            }
-        );
-    }
-
-
+    });
 
     // =========================================================
     //             MENSAJE REGISTRO EXITOSO
     // =========================================================
-
-
-    
     function mostrarExitoRegistro() {
-
         mensajeExito.classList.add('visible');
         setTimeout(function() {
-                mensajeExito.classList.remove('visible');
-            },
-            3500
-        );
+            mensajeExito.classList.remove('visible');
+        }, 3500);
     }
-
-
-
 
     // =========================================================
     //               CONSULTAR ENCOMIENDA
     // =========================================================
-
-
-    
-
     if (btnConsultar) {
-
         btnConsultar.addEventListener('click', function() {
+            const id = idConsulta.value.trim().toUpperCase();
 
-                const id = idConsulta.value.trim().toUpperCase();
+            resultadoConsulta.style.display = 'none';
+            searchMessage.style.display = 'none';
 
-                resultadoConsulta.style.display = 'none';
-                searchMessage.style.display = 'none';
+            if (!id) {
+                mostrarMensajeBusqueda('⚠️ Ingresa un ID de encomienda.', '#f59e0b');
+                return;
+            }
 
-                if (!id) {
+            btnConsultar.disabled = true;
+            btnConsultar.innerText = 'Consultando...';
 
-                    mostrarMensajeBusqueda('⚠️ Ingresa un ID de encomienda.','#f59e0b');
+            const callbackName = 'consultaEncomienda_' + Date.now();
+            const scriptConsulta = document.createElement('script');
 
-                    return;
+            window[callbackName] = function(data) {
+                try {
+                    if (data && data.encontrado) {
+                        mostrarResultado(data);
+                    } else {
+                        mostrarMensajeBusqueda(
+                            '❌ ' + (data && data.mensaje ? data.mensaje : 'No se encontró la encomienda.'),
+                            '#ef4444'
+                        );
+                    }
+                } catch (error) {
+                    console.error('Error procesando consulta:', error);
+                    mostrarMensajeBusqueda('❌ Error al procesar la respuesta.', '#ef4444');
                 }
 
-                btnConsultar.disabled = true;
-                btnConsultar.innerText = 'Consultando...';
+                btnConsultar.disabled = false;
+                btnConsultar.innerText = 'Consultar';
+                delete window[callbackName];
 
-                const callbackName = 'consultaEncomienda_' + Date.now();
-                const scriptConsulta = document.createElement('script');
+                if (scriptConsulta && scriptConsulta.parentNode) {
+                    scriptConsulta.parentNode.removeChild(scriptConsulta);
+                }
+            };
 
-                window[callbackName] = function(data) {
+            scriptConsulta.src = SCRIPT_URL + '?id=' + encodeURIComponent(id) + '&callback=' + encodeURIComponent(callbackName);
 
-                        try {
+            scriptConsulta.onerror = function() {
+                console.error('No se pudo cargar:', scriptConsulta.src);
+                mostrarMensajeBusqueda('❌ No fue posible consultar el servidor.', '#ef4444');
 
-                            if (data && data.encontrado) {
+                btnConsultar.disabled = false;
+                btnConsultar.innerText = 'Consultar';
+                delete window[callbackName];
 
-                                mostrarResultado(data);
+                if (scriptConsulta && scriptConsulta.parentNode) {
+                    scriptConsulta.parentNode.removeChild(scriptConsulta);
+                }
+            };
 
-                            } else {
-
-                                mostrarMensajeBusqueda(
-                                    '❌ ' +
-                                    (
-                                        data &&
-                                        data.mensaje
-                                            ? data.mensaje
-                                            : 'No se encontró la encomienda.'
-                                    ),
-                                    '#ef4444'
-                                );
-                            }
-
-                        } catch (error) {
-
-                            console.error('Error procesando consulta:', error);
-                            mostrarMensajeBusqueda('❌ Error al procesar la respuesta.','#ef4444');
-                        }
-
-                        btnConsultar.disabled = false;
-                        btnConsultar.innerText = 'Consultar';
-                        delete window[callbackName];
-
-                        if (scriptConsulta && scriptConsulta.parentNode) {
-                            scriptConsulta
-                                .parentNode
-                                .removeChild(
-                                    scriptConsulta
-                                );
-                        }
-                    };
-
-                scriptConsulta.src = SCRIPT_URL + '?id=' +
-                    encodeURIComponent(id) +
-                    '&callback=' +
-                    encodeURIComponent(
-                        callbackName
-                    );
-
-                scriptConsulta.onerror = function() {
-
-                        console.error('No se pudo cargar:', scriptConsulta.src);
-
-                        mostrarMensajeBusqueda('❌ No fue posible consultar el servidor.','#ef4444');
-
-                        btnConsultar.disabled = false;
-                        btnConsultar.innerText = 'Consultar';
-                        delete window[callbackName];
-
-                        if (
-                            scriptConsulta &&
-                            scriptConsulta.parentNode
-                        ) {
-                            scriptConsulta
-                                .parentNode
-                                .removeChild(
-                                    scriptConsulta
-                                );
-                        }
-                    };
-
-                document.body.appendChild(
-                    scriptConsulta
-                );
-            }
-        );
+            document.body.appendChild(scriptConsulta);
+        });
     }
-
-
-
 
     // =========================================================
     //                MOSTRAR RESULTADO
     // =========================================================
-
-    
-
     function mostrarResultado(data) {
-
         document.getElementById('resultadoId').textContent = data.id || '';
         document.getElementById('resultadoNombre').textContent = data.nombre || '';
         document.getElementById('resultadoDepto').textContent = data.depto || '';
         document.getElementById('resultadoBulto').textContent = data.bulto || '';
         document.getElementById('resultadoIngreso').textContent = formatearFecha(data.fechaIngreso);
 
-        const estadoElemento =document.getElementById('resultadoEstado');
+        const estadoElemento = document.getElementById('resultadoEstado');
         const estado = String(data.estado || '').trim().toUpperCase();
         
         estadoElemento.textContent = data.estado || 'SIN ESTADO';
 
-
-
-
-        // -----------------------------------------
         // COLOR DEL ESTADO
-        // -----------------------------------------
-
-
-        
-        if (
-            estado === 'RECIBIDA'
-        ) {
+        if (estado === 'RECIBIDA') {
             estadoElemento.style.backgroundColor = '#6c5ce7';
-
-        } else if (
-            estado === 'RETIRADA'
-        ) {
-
+        } else if (estado === 'RETIRADA') {
             estadoElemento.style.backgroundColor = '#4caf50';
-
-        } else if (
-            estado === 'INCIDENCIA'
-        ) {
-
+        } else if (estado === 'INCIDENCIA') {
             estadoElemento.style.backgroundColor = '#ef4444';
-
         } else {
-
             estadoElemento.style.backgroundColor = '#64748b';
         }
 
-
-
-
-        // -----------------------------------------
         // INFORMACIÓN RETIRO
-        // -----------------------------------------
-
-        
-        
-        
         const bloqueRetiro = document.getElementById('bloqueRetiro');
         const resultadoRetiro = document.getElementById('resultadoRetiro');
 
-        if (
-            data.fechaRetiro || data.horaRetiro
-        ) {
-
+        if (data.fechaRetiro || data.horaRetiro) {
             bloqueRetiro.style.display = 'block';
-            resultadoRetiro.textContent = (
-                    data.fechaRetiro ||
-                    ''
-                ) +
-                ' ' +
-                (
-                    data.horaRetiro || ''
-                );
-
+            resultadoRetiro.textContent = (data.fechaRetiro || '') + ' ' + (data.horaRetiro || '');
         } else {
-
             bloqueRetiro.style.display = 'none';
             resultadoRetiro.textContent = '';
         }
 
-
-
-
-
-        // -----------------------------------------
         // BOTÓN REGISTRAR RETIRO
-        // -----------------------------------------
-
-
-
-        
-        const accionRetiro =document.getElementById('accionRetiro');
+        const accionRetiro = document.getElementById('accionRetiro');
         const btnRegistrarRetiro = document.getElementById('btnRegistrarRetiro');
         
-        if (
-            estado === 'RECIBIDA'
-        ) {
-
+        if (estado === 'RECIBIDA') {
             accionRetiro.style.display = 'block';
             btnRegistrarRetiro.disabled = false;
-
         } else {
-
             accionRetiro.style.display = 'none';
             btnRegistrarRetiro.disabled = true;
         }
 
-
-
-
-        // -----------------------------------------
         // GUARDAR ID
-        // -----------------------------------------
-
-        
-
         btnRegistrarRetiro.dataset.id = data.id || '';
 
-
-        
-        // -----------------------------------------
         // MOSTRAR RESULTADO
-        // -----------------------------------------
-        
-
         resultadoConsulta.style.display = 'block';
     }
-
-
-
 
     // =========================================================
     //                 BOTÓN REGISTRAR RETIRO
     // =========================================================
-
-
-
-    
-    const btnRegistrarRetiro =document.getElementById('btnRegistrarRetiro');
+    const btnRegistrarRetiro = document.getElementById('btnRegistrarRetiro');
 
     if (btnRegistrarRetiro) {
+        btnRegistrarRetiro.addEventListener('click', function() {
+            const id = String(this.dataset.id || '').trim().toUpperCase();
 
-        btnRegistrarRetiro.addEventListener('click',
-            function() {
-
-                const boton = this;
-                const id = String(boton.dataset.id || '')
-                    .trim()
-                    .toUpperCase();
-
-                if (!id) {
-
-                    mostrarMensajeBusqueda(
-                        '❌ No se encontró el ID de la encomienda.',
-                        '#ef4444'
-                    );
-
-                    return;
-                }
-
-
-
-
-                // -----------------------------------------
-                // ABRIR MODAL PROPIO
-                // -----------------------------------------
-
-
-                
-
-                abrirModalRetiro(id);
+            if (!id) {
+                mostrarMensajeBusqueda('❌ No se encontró el ID de la encomienda.', '#ef4444');
+                return;
             }
-        );
+
+            abrirModalRetiro(id);
+        });
     }
-
-
-
-
 
     // =========================================================
     //               CONFIRMAR RETIRO
     // =========================================================
+    confirmarRetiro.addEventListener('click', function() {
+        const id = idRetiroPendiente;
 
-
-
-
-    confirmarRetiro.addEventListener('click',
-        function() {
-
-            const id = idRetiroPendiente;
-
-            if (!id) {
-                cerrarModal();
-                return;
-            }
-
-            const boton =document.getElementById('btnRegistrarRetiro');
-
-
-
-
-
-            // -----------------------------------------
-            // BLOQUEAR CONFIRMACIÓN
-            // -----------------------------------------
-
-            
-
-            
-            confirmarRetiro.disabled = true;
-            cancelarRetiro.disabled = true;
-            cerrarModalRetiro.disabled = true;
-
-
-
-
-
-            // -----------------------------------------
-            // CAMBIAR A PRELOADER COLORS
-            // -----------------------------------------
-
-
-            
-
-            confirmacionRetiro.style.display = 'none';
-            procesoRetiro.classList.add('activo');
-
-            
-
-
-            // -----------------------------------------
-            // PREPARAR DATOS
-            // -----------------------------------------
-
-
-
-            
-            const datosRetiro = new URLSearchParams();
-
-            datosRetiro.append('accion','retirar');
-            datosRetiro.append('id',id);
-
-
-
-
-
-            // -----------------------------------------
-            // ENVIAR RETIRO
-            // -----------------------------------------
-
-
-            
-            fetch(SCRIPT_URL,
-                {
-                    method: 'POST',
-                    body: datosRetiro,
-                    mode: 'no-cors'
-                }
-            )
-
-            .then(
-                function() {
-                    /*
-                     * Esperamos a que Apps Script
-                     * termine de escribir en Sheets.
-                     */
-                    setTimeout(
-                        function() {
-                            consultarID(
-                                id
-                            );
-                        },
-                        1200
-                    );
-                }
-            )
-            .catch(
-                function(error) {
-
-                    console.error('Error registrando retiro:',error);
-
-                    mostrarMensajeBusqueda('❌ Error al registrar el retiro.','#ef4444');
-                    restaurarModalRetiro();
-                }
-            );
+        if (!id) {
+            cerrarModal();
+            return;
         }
-    );
 
+        confirmarRetiro.disabled = true;
+        cancelarRetiro.disabled = true;
+        cerrarModalRetiro.disabled = true;
 
+        confirmacionRetiro.style.display = 'none';
+        procesoRetiro.classList.add('activo');
 
+        const datosRetiro = new URLSearchParams();
+        datosRetiro.append('accion', 'retirar');
+        datosRetiro.append('id', id);
 
-
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: datosRetiro,
+            mode: 'no-cors'
+        })
+        .then(function() {
+            setTimeout(function() {
+                consultarID(id);
+            }, 1200);
+        })
+        .catch(function(error) {
+            console.error('Error registrando retiro:', error);
+            mostrarMensajeBusqueda('❌ Error al registrar el retiro.', '#ef4444');
+            restaurarModalRetiro();
+        });
+    });
 
     // =========================================================
     //            CONSULTAR PARA CONFIRMAR RETIRO
     // =========================================================
-
-
-
-    
-
-    function consultarID(id) { const boton = document.getElementById('btnRegistrarRetiro');
-
+    function consultarID(id) {
+        const boton = document.getElementById('btnRegistrarRetiro');
         const callbackName = 'confirmarRetiro_' + Date.now();
         const scriptConsulta = document.createElement('script');
 
         window[callbackName] = function(data) {
+            try {
+                if (data && data.encontrado) {
+                    mostrarResultado(data);
+                    const estado = String(data.estado || '').trim().toUpperCase();
 
-                try {
-                    
-                    if (data && data.encontrado) {
-
-                        mostrarResultado(data);
-                        const estado = String(data.estado || '').trim().toUpperCase();
-
-                        if (estado === 'RETIRADA') {
-
-                            mostrarMensajeBusqueda('✅ Retiro registrado correctamente.','#10b981');
-
-                        } else {
-
-                            mostrarMensajeBusqueda('⚠️ El retiro fue enviado, pero aún no se pudo confirmar.','#f59e0b');
-                        }
-
+                    if (estado === 'RETIRADA') {
+                        mostrarMensajeBusqueda('✅ Retiro registrado correctamente.', '#10b981');
                     } else {
-
-                        mostrarMensajeBusqueda('❌ No se pudo consultar la encomienda.','#ef4444');
+                        mostrarMensajeBusqueda('⚠️ El retiro fue enviado, pero aún no se pudo confirmar.', '#f59e0b');
                     }
-
-                } catch (error) {
-
-                    console.error('Error confirmando retiro:', error);
-
-                    mostrarMensajeBusqueda('❌ Error al procesar la confirmación.','#ef4444');
+                } else {
+                    mostrarMensajeBusqueda('❌ No se pudo consultar la encomienda.', '#ef4444');
                 }
+            } catch (error) {
+                console.error('Error confirmando retiro:', error);
+                mostrarMensajeBusqueda('❌ Error al procesar la confirmación.', '#ef4444');
+            }
 
+            modalRetiro.classList.remove('activo');
+            restaurarModalRetiro();
+            delete window[callbackName];
 
+            if (scriptConsulta && scriptConsulta.parentNode) {
+                scriptConsulta.parentNode.removeChild(scriptConsulta);
+            }
 
-                // -----------------------------------------
-                // CERRAR MODAL
-                // -----------------------------------------
+            if (boton) {
+                boton.disabled = false;
+                boton.innerText = '✓ Registrar retiro';
+            }
+        };
 
-
-            
-                modalRetiro.classList.remove('activo');
-
-
-            
-
-                // -----------------------------------------
-                // RESTAURAR MODAL
-                // -----------------------------------------
-
-
-            
-                restaurarModalRetiro();
-
-
-
-
-                // -----------------------------------------
-                // LIMPIAR
-                // -----------------------------------------
-
-
-            
-                delete window[callbackName];
-
-
-                if (scriptConsulta && scriptConsulta.parentNode) {
-
-                    scriptConsulta.parentNode.removeChild(scriptConsulta);
-                }
-
-            
-
-                // -----------------------------------------
-                // RESTAURAR BOTÓN
-                // -----------------------------------------
-
-
-            
-            
-                if (boton) {
-
-                    boton.disabled = false;
-                    boton.innerText = '✓ Registrar retiro';
-                }
-            };
-
-
-
-                              
-        // -----------------------------------------
-        // URL JSONP
-        // -----------------------------------------
-
-
-                              
-        scriptConsulta.src = SCRIPT_URL +
-            '?id=' +
-            encodeURIComponent(id) +
-            '&callback=' +
-            encodeURIComponent(
-                callbackName
-            );
-
-
-
-
-        // -----------------------------------------
-        // ERROR
-        // -----------------------------------------
-
-                              
+        scriptConsulta.src = SCRIPT_URL + '?id=' + encodeURIComponent(id) + '&callback=' + encodeURIComponent(callbackName);
 
         scriptConsulta.onerror = function() {
+            mostrarMensajeBusqueda('❌ No fue posible verificar el retiro.', '#ef4444');
+            restaurarModalRetiro();
 
-                mostrarMensajeBusqueda('❌ No fue posible verificar el retiro.','#ef4444');
-                restaurarModalRetiro();
+            if (boton) {
+                boton.disabled = false;
+                boton.innerText = '✓ Registrar retiro';
+            }
 
-                if (boton) {
+            delete window[callbackName];
 
-                    boton.disabled = false;
-                    boton.innerText = '✓ Registrar retiro';
-                }
-
-                delete window[callbackName];
-
-                if (scriptConsulta && scriptConsulta.parentNode) {
-
-                    scriptConsulta
-                        .parentNode
-                        .removeChild(
-                            scriptConsulta
-                        );
-                }
-            };
+            if (scriptConsulta && scriptConsulta.parentNode) {
+                scriptConsulta.parentNode.removeChild(scriptConsulta);
+            }
+        };
 
         document.body.appendChild(scriptConsulta);
     }
 
-
-
     // =========================================================
     //             RESTAURAR MODAL RETIRO
     // =========================================================
-
-
-    
     function restaurarModalRetiro() {
-
         confirmacionRetiro.style.display = 'block';
         procesoRetiro.classList.remove('activo');
         confirmarRetiro.disabled = false;
@@ -2094,60 +1250,51 @@
         cerrarModalRetiro.disabled = false;
     }
 
-
-
-
-
     // =========================================================
     //                 FORMATO DE FECHA
     // =========================================================
-
-   
-    
-    
     function formatearFecha(valor) {
-
-        if (!valor) {
-
-            return '';
-        }
+        if (!valor) return '';
 
         const fecha = new Date(valor);
+        if (isNaN(fecha.getTime())) return valor;
 
-        if (isNaN(
-                fecha.getTime()
-            )
-        ) {
-            return valor;
-        }
-
-        return fecha.toLocaleString('es-CL',
-            {
-                dateStyle: 'short',
-                timeStyle: 'medium'
-            }
-        );
+        return fecha.toLocaleString('es-CL', {
+            dateStyle: 'short',
+            timeStyle: 'medium'
+        });
     }
-
-
-
 
     // =========================================================
     //             MENSAJE DE CONSULTA
     // =========================================================
+    let timerMensajeBusqueda = null;
 
+    function mostrarMensajeBusqueda(mensaje, color) {
+      if (!searchMessage) return;
 
+      if (timerMensajeBusqueda) clearTimeout(timerMensajeBusqueda);
 
-    
-    function mostrarMensajeBusqueda(mensaje,color) {
+      searchMessage.style.backgroundColor = color;
+      searchMessage.style.color = '#fff';
+      searchMessage.style.display = 'block';
+      searchMessage.style.opacity = '1';
+      searchMessage.innerText = mensaje;
 
-        searchMessage.style.backgroundColor = color;
-        searchMessage.style.color = '#fff';
-        searchMessage.style.display = 'block';
-        searchMessage.style.opacity = '1';
-        searchMessage.innerText = mensaje;
+      timerMensajeBusqueda = setTimeout(function () {
+        searchMessage.style.opacity = '0';
+
+        setTimeout(function () {
+          searchMessage.style.display = 'none';
+        }, 400);
+      }, 3500);
     }
 
+    const selectBulto = document.getElementById('bulto');
+    if (selectBulto) {
+      selectBulto.addEventListener('change', () => selectBulto.style.color = selectBulto.value ? '#2d3748' : '#a0aec0');
+      selectBulto.style.color = selectBulto.value ? '#2d3748' : '#a0aec0';
+    }
 </script>
 
 </body>
