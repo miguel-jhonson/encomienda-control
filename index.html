@@ -573,13 +573,18 @@
         <!--       RESULTADO CONSULTA       -->
         <!-- ============================== -->
         <div id="resultadoConsulta">
+
+            <!-- 1. ALERTA FLOTANTE/CERRABLE (Va afuera de los datos) -->
+            <div id="alertaMultiples" style="display:none; position: relative; width: 100%; margin-bottom: 15px; padding: 12px 32px 12px 14px; background: #fff3cd; border: 1px solid #ffe8a1; border-radius: 10px; color: #856404; font-size: 13px; font-weight: 600; box-sizing: border-box;">
+                ⚠️ <strong>¡Atención!</strong> La unidad <span id="numDeptoAlerta"></span> tiene <span id="cantPendientes"></span> encomiendas pendientes sin retirar:
+                <div id="listaIdsPendientes" style="margin-top: 4px; font-weight: 700; color: #533f03;"></div>
+                <button type="button" onclick="cerrarAlertaMultiples()" style="position: absolute; top: 6px; right: 10px; background: transparent; border: none; font-size: 20px; font-weight: bold; color: #856404; cursor: pointer; line-height: 1;">&times;</button>
+            </div>
+
+            <!-- 2. FILA DEL ID (Limpia) -->
             <div class="dato">
                 <strong>ID:</strong>
                 <span id="resultadoId"></span>
-                <div id="alertaMultiples" style="display:none; margin-bottom: 15px; padding: 12px 14px; background: #fff3cd; border: 1px solid #ffe8a1; border-radius: 10px; color: #856404; font-size: 13px; font-weight: 600;">
-                    ⚠️ <strong>¡Atención!</strong> La unidad <span id="numDeptoAlerta"></span> tiene <span id="cantPendientes"></span> encomiendas pendientes sin retirar:
-                    <div id="listaIdsPendientes" style="margin-top: 4px; font-weight: 700; color: #533f03;"></div>
-                </div>
             </div>
 
             <div class="dato">
@@ -1234,6 +1239,13 @@
     // =========================================================
     //                MOSTRAR RESULTADO
     // =========================================================
+    function cerrarAlertaMultiples() {
+        const alerta = document.getElementById('alertaMultiples');
+        if (alerta) {
+            alerta.style.display = 'none';
+        }
+    }
+
     function mostrarResultado(data) {
         document.getElementById('resultadoId').textContent = data.id || '';
         document.getElementById('resultadoNombre').textContent = data.nombre || '';
@@ -1244,11 +1256,6 @@
         const estadoElemento = document.getElementById('resultadoEstado');
         const estado = String(data.estado || '').trim().toUpperCase();
 
-        const alerta = document.getElementById('alertaMultiples');
-        if (alerta) {
-            alerta.style.display = 'none';
-        }
-        
         const alertaMultiples = document.getElementById('alertaMultiples');
         const numDeptoAlerta = document.getElementById('numDeptoAlerta');
         const cantPendientes = document.getElementById('cantPendientes');
