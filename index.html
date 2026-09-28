@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Control Digital Encomiendas</title>
 
@@ -12,12 +15,7 @@
         }
 
         body {
-            margin: 0;
-            min-height: 100vh;
-            padding: 30px 15px;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #f4f6fb 0%, #eef1f7 100%);
-            color: #26334a;
+          font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         /* ==========================================
@@ -104,6 +102,13 @@
         /* ==========================================
                          FORMULARIO
          ========================================== */
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
         .group {
             margin-bottom: 21px;
         }
@@ -142,8 +147,14 @@
 
         input:focus,
         select:focus {
-          border-color: #6c5ce7;
-          box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.10);
+            border-color: #6c5ce7 !important;
+            box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.15) !important;
+            transform: translateY(-1px);
+        }
+
+        /* Transición suave para todos los controles */
+        input, select, .btn-principal, .btn-lupa {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         /* ==========================================
@@ -257,15 +268,21 @@
             border-radius: 50%;
             background: #f1f3f7;
             color: #64748b;
-            font-size: 22px;
-            line-height: 1;
+            font-size: 20px;
             cursor: pointer;
             box-shadow: none;
+            
+            /* Centrado perfecto vertical y horizontal */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            transition: background 0.2s ease, color 0.2s ease;
         }
 
         .btn-cerrar:hover {
-            background: #e5e7eb;
-            color: #334155;
+            background: #e2e8f0;
+            color: #1e293b;
             transform: none;
         }
 
@@ -303,37 +320,42 @@
            ========================================== */
         #resultadoConsulta {
             display: none;
-            margin-top: 22px;
-            padding: 18px;
-            background: #f8fafc;
+            margin-top: 20px;
+            padding: 20px;
+            background: #ffffff;
             border: 1px solid #e2e8f0;
-            border-radius: 12px;
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
         }
 
         .dato {
-            margin-bottom: 12px;
-            color: #4a5568;
-            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px dashed #edf2f7;
+            font-size: 13.5px;
+        }
+
+        .dato:last-child {
+            border-bottom: none;
         }
 
         .dato strong {
-            display: inline-block;
-            min-width: 105px;
-            color: #2f3b52;
+            color: #64748b;
+            font-weight: 600;
         }
 
         /* ==========================================
                            ESTADO
            ========================================== */
         .estado {
-            display: inline-block;
-            padding: 6px 12px;
+            padding: 4px 12px;
             border-radius: 20px;
-            background: #6c5ce7;
-            color: white;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
-            text-align: center;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
         /* ==========================================
@@ -376,6 +398,11 @@
             h2 {
                 font-size: 21px;
             }
+
+            /* Pasa el formulario a 1 columna en celulares */
+            .form-row {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -407,15 +434,16 @@
 
         <div class="group">
             <label for="nombre">Nombre/Apellido del Residente</label>
-            <input type="text" id="nombre" name="nombre" class="form-control" minlength="3" required placeholder="Ej: Juan Pérez">
+            <input type="text" id="nombre" name="nombre" class="form-control" minlength="3" required placeholder="👤     Juan Pérez">
             <div class="invalid-feedback" id="feedbackNombre">
                 Ingresa el nombre del residente.
             </div>
         </div>
-
+        
+        <div class="form-row">
         <div class="group">
             <label for="depto">Número Depto</label>
-            <input type="number" id="depto" name="depto" class="form-control" min="1" required placeholder="Ej: 119">
+            <input type="number" id="depto" name="depto" class="form-control" min="1" required placeholder="🏢      119">
             <div class="invalid-feedback">
                 Ingresa un número de departamento válido.
             </div>
@@ -433,10 +461,11 @@
                 Selecciona el tipo de encomienda.
             </div>
         </div>
+        </div>
 
         <div class="group">
             <label for="fono">Fono Residente</label>
-            <input type="tel" id="fono" class="form-control" name="fono" required placeholder="Ej: 56912345678" pattern="[0-9]{11}" maxlength="11" inputmode="numeric">
+            <input type="tel" id="fono" class="form-control" name="fono" required placeholder="☎︎  56912345678" pattern="[0-9]{11}" maxlength="11" inputmode="numeric">
             <div class="invalid-feedback">
                 Ingresa un teléfono valido de 11 digitos.
             </div>
@@ -462,7 +491,12 @@
                 <h3>🔍 Consultar encomienda</h3>
                 <p>Ingresa el ID de la encomienda</p>
             </div>
-            <button type="button" id="btnCerrarConsulta" class="btn-cerrar">×</button>
+            <button type="button" id="btnCerrarConsulta" class="btn-cerrar" title="Cerrar">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
         </div>
 
         <div class="group">
@@ -1164,7 +1198,7 @@
         const resultadoRetiro = document.getElementById('resultadoRetiro');
 
         if (data.fechaRetiro || data.horaRetiro) {
-            bloqueRetiro.style.display = 'block';
+            bloqueRetiro.style.display = 'flex';
             resultadoRetiro.textContent = (data.fechaRetiro || '') + ' ' + (data.horaRetiro || '');
         } else {
             bloqueRetiro.style.display = 'none';
@@ -1200,7 +1234,7 @@
             const id = String(this.dataset.id || '').trim().toUpperCase();
 
             if (!id) {
-                mostrarMensajeBusqueda('❌ No se encontró el ID de la encomienda.', '#ef4444');
+                mostrarMensajeBusqueda('No se encontró el ID de la encomienda.', '#ef4444');
                 return;
             }
 
@@ -1242,7 +1276,7 @@
         })
         .catch(function(error) {
             console.error('Error registrando retiro:', error);
-            mostrarMensajeBusqueda('❌ Error al registrar el retiro.', '#ef4444');
+            mostrarMensajeBusqueda('Error al registrar el retiro.', '#ef4444');
             restaurarModalRetiro();
         });
     });
@@ -1262,16 +1296,16 @@
                     const estado = String(data.estado || '').trim().toUpperCase();
 
                     if (estado === 'RETIRADA') {
-                        mostrarMensajeBusqueda('✅ Retiro registrado correctamente.', '#10b981');
+                        mostrarMensajeBusqueda('Retiro registrado correctamente.', '#10b981');
                     } else {
-                        mostrarMensajeBusqueda('⚠️ El retiro fue enviado, pero aún no se pudo confirmar.', '#f59e0b');
+                        mostrarMensajeBusqueda('El retiro fue enviado, pero aún no se pudo confirmar.', '#f59e0b');
                     }
                 } else {
-                    mostrarMensajeBusqueda('❌ No se pudo consultar la encomienda.', '#ef4444');
+                    mostrarMensajeBusqueda('No se pudo consultar la encomienda.', '#ef4444');
                 }
             } catch (error) {
                 console.error('Error confirmando retiro:', error);
-                mostrarMensajeBusqueda('❌ Error al procesar la confirmación.', '#ef4444');
+                mostrarMensajeBusqueda('Error al procesar la confirmación.', '#ef4444');
             }
 
             modalRetiro.classList.remove('activo');
@@ -1284,19 +1318,19 @@
 
             if (boton) {
                 boton.disabled = false;
-                boton.innerText = '✓ Registrar retiro';
+                boton.innerText = 'Registrar retiro';
             }
         };
 
         scriptConsulta.src = SCRIPT_URL + '?id=' + encodeURIComponent(id) + '&callback=' + encodeURIComponent(callbackName);
 
         scriptConsulta.onerror = function() {
-            mostrarMensajeBusqueda('❌ No fue posible verificar el retiro.', '#ef4444');
+            mostrarMensajeBusqueda('No fue posible verificar el retiro.', '#ef4444');
             restaurarModalRetiro();
 
             if (boton) {
                 boton.disabled = false;
-                boton.innerText = '✓ Registrar retiro';
+                boton.innerText = 'Registrar retiro';
             }
 
             delete window[callbackName];
