@@ -644,18 +644,54 @@
     const modalConsulta = document.getElementById('modalConsulta');
     const btnCerrarConsulta = document.getElementById('btnCerrarConsulta');
 
+    if (idConsulta) {
+        idConsulta.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault(); // Evita recargas inesperadas de la página
+                btnConsultar.click(); // Ejecuta la misma acción del botón "Consultar"
+            }
+        });
+    }
+
+    function limpiarConsultaModal() {
+        if (idConsulta) idConsulta.value = '';
+        if (resultadoConsulta) resultadoConsulta.style.display = 'none';
+        if (searchMessage) {
+            searchMessage.style.display = 'none';
+            searchMessage.innerText = '';
+        }
+
+        // Vacía los textos de la tarjeta
+        ['resultadoId', 'resultadoNombre', 'resultadoDepto', 'resultadoBulto', 'resultadoIngreso', 'resultadoEstado', 'resultadoRetiro'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = '';
+        });
+
+        // Oculta bloques opcionales
+        const bloqueRetiro = document.getElementById('bloqueRetiro');
+        const accionRetiro = document.getElementById('accionRetiro');
+        if (bloqueRetiro) bloqueRetiro.style.display = 'none';
+        if (accionRetiro) accionRetiro.style.display = 'none';
+    }
+
+    // ABRIR MODAL
     btnAbrirConsulta.addEventListener('click', function() {
+        limpiarConsultaModal(); // Garantiza que abra limpio
         modalConsulta.style.display = 'flex';
         idConsulta.focus();
     });
 
+    // CERRAR MODAL (Botón X)
     btnCerrarConsulta.addEventListener('click', function() {
         modalConsulta.style.display = 'none';
+        limpiarConsultaModal();
     });
 
+    // CERRAR MODAL (Clic afuera)
     modalConsulta.addEventListener('click', function(e) {
         if (e.target === modalConsulta) {
             modalConsulta.style.display = 'none';
+            limpiarConsultaModal();
         }
     });
 
@@ -1027,15 +1063,25 @@
     // =========================================================
     if (btnConsultar) {
         btnConsultar.addEventListener('click', function() {
-            const id = idConsulta.value.trim().toUpperCase();
+            let id = idConsulta.value.trim().toUpperCase();
 
             resultadoConsulta.style.display = 'none';
             searchMessage.style.display = 'none';
 
             if (!id) {
-                mostrarMensajeBusqueda('⚠️ Ingresa un ID de encomienda.', '#f59e0b');
+                mostrarMensajeBusqueda('Ingresa un ID de encomienda.', '#f59e0b');
                 return;
             }
+
+            if (!id.startsWith('ENC-')) {
+                // Si ingresa solo números (ej: "9" o "00009"), autocompleta a 5 dígitos con ceros: "ENC-00009"
+                if (/^\d+$/.test(id)) {
+                    id = 'ENC-' + id.padStart(5, '0');
+                } else {
+                    id = 'ENC-' + id;
+                }
+            }
+            idConsulta.value = id;
 
             btnConsultar.disabled = true;
             btnConsultar.innerText = 'Consultando...';
@@ -1055,7 +1101,7 @@
                     }
                 } catch (error) {
                     console.error('Error procesando consulta:', error);
-                    mostrarMensajeBusqueda('❌ Error al procesar la respuesta.', '#ef4444');
+                    mostrarMensajeBusqueda('Error al procesar la respuesta.', '#ef4444');
                 }
 
                 btnConsultar.disabled = false;
@@ -1071,7 +1117,7 @@
 
             scriptConsulta.onerror = function() {
                 console.error('No se pudo cargar:', scriptConsulta.src);
-                mostrarMensajeBusqueda('❌ No fue posible consultar el servidor.', '#ef4444');
+                mostrarMensajeBusqueda('No fue posible consultar el servidor.', '#ef4444');
 
                 btnConsultar.disabled = false;
                 btnConsultar.innerText = 'Consultar';
@@ -1319,6 +1365,49 @@
       selectBulto.addEventListener('change', () => selectBulto.style.color = selectBulto.value ? '#2d3748' : '#a0aec0');
       selectBulto.style.color = selectBulto.value ? '#2d3748' : '#a0aec0';
     }
+
+    
+
+    // ============================================= //
+    //       LIMPIAR MODAL DE CONSULTA AL CERRAR     //
+    // ============================================= //
+
+    function resetearModal(modal) {
+      // 1. Resetea todos los campos de texto e inputs
+      modal.querySelectorAll('input, select, textarea').forEach(input => {
+          input.value = '';
+          input.classList.remove('is-invalid', 'is-valid');
+      });
+
+      // 2. Resetea formularios dentro del modal
+      modal.querySelectorAll('form').forEach(form => form.reset());
+
+      // 3. Oculta las cajas/tarjetas de resultados
+      modal.querySelectorAll('[id*="resultado"], [id*="info"], [id*="detalle"], [class*="resultado"]').forEach(el => {
+          if (el.tagName !== 'INPUT' && el.tagName !== 'BUTTON') {
+              el.style.display = 'none';
+              el.classList.add('d-none');
+          }
+      });
+
+      // 4. Vacía las etiquetas de texto con los datos de la encomienda (ID, Residente, etc.)
+      modal.querySelectorAll('span[id], p[id]').forEach(el => {
+          if (el.id !== 'idConsulta') {
+              el.textContent = '';
+          }
+      });
+  }
+
+  // Limpia al cerrar cualquier modal
+  document.addEventListener('hidden.bs.modal', function (event) {
+      resetearModal(event.target);
+  });
+
+  // Limpia al abrir cualquier modal (doble protección)
+  document.addEventListener('show.bs.modal', function (event) {
+      resetearModal(event.target);
+  });
+
 </script>
 
 </body>
