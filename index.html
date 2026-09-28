@@ -515,6 +515,10 @@
             <div class="dato">
                 <strong>ID:</strong>
                 <span id="resultadoId"></span>
+                <div id="alertaMultiples" style="display:none; margin-bottom: 15px; padding: 12px 14px; background: #fff3cd; border: 1px solid #ffe8a1; border-radius: 10px; color: #856404; font-size: 13px; font-weight: 600;">
+                    ⚠️ <strong>¡Atención!</strong> La unidad <span id="numDeptoAlerta"></span> tiene <span id="cantPendientes"></span> encomiendas pendientes sin retirar:
+                    <div id="listaIdsPendientes" style="margin-top: 4px; font-weight: 700; color: #533f03;"></div>
+                </div>
             </div>
 
             <div class="dato">
@@ -1178,6 +1182,24 @@
 
         const estadoElemento = document.getElementById('resultadoEstado');
         const estado = String(data.estado || '').trim().toUpperCase();
+
+        const alertaMultiples = document.getElementById('alertaMultiples');
+        const numDeptoAlerta = document.getElementById('numDeptoAlerta');
+        const cantPendientes = document.getElementById('cantPendientes');
+        const listaIdsPendientes = document.getElementById('listaIdsPendientes');
+
+        // Verificar si hay más de 1 paquete pendiente para este departamento
+        if (data.totalPendientesDepto && data.totalPendientesDepto > 1) {
+            alertaMultiples.style.display = 'block';
+            numDeptoAlerta.textContent = data.depto || '';
+            cantPendientes.textContent = data.totalPendientesDepto;
+
+            if (data.idsPendientes && Array.isArray(data.idsPendientes)) {
+                listaIdsPendientes.textContent = 'IDs: ' + data.idsPendientes.join(' • ');
+            }
+        } else {
+            alertaMultiples.style.display = 'none';
+        }    
         
         estadoElemento.textContent = data.estado || 'SIN ESTADO';
 
